@@ -1,1 +1,1031 @@
-<!DOCTYPE html> <html lang="es" class="dark"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>GeoScan // Ferias y Eventos Geológicos Mundiales</title> <script src="https://cdn.tailwindcss.com"></script> <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"> <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"> <script> tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['"Space Grotesk"', 'sans-serif'] }, colors: { surface: '#131316', 'surface-dim': '#0e0e11', 'surface-container': '#1b1b1e', 'surface-card': '#161619', primary: '#10b981', 'outline-subtle': '#27272a', 'text-muted': '#9ca3af' } } } } </script> </head> <body class="bg-[#0e0e11] text-gray-100 font-sans min-h-screen pb-24 selection:bg-emerald-500/30"> <!-- TOP APP BAR --> <header class="sticky top-0 z-40 bg-[#131316]/90 backdrop-blur-md border-b border-[#27272a] px-4 py-3 flex items-center justify-between"> <div class="flex items-center gap-3"> <a href="index.html" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"> <span class="material-symbols-outlined text-[22px]">arrow_back</span> </a> <div> <div class="flex items-center gap-1.5"> <span class="text-xs font-bold tracking-widest text-emerald-400 uppercase">GeoScan IA</span> <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.2 rounded font-mono">v3.2</span> </div> <h1 class="text-sm font-bold tracking-tight text-white uppercase">Ferias Mundiales</h1> </div> </div> <span class="text-[11px] font-mono text-gray-400 bg-[#1b1b1e] border border-[#27272a] px-2 py-1 rounded flex items-center gap-1"> <span class="material-symbols-outlined text-[14px] text-emerald-400">public</span> Global </span> </header> <main class="max-w-md mx-auto px-4 pt-4 space-y-4"> <!-- AVISO CITES / EXPEDICIÓN --> <div class="p-3 bg-emerald-500/5 border border-emerald-500/20 rounded-xl flex items-start gap-2.5"> <span class="material-symbols-outlined text-emerald-400 text-lg mt-0.5">policy</span> <p class="text-[11px] text-gray-300 leading-relaxed"> <strong class="text-emerald-400 font-semibold">Aviso de Expedición:</strong> Todo espécimen adquirido en ferias internacionales requiere factura homologada y permiso CITES si incluye fósiles catalogados. </p> </div> <!-- BUSCADOR INTERACTIVO EN TIEMPO REAL --> <div class="relative"> <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">search</span> <input id="search-input" type="text" placeholder="Buscar por ciudad, país o feria (ej. Tucson, Francia)..." class="w-full bg-[#161619] border border-[#27272a] focus:border-emerald-500 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-gray-500 outline-none transition-all shadow-sm" > <button id="clear-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"> <span class="material-symbols-outlined text-[18px]">close</span> </button> </div> <!-- BOTONES DE FILTRO POR REGIÓN --> <div class="flex gap-2 overflow-x-auto pb-1 text-xs no-scrollbar"> <button data-region="all" class="region-btn active bg-emerald-500 text-black font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors"> Todas (Global) </button> <button data-region="norteamerica" class="region-btn bg-[#1b1b1e] border border-[#27272a] text-gray-300 hover:text-white px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors"> Norteamérica </button> <button data-region="europa" class="region-btn bg-[#1b1b1e] border border-[#27272a] text-gray-300 hover:text-white px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors"> Europa </button> <button data-region="asia" class="region-btn bg-[#1b1b1e] border border-[#27272a] text-gray-300 hover:text-white px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors"> Asia / Pacífico </button> </div> <!-- CONTADOR DE EVENTOS --> <div class="flex justify-between items-center text-[11px] text-gray-400 px-1 font-mono"> <span id="events-count">Mostrando 4 eventos confirmados</span> <span class="text-emerald-400 flex items-center gap-1"> <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Calendario 2026/2027 </span> </div> <!-- LISTADO DE FERIAS --> <div id="fair-list" class="space-y-3"> <!-- TUCSON GEM & MINERAL SHOW --> <div class="fair-card bg-[#161619] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-4 transition-all" data-name="tucson gem mineral show" data-location="tucson arizona estados unidos usa" data-region="norteamerica"> <div class="flex justify-between items-start mb-2"> <div> <span class="text-[10px] font-mono tracking-wider text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">Top Global #1 Anual</span> <h2 class="text-lg font-bold text-white mt-1">Tucson Gem &amp; Mineral Show</h2> <p class="text-xs text-gray-400 flex items-center gap-1 mt-0.5"> <span class="material-symbols-outlined text-[14px] text-emerald-400">location_on</span> Tucson, Arizona — Estados Unidos </p> </div> <div class="text-right"> <span class="text-xs font-mono font-bold bg-[#1b1b1e] border border-[#27272a] text-emerald-400 px-2 py-1 rounded block">FEB 2027</span> <span class="text-[10px] text-gray-500 font-mono mt-1 block">12 Días</span> </div> </div> <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#27272a] text-xs"> <div> <span class="text-gray-500 block text-[10px]">AFLUENCIA ESTIMADA:</span> <div class="text-yellow-400 font-mono flex items-center gap-1"> <span>★★★★★</span> <span class="text-gray-300 text-[11px]">+65.000</span> </div> </div> <div> <span class="text-gray-500 block text-[10px]">ENFOQUE:</span> <span class="text-gray-200 text-[11px]">Sistemática &amp; Gemas</span> </div> </div> <div class="mt-3 pt-3 border-t border-[#27272a] flex items-center justify-between gap-2"> <span class="text-[11px] text-gray-400 truncate">Centro de Convenciones de Tucson</span> <button onclick="toggleAgenda(this)" class="agenda-btn px-3 py-1.5 bg-[#1b1b1e] hover:bg-emerald-500 hover:text-black border border-[#27272a] rounded-lg text-xs font-medium flex items-center gap-1 transition-colors whitespace-nowrap"> <span class="material-symbols-outlined text-[14px]">event_available</span> <span>Añadir a Agenda</span> </button> </div> </div> <!-- MINERAL & GEM SAINTE-MARIE --> <div class="fair-card bg-[#161619] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-4 transition-all" data-name="mineral gem sainte-marie aux mines" data-location="sainte-marie-aux-mines alsacia francia europa france" data-region="europa"> <div class="flex justify-between items-start mb-2"> <div> <span class="text-[10px] font-mono tracking-wider text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">Europa #1 Verano</span> <h2 class="text-lg font-bold text-white mt-1">Mineral &amp; Gem Sainte-Marie</h2> <p class="text-xs text-gray-400 flex items-center gap-1 mt-0.5"> <span class="material-symbols-outlined text-[14px] text-emerald-400">location_on</span> Sainte-Marie-aux-Mines, Alsacia — Francia </p> </div> <div class="text-right"> <span class="text-xs font-mono font-bold bg-[#1b1b1e] border border-[#27272a] text-emerald-400 px-2 py-1 rounded block">JUN 2027</span> <span class="text-[10px] text-gray-500 font-mono mt-1 block">4 Días</span> </div> </div> <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#27272a] text-xs"> <div> <span class="text-gray-500 block text-[10px]">AFLUENCIA ESTIMADA:</span> <div class="text-yellow-400 font-mono flex items-center gap-1"> <span>★★★★☆</span> <span class="text-gray-300 text-[11px]">+35.000</span> </div> </div> <div> <span class="text-gray-500 block text-[10px]">ENFOQUE:</span> <span class="text-gray-200 text-[11px]">Piezas de Museo &amp; Micromonturas</span> </div> </div> <div class="mt-3 pt-3 border-t border-[#27272a] flex items-center justify-between gap-2"> <span class="text-[11px] text-gray-400 truncate">Val d'Argent Expo</span> <button onclick="toggleAgenda(this)" class="agenda-btn px-3 py-1.5 bg-[#1b1b1e] hover:bg-emerald-500 hover:text-black border border-[#27272a] rounded-lg text-xs font-medium flex items-center gap-1 transition-colors whitespace-nowrap"> <span class="material-symbols-outlined text-[14px]">event_available</span> <span>Añadir a Agenda</span> </button> </div> </div> <!-- THE MUNICH SHOW --> <div class="fair-card bg-[#161619] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-4 transition-all" data-name="the munich show mineralientage munich" data-location="munich baviera alemania europa germany" data-region="europa"> <div class="flex justify-between items-start mb-2"> <div> <span class="text-[10px] font-mono tracking-wider text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">Otoño Internacional</span> <h2 class="text-lg font-bold text-white mt-1">The Munich Show (Mineralientage)</h2> <p class="text-xs text-gray-400 flex items-center gap-1 mt-0.5"> <span class="material-symbols-outlined text-[14px] text-emerald-400">location_on</span> Múnich, Baviera — Alemania </p> </div> <div class="text-right"> <span class="text-xs font-mono font-bold bg-[#1b1b1e] border border-[#27272a] text-emerald-400 px-2 py-1 rounded block">OCT 2026</span> <span class="text-[10px] text-gray-500 font-mono mt-1 block">3 Días</span> </div> </div> <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#27272a] text-xs"> <div> <span class="text-gray-500 block text-[10px]">AFLUENCIA ESTIMADA:</span> <div class="text-yellow-400 font-mono flex items-center gap-1"> <span>★★★★★</span> <span class="text-gray-300 text-[11px]">+40.000</span> </div> </div> <div> <span class="text-gray-500 block text-[10px]">ENFOQUE:</span> <span class="text-gray-200 text-[11px]">Alta Mineralogía &amp; Fósiles</span> </div> </div> <div class="mt-3 pt-3 border-t border-[#27272a] flex items-center justify-between gap-2"> <span class="text-[11px] text-gray-400 truncate">Messe München Riem</span> <button onclick="toggleAgenda(this)" class="agenda-btn px-3 py-1.5 bg-[#1b1b1e] hover:bg-emerald-500 hover:text-black border border-[#27272a] rounded-lg text-xs font-medium flex items-center gap-1 transition-colors whitespace-nowrap"> <span class="material-symbols-outlined text-[14px]">event_available</span> <span>Añadir a Agenda</span> </button> </div> </div> <!-- TOKYO MINERAL SHOW --> <div class="fair-card bg-[#161619] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-4 transition-all" data-name="tokyo mineral show ikebukuro" data-location="ikebukuro tokio japon asia japan" data-region="asia"> <div class="flex justify-between items-start mb-2"> <div> <span class="text-[10px] font-mono tracking-wider text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">Asia Invierno</span> <h2 class="text-lg font-bold text-white mt-1">Tokyo Mineral Show (Ikebukuro)</h2> <p class="text-xs text-gray-400 flex items-center gap-1 mt-0.5"> <span class="material-symbols-outlined text-[14px] text-emerald-400">location_on</span> Ikebukuro, Tokio — Japón </p> </div> <div class="text-right"> <span class="text-xs font-mono font-bold bg-[#1b1b1e] border border-[#27272a] text-emerald-400 px-2 py-1 rounded block">DIC 2026</span> <span class="text-[10px] text-gray-500 font-mono mt-1 block">4 Días</span> </div> </div> <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#27272a] text-xs"> <div> <span class="text-gray-500 block text-[10px]">AFLUENCIA ESTIMADA:</span> <div class="text-yellow-400 font-mono flex items-center gap-1"> <span>★★★★☆</span> <span class="text-gray-300 text-[11px]">+20.000</span> </div> </div> <div> <span class="text-gray-500 block text-[10px]">ENFOQUE:</span> <span class="text-gray-200 text-[11px]">Meteoritos &amp; Especies Raras</span> </div> </div> <div class="mt-3 pt-3 border-t border-[#27272a] flex items-center justify-between gap-2"> <span class="text-[11px] text-gray-400 truncate">Sunshine City Cultural Center</span> <button onclick="toggleAgenda(this)" class="agenda-btn px-3 py-1.5 bg-[#1b1b1e] hover:bg-emerald-500 hover:text-black border border-[#27272a] rounded-lg text-xs font-medium flex items-center gap-1 transition-colors whitespace-nowrap"> <span class="material-symbols-outlined text-[14px]">event_available</span> <span>Añadir a Agenda</span> </button> </div> </div> </div> <!-- MENSAJE DE NO RESULTADOS --> <div id="no-results" class="hidden text-center py-10 border border-dashed border-[#27272a] rounded-xl"> <span class="material-symbols-outlined text-gray-500 text-4xl mb-2">event_busy</span> <p class="text-sm text-gray-300 font-medium">No se encontraron eventos</p> <p class="text-xs text-gray-500 mt-1">Prueba con otra ciudad, país o cambia el filtro de región</p> </div> </main> <!-- BARRA DE NAVEGACIÓN INFERIOR --> <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#131316]/95 backdrop-blur-md border-t border-[#27272a] flex justify-around items-center py-2 px-3"> <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">dashboard</span> <span class="text-[10px] mt-0.5">Inicio</span> </a> <a href="scanner.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">view_in_ar</span> <span class="text-[10px] mt-0.5">Scanner</span> </a> <a href="catalogo.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">menu_book</span> <span class="text-[10px] mt-0.5">Catálogo</span> </a> <a href="protocolo.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">science</span> <span class="text-[10px] mt-0.5">Protocolo</span> </a> <a href="ferias.html" class="flex flex-col items-center text-emerald-400 font-medium"> <span class="material-symbols-outlined text-[20px]">event</span> <span class="text-[10px] mt-0.5">Ferias</span> </a> </nav> <!-- JAVASCRIPT: MOTOR DE FILTRADO Y BÚSQUEDA INTERACTIVA --> <script> const searchInput = document.getElementById('search-input'); const clearBtn = document.getElementById('clear-btn'); const regionBtns = document.querySelectorAll('.region-btn'); const cards = document.querySelectorAll('.fair-card'); const eventsCount = document.getElementById('events-count'); const noResults = document.getElementById('no-results'); let currentRegion = 'all'; function filterFairs() { const query = searchInput.value.toLowerCase().trim(); let visibleCount = 0; cards.forEach(card => { const name = card.getAttribute('data-name'); const location = card.getAttribute('data-location'); const region = card.getAttribute('data-region'); const matchesQuery = !query || name.includes(query) || location.includes(query); const matchesRegion = currentRegion === 'all' || region === currentRegion; if (matchesQuery && matchesRegion) { card.style.display = 'block'; visibleCount++; } else { card.style.display = 'none'; } }); eventsCount.textContent = `Mostrando ${visibleCount} ${visibleCount === 1 ? 'evento confirmado' : 'eventos confirmados'}`; noResults.style.display = visibleCount === 0 ? 'block' : 'none'; clearBtn.style.display = query.length > 0 ? 'block' : 'none'; } searchInput.addEventListener('input', filterFairs); clearBtn.addEventListener('click', () => { searchInput.value = ''; filterFairs(); searchInput.focus(); }); regionBtns.forEach(btn => { btn.addEventListener('click', () => { regionBtns.forEach(b => { b.classList.remove('bg-emerald-500', 'text-black', 'font-semibold'); b.classList.add('bg-[#1b1b1e]', 'text-gray-300'); }); btn.classList.remove('bg-[#1b1b1e]', 'text-gray-300'); btn.classList.add('bg-emerald-500', 'text-black', 'font-semibold'); currentRegion = btn.getAttribute('data-region'); filterFairs(); }); }); function toggleAgenda(btn) { const isSaved = btn.classList.contains('bg-emerald-500'); if (isSaved) { btn.classList.remove('bg-emerald-500', 'text-black'); btn.classList.add('bg-[#1b1b1e]', 'text-gray-100'); btn.innerHTML = '<span class="material-symbols-outlined text-[14px]">event_available</span><span>Añadir a Agenda</span>'; } else { btn.classList.remove('bg-[#1b1b1e]', 'text-gray-100'); btn.classList.add('bg-emerald-500', 'text-black'); btn.innerHTML = '<span class="material-symbols-outlined text-[14px]">check</span><span>En tu Agenda</span>'; } } </script> </body> </html>
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GeoScan - Ferias y Eventos Mineralógicos Mundiales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-bedrock": "#0c0c0e",
+                  "surface-carbon-raised": "#222225",
+                  "surface-charcoal": "#121214",
+                  "surface-graphite": "#18181b",
+                  "surface-matte-plate": "#2a2a2e",
+                  "laser-emerald": "#10b981",
+                  "spectral-mint": "#4edea3",
+                  "amber-mohs": "#ffb95f",
+                  "quartz-cyan": "#4cd7f6",
+                  "surface-container-highest": "#2d3449",
+                  "on-tertiary": "#003640",
+                  "on-primary-container": "#00422b",
+                  "on-error-container": "#ffdad6",
+                  "surface-bright": "#31394d",
+                  "surface-container-low": "#131b2e",
+                  "secondary-fixed-dim": "#ffb95f",
+                  "on-tertiary-container": "#003f4b",
+                  "surface-container-lowest": "#060e20",
+                  "primary-fixed": "#6ffbbe",
+                  "inverse-primary": "#006c49",
+                  "primary-container": "#10b981",
+                  "surface": "#0b1326",
+                  "error-container": "#93000a",
+                  "tertiary-fixed": "#acedff",
+                  "tertiary-container": "#00b2d0",
+                  "secondary": "#ffb95f",
+                  "on-primary-fixed-variant": "#005236",
+                  "inverse-on-surface": "#283044",
+                  "secondary-fixed": "#ffddb8",
+                  "outline": "#86948a",
+                  "surface-container-high": "#222a3d",
+                  "primary": "#4edea3",
+                  "on-surface": "#dae2fd",
+                  "error": "#ffb4ab",
+                  "surface-variant": "#2d3449",
+                  "on-background": "#dae2fd",
+                  "on-tertiary-fixed-variant": "#004e5c",
+                  "on-secondary-container": "#5b3800",
+                  "background": "#0b1326",
+                  "outline-variant": "#3c4a42",
+                  "on-primary-fixed": "#002113",
+                  "on-surface-variant": "#bbcabf",
+                  "surface-dim": "#0b1326",
+                  "surface-tint": "#4edea3",
+                  "on-secondary-fixed-variant": "#653e00",
+                  "tertiary-fixed-dim": "#4cd7f6",
+                  "on-secondary-fixed": "#2a1700",
+                  "on-primary": "#003824",
+                  "inverse-surface": "#dae2fd",
+                  "tertiary": "#4cd7f6",
+                  "on-tertiary-fixed": "#001f26",
+                  "primary-fixed-dim": "#4edea3",
+                  "secondary-container": "#ee9800",
+                  "surface-container": "#171f33",
+                  "on-error": "#690005",
+                  "on-secondary": "#472a00"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "unit-base": "1rem",
+                  "unit-2xl": "3rem",
+                  "unit-md": "0.75rem",
+                  "gutter-mobile": "0.75rem",
+                  "unit-sm": "0.5rem",
+                  "unit-2xs": "0.125rem",
+                  "unit-xs": "0.25rem",
+                  "unit-xl": "2rem",
+                  "gutter-desktop": "1.5rem",
+                  "unit-lg": "1.5rem",
+                  "reticle-padding": "1.25rem"
+          },
+          "fontFamily": {
+                  "headline-sm": ["Space Grotesk", "sans-serif"],
+                  "body-sm": ["Inter", "sans-serif"],
+                  "headline-md": ["Space Grotesk", "sans-serif"],
+                  "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+                  "metric-val-lg": ["JetBrains Mono", "monospace"],
+                  "label-tag": ["JetBrains Mono", "monospace"],
+                  "body-md": ["Inter", "sans-serif"],
+                  "metric-val": ["JetBrains Mono", "monospace"],
+                  "headline-lg": ["Space Grotesk", "sans-serif"],
+                  "display-reticle": ["JetBrains Mono", "monospace"],
+                  "body-lg": ["Inter", "sans-serif"],
+                  "label-caps": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {
+                  "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                  "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                  "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "metric-val-lg": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                  "label-tag": ["10px", {"lineHeight": "12px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+                  "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "metric-val": ["16px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "display-reticle": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                  "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "label-caps": ["11px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: 'liga';
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col antialiased pb-24 selection:bg-primary selection:text-on-primary">
+<!-- TOP APP BAR -->
+<header class="flex justify-between items-center w-full px-gutter-mobile h-14 z-50 bg-surface-container-lowest border-b border-outline-variant sticky top-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="satellite_alt">satellite_alt</span>
+<div>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary">GeoScan</span>
+<span class="font-label-tag text-label-tag text-tertiary block -mt-1 tracking-widest">EXPO_TELEMETRY // 2024-25</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform duration-150 relative" id="quick-reset-btn" title="Restablecer filtros">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-secondary hidden" id="filter-active-dot"></span>
+</button>
+<button class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- SUBHEADER STATUS / RADAR STRIP -->
+<section class="bg-surface-container-low px-gutter-mobile py-2 border-b border-outline-variant flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold flex items-center gap-1">CRAWLER WEB GEO-MINERAL // EN VIVO</span><span class="font-label-tag text-[9px] text-outline flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>CONECTADO A MOTORES WEB (MINDAT, GOOGLE, FED. GEOLÓGICAS)</span></span></div></div><div class="font-label-tag text-label-tag text-on-surface-variant flex items-center gap-1.5 bg-surface-container-lowest px-2 py-1 rounded border border-outline-variant"><span class="material-symbols-outlined text-[13px] text-tertiary" data-icon="radar">radar</span><span class="font-metric-val text-primary font-bold" id="registered-count-text">148 EVENTOS INDEXADOS</span></div></section>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 w-full max-w-md mx-auto px-gutter-mobile pt-3 space-y-4"><!-- SEARCH AND GPS CRAWLER HUB -->
+<div class="space-y-2.5">
+<!-- Search Input Bar -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-9 pr-8 py-2 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="search-input" placeholder="Buscar por mineral, pueblo, feria, mercadillo..." type="text"/>
+<button class="absolute right-2.5 text-outline hover:text-on-surface text-[16px] transition-colors p-1" id="clear-search-btn" title="Limpiar">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Live Web Crawler & GPS Radar Strip -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-2.5 space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px] animate-pulse" data-icon="travel_explore">travel_explore</span>
+<span class="font-label-caps text-label-caps text-on-surface font-bold tracking-wider">RADAR WEB GLOBAL &amp; LOCAL</span>
+</div>
+<span class="font-label-tag text-[9px] bg-primary/10 border border-primary/30 text-primary px-1.5 py-0.5 rounded font-bold">API ONLINE</span>
+</div>
+<p class="font-body-sm text-[11px] text-outline leading-tight">
+      Rastreo automático en Google Search, Bing Geomineral, Mindat Events, Fed. Española/Europea de Mineralogía y boletines de asociaciones locales.
+    </p>
+<div class="flex items-center gap-2 pt-0.5">
+<button class="flex-1 py-1.5 px-2.5 bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant hover:border-primary text-primary font-label-tag text-label-tag font-bold rounded flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm" id="trigger-crawler-btn">
+<span class="material-symbols-outlined text-[14px]" data-icon="sync">sync</span>
+<span id="crawler-btn-text">RASTREAR NUEVOS EVENTOS LOCALES</span>
+</button>
+<button class="px-2.5 py-1.5 bg-surface-container-high border border-outline-variant hover:border-tertiary text-on-surface font-label-tag text-label-tag rounded flex items-center gap-1 active:scale-95 transition-all" id="gps-proximity-btn" title="Filtrar por cercanía GPS">
+<span class="material-symbols-outlined text-tertiary text-[14px]" data-icon="my_location">my_location</span>
+<span id="gps-label">&lt; 50 KM</span>
+</button>
+</div>
+<div class="hidden font-label-tag text-[10px] text-secondary bg-surface-container-high p-1.5 rounded flex items-center justify-between border border-secondary/30" id="crawler-status-bar">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Indexando 12 nuevos mercadillos regionales...</span>
+<span class="text-primary font-bold">SINCRO 100%</span>
+</div>
+</div>
+<!-- CONTINENTAL HIERARCHICAL BAR -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between px-0.5">
+<span class="font-label-tag text-[9px] text-outline font-bold tracking-widest uppercase">1. CONTINENTE:</span>
+<span class="font-label-tag text-[9px] text-tertiary" id="active-scope-indicator">EUROPA / ESPAÑA</span>
+</div>
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" id="continent-filters">
+<button class="continent-btn px-2.5 py-1 rounded bg-primary text-surface-container-lowest font-label-tag text-label-tag font-bold whitespace-nowrap shadow-sm transition-all" data-continent="ALL">
+        🌍 TODOS
+      </button>
+<button class="continent-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap transition-all" data-continent="EUROPA">
+        🇪🇺 EUROPA
+      </button>
+<button class="continent-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap transition-all" data-continent="NORTEAMERICA">
+        🌎 AMÉRICA NORTE
+      </button>
+<button class="continent-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap transition-all" data-continent="ASIA">
+        🌏 ASIA
+      </button>
+<button class="continent-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap transition-all" data-continent="SUDAMERICA">
+        🌎 AMÉRICA SUR
+      </button>
+<button class="continent-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap transition-all" data-continent="AFRICA">
+        🌍 ÁFRICA
+      </button>
+<button class="continent-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap transition-all" data-continent="OCEANIA">
+        🌏 OCEANÍA
+      </button>
+</div>
+</div>
+<!-- DYNAMIC COUNTRY & LOCAL REGION CHIPS STRIP -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between px-0.5">
+<span class="font-label-tag text-[9px] text-outline font-bold tracking-widest uppercase">2. PAÍS Y ZONA LOCAL:</span>
+<button class="font-label-tag text-[9px] text-outline hover:text-primary transition-colors underline" id="reset-subregion-btn">VER TODOS</button>
+</div>
+<div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5" id="country-zone-filters">
+<button class="country-chip-btn px-2 py-0.5 bg-primary text-surface-container-lowest font-bold rounded font-label-tag text-label-tag whitespace-nowrap transition-all" data-country="ALL">Todo el Continente</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="España">🇪🇸 España (Todas)</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Madrid">📍 Madrid</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Cataluña">📍 Cataluña / BCN</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Euskadi">📍 País Vasco / Bilbao</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Murcia">📍 Murcia / La Unión</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Asturias">📍 Asturias / Oviedo</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Francia">🇫🇷 Francia</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Alemania">🇩🇪 Alemania</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="EE.UU.">🇺🇸 EE.UU.</button>
+<button class="country-chip-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all" data-country="Japón">🇯🇵 Japón</button>
+</div>
+</div>
+<!-- EVENT SCALE / CATEGORY SELECTOR -->
+<div class="space-y-1.5">
+<span class="font-label-tag text-[9px] text-outline font-bold tracking-widest uppercase block px-0.5">3. ESCALA DEL EVENTO:</span>
+<div class="bg-surface-container-lowest p-1 rounded-lg border border-outline-variant grid grid-cols-4 gap-1 text-center font-label-tag text-label-tag" id="category-filters">
+<button class="cat-filter-btn py-1.5 px-0.5 bg-surface-container-high rounded text-primary font-bold border border-primary/40 shadow-sm transition-all" data-category="ALL">
+        TODOS
+      </button>
+<button class="cat-filter-btn py-1.5 px-0.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-all" data-category="GLOBAL">
+        TOP MUNDIAL
+      </button>
+<button class="cat-filter-btn py-1.5 px-0.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-all" data-category="REGIONAL">
+        REGIONALES
+      </button>
+<button class="cat-filter-btn py-1.5 px-0.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-all" data-category="LOCAL">
+        MERCADILLOS
+      </button>
+</div>
+</div>
+</div>
+<!-- EMPTY STATE (CRAWLER ACTIVE) -->
+<div class="hidden bg-surface-container-lowest border border-outline-variant rounded-lg p-6 text-center space-y-3" id="empty-state">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center mx-auto text-outline">
+<span class="material-symbols-outlined text-[24px]" data-icon="explore_off">explore_off</span>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-[15px] text-on-surface font-bold">Sin eventos en este radio/zona</h3>
+<p class="font-body-sm text-[12px] text-outline">No hay citas registradas con los filtros geográficos actuales. Pulsa para ejecutar crawler ampliado.</p>
+</div>
+<button class="px-3 py-1.5 bg-primary text-surface-container-lowest font-label-tag text-label-tag font-bold rounded hover:brightness-110 active:scale-95 transition-all inline-flex items-center gap-1" id="empty-reset-btn">
+<span class="material-symbols-outlined text-[14px]" data-icon="refresh">refresh</span>
+<span>EXPANDIR BÚSQUEDA A TODO EL PAÍS</span>
+</button>
+</div>
+<!-- FEED EXHAUSTIVO DE FERIAS Y EVENTOS -->
+<section class="space-y-3 pt-1">
+<div class="flex items-center justify-between border-b border-outline-variant pb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="format_list_bulleted">format_list_bulleted</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">AGENDA GLOBAL &amp; LOCAL</h2>
+</div>
+<span class="font-label-tag text-label-tag text-outline" id="order-label-tag">ORDEN: CRONOLÓGICO</span>
+</div>
+<div class="space-y-3" id="events-list-container">
+<!-- CARD 1: TUCSON (TOP GLOBAL - EE.UU.) -->
+<article class="fair-card bg-surface-container rounded-lg border border-primary/40 overflow-hidden shadow-lg transition-all" data-category="GLOBAL" data-city="Tucson" data-continent="NORTEAMERICA" data-country="EE.UU." data-distance="8600" data-id="tgms" data-name="Tucson Gem and Mineral Show" data-region="Arizona" data-tags="tucson gem show arizona eeuu wulfenite subastas apex">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-primary text-surface-container-lowest font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">TOP MUNDIAL APEX</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇺🇸 TUCSON, ARIZONA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Tucson Gem and Mineral Show®</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tucson Convention Center · 13 - 16 Feb 2025</p>
+</div>
+<div class="bg-surface-container-lowest border border-secondary/60 rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 9.9</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 1</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">4.000+ Expositores</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Muestras Museísticas Únicas</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-secondary">Afluencia: +55.000</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="tgms">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Tucson+Convention+Center" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.tgms.org/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 2: EXPOMINERALES MADRID (REGIONAL / NACIONAL ESPAÑA) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="REGIONAL" data-city="Madrid" data-continent="EUROPA" data-country="España" data-distance="12" data-id="madrid" data-name="Expominerales Madrid ETSI Minas" data-region="Madrid" data-tags="madrid etsi minas expominerales espana rios rosas mercadillo universidad">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-secondary/20 text-secondary border border-secondary/40 font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">FERIA REGIONAL &amp; UNIVERSITARIA</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇪🇸 MADRID, ESPAÑA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Expominerales Madrid (ETSI Minas)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Escuela Técnica Superior de Ingenieros de Minas · 07 - 09 Marzo 2025</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 8.8</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 2</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Mineralogía Ibérica &amp; Clásicos</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">60+ Mesas &amp; Stands</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-secondary">Afluencia: 12.000</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-tertiary">&lt; 15 km de ti</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="madrid">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=ETSI+Minas+Madrid" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.minasyenergia.upm.es/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 3: FIM BARCELONA - SANTS (REGIONAL CATALUÑA) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="REGIONAL" data-city="Barcelona" data-continent="EUROPA" data-country="España" data-distance="505" data-id="barcelona" data-name="FIM Feria Internacional Minerales Barcelona" data-region="Cataluña" data-tags="barcelona catalunya sants fim micromontajes fósiles mineralogía">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-secondary/20 text-secondary border border-secondary/40 font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">FERIA REGIONAL</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇪🇸 BARCELONA, CATALUÑA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">FIM - Feria Internacional de Minerales</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cotxeres de Sants · 15 - 17 Noviembre 2024</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 8.5</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 2</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Micromontajes &amp; Especímenes Selectos</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">48 Expositores Europeos</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-tertiary">Afluencia: 8.500</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="barcelona">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Cotxeres+de+Sants+Barcelona" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://mineralsants.cat/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 4: MERCADILLO LOCAL BELLVITGE / L'HOSPITALET (LOCAL MERCADILLO) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="LOCAL" data-city="L'Hospitalet de Llobregat" data-continent="EUROPA" data-country="España" data-distance="512" data-id="bellvitge" data-name="Mercadillo de Minerales de Bellvitge" data-region="Cataluña" data-tags="bellvitge mercadillo local intercambio l'hospitalet barcelona cataluña mesas aficionado">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-surface-container-highest text-on-surface font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded border border-outline-variant">MERCADILLO &amp; INTERCAMBIO LOCAL</span>
+<span class="font-label-tag text-label-tag text-outline font-bold">🇪🇸 L'HOSPITALET, CATALUÑA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mercadillo de Intercambio Bellvitge</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Centro Cultural Bellvitge · Primer Domingo de Cada Mes</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-tertiary">LOCAL</span>
+<span class="font-label-tag text-[9px] text-outline block">INTERCAMBIO</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">Mesas de Coleccionistas Particulares</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Precios populares &amp; Trueque</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-outline">Afluencia: 850 asistentes</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-outline hover:text-primary" data-target="bellvitge">
+<span class="material-symbols-outlined text-[15px]" data-icon="notification_add">notification_add</span>
+<span class="btn-text">ACTIVAR ALERTA MENSUAL</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Centre+Cultural+Bellvitge" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.l-h.cat/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="info">info</span> INFO
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 5: FERIA DE LA UNIÓN (MURCIA - YACIMIENTOS & MERCADO) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="REGIONAL" data-city="La Unión" data-continent="EUROPA" data-country="España" data-distance="420" data-id="launion" data-name="Feria de Minerales y Fósiles de La Unión" data-region="Murcia" data-tags="la union murcia sierra minera cartagena piritas calcitas galenas mina agrupa vicenta">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-secondary/20 text-secondary border border-secondary/40 font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">FERIA DE DISTRITO MINERO</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇪🇸 LA UNIÓN, MURCIA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Feria de Minerales y Fósiles de La Unión</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Antiguo Mercado Público · 17 - 19 Abril 2025 (Semana Santa)</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 8.7</span>
+<span class="font-label-tag text-[9px] text-outline block">HISTÓRICO</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Sierra Minera de Cartagena-La Unión</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">35 Expositores Especializados</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-secondary">Excursiones a Mina Agrupa Vicenta</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="launion">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Antiguo+Mercado+Publico+La+Union+Murcia" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://turismo.launion.es/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 6: FOSMINER BILBAO / BEC (REGIONAL PAÍS VASCO) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="REGIONAL" data-city="Bilbao" data-continent="EUROPA" data-country="España" data-distance="395" data-id="fosminer" data-name="Fosminer Bilbao BEC" data-region="Euskadi" data-tags="fosminer bilbao bec barakaldo pais vasco euskadi fosiles calcitas fluoritas">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-secondary/20 text-secondary border border-secondary/40 font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">EXPOSICIÓN NORTE</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇪🇸 BILBAO, PAÍS VASCO</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fosminer - Exposición Internacional</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bilbao Exhibition Centre (BEC) · 25 - 27 Octubre 2024</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 8.6</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 2</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Fósiles del Cantábrico &amp; Pirineos</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">55 Stands Internacionales</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-tertiary">Afluencia: 9.200</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="fosminer">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Bilbao+Exhibition+Centre" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://fosminer.bilbaoexhibitioncentre.com/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 7: BOLSA DE MINERALES DE OVIEDO (ASTURIAS - LOCAL/REGIONAL) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="LOCAL" data-city="Oviedo" data-continent="EUROPA" data-country="España" data-distance="445" data-id="oviedo" data-name="Bolsa y Encuentro Minerales de Oviedo" data-region="Asturias" data-tags="oviedo asturias fluorita berbes la viesca bolsa de minerales coleccionismo local">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-surface-container-highest text-on-surface font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded border border-outline-variant">BOLSA &amp; YACIMIENTO LOCAL</span>
+<span class="font-label-tag text-label-tag text-outline font-bold">🇪🇸 OVIEDO, ASTURIAS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Bolsa de Minerales y Fósiles de Oviedo</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Palacio de Congresos y Exposiciones · 22 - 23 Febrero 2025</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 8.2</span>
+<span class="font-label-tag text-[9px] text-outline block">LOCAL</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Fluoritas de Berbes &amp; La Viesca</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">28 Mesas de Expertos</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-tertiary">Afluencia: 2.100</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="oviedo">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Palacio+de+Congresos+Oviedo" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.geolam.org/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="info">info</span> INFO
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 8: THE MUNICH SHOW (TOP GLOBAL ALEMANIA) -->
+<article class="fair-card bg-surface-container rounded-lg border border-primary/30 overflow-hidden hover:border-primary transition-colors" data-category="GLOBAL" data-city="Munich" data-continent="EUROPA" data-country="Alemania" data-distance="1480" data-id="munich" data-name="The Munich Show Mineralientage" data-region="Baviera" data-tags="munich alemania mineralientage fósiles meteoritos tier 1 apex">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-primary text-surface-container-lowest font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">TOP MUNDIAL APEX</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇩🇪 MUNICH, ALEMANIA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">The Munich Show - Mineralientage</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Messe München · 24 - 27 Octubre 2024</p>
+</div>
+<div class="bg-surface-container-lowest border border-secondary/60 rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 9.6</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 1</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Fósiles Raros, Meteoritos &amp; Alpinos</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">1.250 Expositores</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-secondary">Afluencia: +40.000</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="munich">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Messe+Munchen" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://munichshow.com/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 9: MINERAL & GEM SAINTE-MARIE (TOP GLOBAL FRANCIA) -->
+<article class="fair-card bg-surface-container rounded-lg border border-primary/30 overflow-hidden hover:border-primary transition-colors" data-category="GLOBAL" data-city="Sainte-Marie-aux-Mines" data-continent="EUROPA" data-country="Francia" data-distance="1150" data-id="saintemarie" data-name="Mineral &amp; Gem Sainte-Marie" data-region="Alsacia" data-tags="sainte marie alsacia francia gemas bruto minas historico">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-primary text-surface-container-lowest font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">TOP MUNDIAL APEX</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇫🇷 ALSACIA, FRANCIA</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mineral &amp; Gem Sainte-Marie-aux-Mines</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Val d'Argent · 26 - 29 Junio 2025</p>
+</div>
+<div class="bg-surface-container-lowest border border-secondary/60 rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 9.4</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 1</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Entorno Minero de Plata &amp; Gemas en Bruto</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">1.000 Expositores</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-secondary">Afluencia: +35.000</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="saintemarie">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Sainte-Marie-aux-Mines+France" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://sainte-marie-mineral.com/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 10: TOKYO GEM & MINERAL SHOW (TOP GLOBAL ASIA) -->
+<article class="fair-card bg-surface-container rounded-lg border border-outline-variant overflow-hidden hover:border-primary transition-colors" data-category="GLOBAL" data-city="Tokyo" data-continent="ASIA" data-country="Japón" data-distance="10800" data-id="tokyo" data-name="Tokyo Gem and Mineral Show" data-region="Kanto" data-tags="tokyo japon asia cuarzo puro ikebukuro sunshine gemas">
+<div class="p-3 space-y-2.5">
+<div class="flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<span class="bg-primary text-surface-container-lowest font-label-tag text-[9px] font-bold px-1.5 py-0.5 rounded">TOP ASIA APEX</span>
+<span class="font-label-tag text-label-tag text-tertiary font-bold">🇯🇵 TOKIO, JAPÓN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Tokyo Gem &amp; Mineral Show</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ikebukuro Sunshine City · 06 - 09 Dic 2024</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-1 text-right shrink-0">
+<span class="font-metric-val text-metric-val font-bold text-secondary">★ 9.0</span>
+<span class="font-label-tag text-[9px] text-outline block">TIER 1</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 text-[10px]">
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-primary">Gemas Asiáticas &amp; Cuarzo Japonés</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-on-surface">400 Expositores Especializados</span>
+<span class="bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded text-tertiary">Afluencia: 20.000</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/60">
+<button class="agenda-action-btn flex items-center gap-1 font-label-tag text-label-tag text-primary hover:underline" data-target="tokyo">
+<span class="material-symbols-outlined text-[15px]" data-icon="event_available">event_available</span>
+<span class="btn-text">AÑADIR A CALENDARIO</span>
+</button>
+<div class="flex gap-1.5">
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="https://www.google.com/maps/search/?api=1&amp;query=Ikebukuro+Sunshine+City+Tokyo" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="map">map</span> GPS
+            </a>
+<a class="px-2 py-1 bg-surface-container-high border border-outline-variant rounded font-label-tag text-[10px] text-on-surface hover:text-primary flex items-center gap-0.5" href="http://www.tima.co.jp/" target="_blank">
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span> WEB
+            </a>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- RADAR TELEMETRY PROTOCOL -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-3 flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="satellite_alt">satellite_alt</span>
+</div>
+<div class="space-y-1">
+<h4 class="font-headline-sm text-[13px] text-on-surface font-bold">INDEXACIÓN CONTÍNUA &amp; COMUNIDAD</h4>
+<p class="font-body-sm text-[11px] text-outline leading-tight">
+      ¿Conoces un mercadillo de pueblo, intercambio local o feria mineral que falte? GeoScan analiza hilos de foros y tablones de asociaciones mineras semanalmente.
+    </p>
+</div>
+</div></main>
+<!-- BOTTOM NAVIGATION BAR WITH LINKS -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter-mobile py-2 bg-surface-container-lowest border-t border-outline-variant">
+<!-- Tab 1: Scanner -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container hover:text-on-surface active:scale-95 transition-transform duration-150" href="scanner.html">
+<span class="material-symbols-outlined" data-icon="view_in_ar">view_in_ar</span>
+<span class="font-label-tag text-label-tag mt-0.5">Scanner</span>
+</a>
+<!-- Tab 2: Catalog -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container hover:text-on-surface active:scale-95 transition-transform duration-150" href="catalogo.html">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-tag text-label-tag mt-0.5">Catálogo</span>
+</a>
+<!-- Tab 3: Ferias (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-surface-container-high text-primary rounded-lg py-1 px-3 border border-primary/30 active:scale-95 transition-transform duration-150" href="ferias.html">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+<span class="font-label-tag text-label-tag font-bold mt-0.5">Ferias</span>
+</a>
+<!-- Tab 4: Protocolo CITES -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container hover:text-on-surface active:scale-95 transition-transform duration-150" href="protocolo.html">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+<span class="font-label-tag text-label-tag mt-0.5">Protocolo</span>
+</a>
+<!-- Tab 5: Inicio / Field Log -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container hover:text-on-surface active:scale-95 transition-transform duration-150" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-tag text-label-tag mt-0.5">Inicio</span>
+</a>
+</nav>
+<!-- CLIENT-SIDE INTERACTIVE ENGINE -->
+<script>
+  (function() {
+    // State
+    const state = {
+      searchQuery: '',
+      activeRegion: 'GLOBAL',
+      activeCity: null,
+      currentSort: 'upcoming',
+      scheduledEvents: new Set()
+    };
+
+    // DOM Elements
+    const searchInput = document.getElementById('search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const regionButtons = document.querySelectorAll('.region-filter-btn');
+    const cityButtons = document.querySelectorAll('.city-filter-btn');
+    const sortButtons = document.querySelectorAll('.sort-btn');
+    const cards = Array.from(document.querySelectorAll('.fair-card'));
+    const featuredSection = document.getElementById('featured-section');
+    const eventsListContainer = document.getElementById('events-list-container');
+    const emptyState = document.getElementById('empty-state');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+    const quickResetBtn = document.getElementById('quick-reset-btn');
+    const filterActiveDot = document.getElementById('filter-active-dot');
+    const registeredCountText = document.getElementById('registered-count-text');
+    const orderLabelTag = document.getElementById('order-label-tag');
+
+    // Filter and Sort Engine
+    function applyFiltersAndSort() {
+      const q = state.searchQuery.trim().toLowerCase();
+      let visibleCount = 0;
+
+      // Filter each card
+      cards.forEach(card => {
+        const name = (card.getAttribute('data-name') || '').toLowerCase();
+        const city = (card.getAttribute('data-city') || '').toLowerCase();
+        const country = (card.getAttribute('data-country') || '').toLowerCase();
+        const region = (card.getAttribute('data-region') || '').toUpperCase();
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+        const fullContent = `${name} ${city} ${country} ${region} ${tags}`;
+
+        let matchesSearch = true;
+        if (q.length > 0) {
+          matchesSearch = fullContent.includes(q);
+        }
+
+        let matchesRegion = true;
+        if (state.activeRegion !== 'GLOBAL') {
+          matchesRegion = region.includes(state.activeRegion.toUpperCase()) || 
+                          country.toUpperCase().includes(state.activeRegion.toUpperCase());
+        }
+
+        let matchesCity = true;
+        if (state.activeCity) {
+          matchesCity = city.toLowerCase() === state.activeCity.toLowerCase();
+        }
+
+        const isVisible = matchesSearch && matchesRegion && matchesCity;
+        if (isVisible) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Handle Featured Top Tier Section visibility
+      const featuredCard = featuredSection ? featuredSection.querySelector('.fair-card') : null;
+      if (featuredSection && featuredCard) {
+        if (featuredCard.classList.contains('hidden')) {
+          featuredSection.classList.add('hidden');
+        } else {
+          featuredSection.classList.remove('hidden');
+        }
+      }
+
+      // Handle empty state
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      // Update counters and telemetry
+      if (registeredCountText) {
+        registeredCountText.textContent = `${visibleCount} EXPOS DISPONIBLES`;
+      }
+
+      // Update dot in top header
+      const hasActiveFilters = state.searchQuery.length > 0 || state.activeRegion !== 'GLOBAL' || state.activeCity !== null;
+      if (filterActiveDot) {
+        if (hasActiveFilters) {
+          filterActiveDot.classList.remove('hidden');
+        } else {
+          filterActiveDot.classList.add('hidden');
+        }
+      }
+
+      // Sort items within the events list container
+      sortListContainer();
+    }
+
+    function sortListContainer() {
+      const listCards = Array.from(eventsListContainer.querySelectorAll('.fair-card'));
+      
+      listCards.sort((a, b) => {
+        if (state.currentSort === 'attendance') {
+          const attA = parseInt(a.getAttribute('data-attendance') || '0', 10);
+          const attB = parseInt(b.getAttribute('data-attendance') || '0', 10);
+          return attB - attA; // Descending
+        } else if (state.currentSort === 'upcoming') {
+          const dateA = new Date(a.getAttribute('data-date') || '2099-01-01').getTime();
+          const dateB = new Date(b.getAttribute('data-date') || '2099-01-01').getTime();
+          return dateA - dateB; // Ascending
+        } else if (state.currentSort === 'month') {
+          // Priority to near months
+          const dateA = new Date(a.getAttribute('data-date') || '2099-01-01').getTime();
+          const dateB = new Date(b.getAttribute('data-date') || '2099-01-01').getTime();
+          return dateA - dateB;
+        }
+        return 0;
+      });
+
+      // Re-append sorted elements
+      listCards.forEach(card => eventsListContainer.appendChild(card));
+    }
+
+    // Search Input Event
+    searchInput.addEventListener('input', function(e) {
+      state.searchQuery = e.target.value;
+      applyFiltersAndSort();
+    });
+
+    // Clear Search Button
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      state.searchQuery = '';
+      applyFiltersAndSort();
+      searchInput.focus();
+    });
+
+    // Region Filter Buttons
+    regionButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const selectedRegion = this.getAttribute('data-region');
+        state.activeRegion = selectedRegion;
+        state.activeCity = null; // Clear city filter when selecting whole region
+
+        // Update UI styles for region buttons
+        regionButtons.forEach(b => {
+          b.className = 'region-filter-btn flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap active:scale-95 transition-all';
+        });
+
+        this.className = 'region-filter-btn flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-surface-container-lowest font-label-tag text-label-tag font-bold whitespace-nowrap shadow-sm active:scale-95 transition-all';
+
+        // Clear city chips styles
+        cityButtons.forEach(cb => {
+          cb.className = 'city-filter-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all';
+        });
+
+        applyFiltersAndSort();
+      });
+    });
+
+    // City Filter Buttons
+    cityButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const city = this.getAttribute('data-city');
+        if (state.activeCity === city) {
+          // Toggle off
+          state.activeCity = null;
+          this.className = 'city-filter-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all';
+        } else {
+          state.activeCity = city;
+          cityButtons.forEach(cb => {
+            cb.className = 'city-filter-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all';
+          });
+          this.className = 'city-filter-btn px-2 py-0.5 bg-tertiary text-surface-container-lowest font-bold border border-tertiary rounded font-label-tag text-label-tag whitespace-nowrap shadow-sm transition-all';
+        }
+
+        applyFiltersAndSort();
+      });
+    });
+
+    // Sort buttons
+    sortButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const sortType = this.getAttribute('data-sort');
+        state.currentSort = sortType;
+
+        // Reset all sort buttons styles
+        sortButtons.forEach(sb => {
+          sb.className = 'sort-btn py-1.5 px-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-all flex items-center justify-center gap-0.5';
+        });
+
+        // Set active style
+        this.className = 'sort-btn py-1.5 px-1 bg-surface-container-high rounded text-primary font-bold border border-primary/40 shadow-sm transition-all flex items-center justify-center gap-0.5';
+
+        // Update indicator label
+        if (orderLabelTag) {
+          if (sortType === 'attendance') {
+            orderLabelTag.textContent = 'ORDEN: MAYOR AFLUENCIA';
+          } else if (sortType === 'upcoming') {
+            orderLabelTag.textContent = 'ORDEN: PRÓXIMAS FECHAS';
+          } else if (sortType === 'month') {
+            orderLabelTag.textContent = 'ORDEN: ESTE MES';
+          } else {
+            orderLabelTag.textContent = 'ORDEN: ANUAL';
+          }
+        }
+
+        applyFiltersAndSort();
+      });
+    });
+
+    // Reset action
+    function resetAllFilters() {
+      searchInput.value = '';
+      state.searchQuery = '';
+      state.activeRegion = 'GLOBAL';
+      state.activeCity = null;
+      state.currentSort = 'upcoming';
+
+      // Reset regions UI
+      regionButtons.forEach(b => {
+        if (b.getAttribute('data-region') === 'GLOBAL') {
+          b.className = 'region-filter-btn flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-surface-container-lowest font-label-tag text-label-tag font-bold whitespace-nowrap shadow-sm active:scale-95 transition-all';
+        } else {
+          b.className = 'region-filter-btn flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-outline-variant font-label-tag text-label-tag whitespace-nowrap active:scale-95 transition-all';
+        }
+      });
+
+      // Reset cities UI
+      cityButtons.forEach(cb => {
+        cb.className = 'city-filter-btn px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant font-label-tag text-label-tag whitespace-nowrap hover:border-tertiary transition-all';
+      });
+
+      // Reset sorts UI
+      sortButtons.forEach(sb => {
+        if (sb.getAttribute('data-sort') === 'upcoming') {
+          sb.className = 'sort-btn py-1.5 px-1 bg-surface-container-high rounded text-primary font-bold border border-primary/40 shadow-sm transition-all flex items-center justify-center gap-0.5';
+        } else {
+          sb.className = 'sort-btn py-1.5 px-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-all flex items-center justify-center gap-0.5';
+        }
+      });
+
+      if (orderLabelTag) orderLabelTag.textContent = 'ORDEN: PRÓXIMAS';
+
+      applyFiltersAndSort();
+    }
+
+    if (emptyResetBtn) emptyResetBtn.addEventListener('click', resetAllFilters);
+    if (quickResetBtn) quickResetBtn.addEventListener('click', resetAllFilters);
+
+    // Dynamic "Añadir a Agenda / Guardar" buttons feedback
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.agenda-action-btn');
+      if (!btn) return;
+
+      const eventId = btn.getAttribute('data-target') || 'unknown';
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const textSpan = btn.querySelector('.btn-text');
+
+      if (state.scheduledEvents.has(eventId)) {
+        // Toggle OFF
+        state.scheduledEvents.delete(eventId);
+        if (textSpan) {
+          if (eventId === 'tgms') textSpan.textContent = 'AÑADIR CALENDARIO';
+          else if (eventId === 'munich') textSpan.textContent = 'RECORDAR (15 DÍAS ANTES)';
+          else if (eventId === 'saintemarie') textSpan.textContent = 'ACTIVAR RECORDATORIO';
+          else if (eventId === 'madrid') textSpan.textContent = 'SEGUIR EVENTO';
+          else textSpan.textContent = 'NOTIFICAR 15 DÍAS ANTES';
+        }
+        if (icon) {
+          icon.textContent = eventId === 'tgms' ? 'event_available' : 'notifications_active';
+        }
+        btn.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-400');
+      } else {
+        // Toggle ON with tactile feedback
+        state.scheduledEvents.add(eventId);
+        if (textSpan) textSpan.textContent = 'AGENDADO ✓';
+        if (icon) icon.textContent = 'task_alt';
+        
+        // Haptic-style tactile animation
+        btn.classList.add('scale-105');
+        setTimeout(() => btn.classList.remove('scale-105'), 180);
+
+        if (btn.classList.contains('bg-primary')) {
+          btn.classList.add('bg-emerald-400');
+        } else {
+          btn.classList.add('text-primary', 'font-bold');
+        }
+      }
+    });
+
+    // Initial pass
+    applyFiltersAndSort();
+  })();
+</script>
+</body></html>
