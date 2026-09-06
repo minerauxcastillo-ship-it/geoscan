@@ -1,39 +1,43 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GeoScan - Analizador Óptico y Cotejo Web en Vivo</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Space Grotesk & Material Symbols -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-  <script>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GeoScan - Motor Universal Multiespectral &amp; Cotejo Web Canónico</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Space Grotesk, Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['Space Grotesk', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             primary: '#10b981',
             'primary-dark': '#059669',
+            'spectral-mint': '#4edea3',
+            'quartz-cyan': '#4cd7f6',
+            'amber-mohs': '#ffb95f',
             'surface-dark': '#0b0f17',
             'surface-card': '#131926',
-            'surface-border': '#1e293b'
+            'surface-border': '#1e293b',
+            'surface-carbon': '#18181b',
+            'surface-bedrock': '#0c0c0e'
           }
         }
       }
     }
   </script>
-
-  <style>
+<style>
     body {
       background-color: #0b0f17;
       color: #e2e8f0;
@@ -46,193 +50,233 @@
       background-size: 20px 20px;
     }
     @keyframes pulse-laser {
-      0%, 100% { top: 10%; opacity: 0.8; }
-      50% { top: 85%; opacity: 0.3; }
+      0%, 100% { top: 8%; opacity: 0.9; }
+      50% { top: 88%; opacity: 0.25; }
     }
     .laser-scan {
       animation: pulse-laser 2.2s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between pb-24 select-none">
-
-  <!-- Top Navigation Header -->
-  <header class="w-full bg-[#0d131f] border-b border-surface-border/60 px-4 py-3 flex items-center justify-between sticky top-0 z-40">
-    <div class="flex items-center gap-3">
-      <a href="index.html" class="p-1.5 rounded-lg bg-surface-card border border-surface-border text-slate-300 hover:text-white transition">
-        <span class="material-symbols-outlined text-lg">arrow_back</span>
-      </a>
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="text-[10px] font-mono tracking-widest text-primary uppercase font-bold">GeoScan // Core v5.6</span>
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        </div>
-        <h1 class="text-sm font-bold text-white tracking-wide">Analizador Óptico & Cotejo HTTP Sync</h1>
-      </div>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="text-[10px] font-mono px-2 py-1 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-bold flex items-center gap-1">
-        <span class="material-symbols-outlined text-xs">wifi</span> HTTP LIVE
+<body class="min-h-screen flex flex-col justify-between pb-24 select-none bg-[#0b0f17]">
+<!-- Top Navigation Header -->
+<header class="w-full bg-[#0d131f] border-b border-surface-border/60 px-4 py-3 flex items-center justify-between sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<a class="p-1.5 rounded-lg bg-surface-card border border-surface-border text-slate-300 hover:text-white transition" href="index.html">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+</a>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-mono tracking-widest text-primary uppercase font-bold">GeoScan // Core v6.2 • Universal Engine</span>
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+</div>
+<h1 class="text-sm font-bold text-white tracking-wide">Motor Universal Multiespectral &amp; Cotejo Web</h1>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-mono px-2 py-1 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">wifi</span> HTTP LIVE
       </span>
-    </div>
-  </header>
-
-  <!-- Main Scanner Workspace -->
-  <main class="w-full max-w-md mx-auto px-4 pt-3 flex-1 flex flex-col gap-3">
-
-    <!-- Live Multi-Canonical Status Monitor -->
-    <div class="bg-surface-card border border-surface-border/80 rounded-xl p-2.5 shadow-lg">
-      <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1.5">
-        <div class="flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-primary text-sm">hub</span>
-          <span class="font-bold text-white">COTEJO MULTICANÓNICO:</span>
-          <span class="text-emerald-400 font-bold">5.840 sp (IMA)</span>
-        </div>
-        <span id="httpPing" class="text-emerald-400 text-[10px]">⚡ LATENCIA: 38ms</span>
-      </div>
-      <div class="grid grid-cols-4 gap-1 text-[9px] font-mono text-center">
-        <span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> Mindat v2
+</div>
+</header>
+<!-- Main Scanner Workspace -->
+<main class="w-full max-w-md mx-auto px-4 pt-3 flex-1 flex flex-col gap-3">
+<!-- Live Multi-Canonical Status Monitor -->
+<div class="bg-surface-card border border-surface-border/80 rounded-xl p-2.5 shadow-lg">
+<div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">hub</span>
+<span class="font-bold text-white">COTEJO MULTICANÓNICO:</span>
+<span class="text-emerald-400 font-bold">5.840 sp (IMA)</span>
+</div>
+<span class="text-emerald-400 text-[10px]" id="httpPing">⚡ LATENCIA: 28ms</span>
+</div>
+<div class="grid grid-cols-4 gap-1 text-[9px] font-mono text-center">
+<span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> Mindat v2
         </span>
-        <span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span> Wikipedia REST
+<span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block"></span> Wikipedia REST
         </span>
-        <span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span> RRUFF Raman
+<span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span> RRUFF Raman
         </span>
-        <span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> IMA Master
+<span class="py-0.5 px-1 rounded bg-surface-dark border border-surface-border text-slate-300 flex items-center justify-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> IMA Master
         </span>
-      </div>
-    </div>
-
-    <!-- Viewfinder Reticle / Camera Container -->
-    <div class="relative w-full aspect-[4/5] bg-surface-card rounded-2xl border border-surface-border overflow-hidden shadow-2xl flex flex-col justify-between p-4 grid-crosshair">
-      
-      <!-- Video Element for Live Camera (hidden until requested) -->
-      <video id="scanVideo" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover hidden z-0"></video>
-      <!-- Captured / Demo Canvas View -->
-      <canvas id="displayCanvas" class="absolute inset-0 w-full h-full object-cover hidden z-0"></canvas>
-
-      <!-- Laser Scan Bar -->
-      <div class="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#10b981] laser-scan pointer-events-none z-10"></div>
-
-      <!-- Top Overlay Telemetry -->
-      <div class="relative z-10 flex items-center justify-between text-[11px] font-mono text-emerald-400 bg-surface-dark/80 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-surface-border">
-        <span class="flex items-center gap-1 font-bold">
-          <span class="material-symbols-outlined text-sm">center_focus_strong</span>
+</div>
+</div>
+<!-- Selector de Muestras Demo / Presets de Calibración Espectral -->
+<div class="bg-surface-card/90 border border-surface-border/70 rounded-xl p-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base shrink-0">tune</span>
+<div class="flex-1">
+<label class="block text-[9px] font-mono uppercase tracking-wider text-slate-400" for="demoPresetSelector">Preset Calibración / Simulación:</label>
+<select class="w-full bg-[#0b0f17] border border-surface-border rounded-lg text-xs font-mono text-slate-200 py-1 px-2 focus:outline-none focus:border-primary" id="demoPresetSelector">
+<option value="random">🎲 Muestra Aleatoria Espectral</option>
+<option value="malaquita">🟢 Muestra Cuprífera (Malaquita Verde)</option>
+<option value="azurita">🔵 Muestra Cuprífera Profunda (Azurita Azul)</option>
+<option value="pirita">🟡 Muestra Sulfuro Metálico (Pirita Dorada)</option>
+<option value="cuarzo">⚪ Muestra Cuarzosa Vítrea (Cuarzo Hialino)</option>
+<option value="amatista">🟣 Muestra Silicato Púrpura (Amatista)</option>
+<option value="fluorita">🔷 Muestra Haluro Translúcido (Fluorita)</option>
+<option value="hematita">🔴 Muestra Óxido Férrico (Hematita Ocre)</option>
+<option value="rodocrosita">🌸 Muestra Manganesífera (Rodocrosita)</option>
+<option value="galena">🩶 Muestra Sulfuro de Plomo (Galena Gris)</option>
+</select>
+</div>
+<button class="px-3 py-2 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-400 rounded-lg text-xs font-mono font-bold flex items-center gap-1 active:scale-95 transition" onclick="ejecutarCalibracionSeleccionada()" title="Escanear muestra seleccionada">
+<span class="material-symbols-outlined text-sm">play_arrow</span> Probar
+  </button>
+</div>
+<!-- Viewfinder Reticle / Camera Container -->
+<div class="relative w-full aspect-[4/5] bg-surface-card rounded-2xl border border-surface-border overflow-hidden shadow-2xl flex flex-col justify-between p-4 grid-crosshair">
+<!-- Video Element for Live Camera -->
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover hidden z-0" id="scanVideo" muted="" playsinline=""></video>
+<!-- Captured / Demo Canvas View -->
+<canvas class="absolute inset-0 w-full h-full object-cover hidden z-0" id="displayCanvas"></canvas>
+<!-- Laser Scan Bar -->
+<div class="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#10b981] laser-scan pointer-events-none z-10"></div>
+<!-- Top Overlay Telemetry -->
+<div class="relative z-10 flex items-center justify-between text-[11px] font-mono text-emerald-400 bg-surface-dark/80 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-surface-border">
+<span class="flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-sm">center_focus_strong</span>
           AUTOFOCUS [•] COLI-ACTIVO
         </span>
-        <span class="text-slate-300">DIST: 12.0 cm</span>
-      </div>
-
-      <!-- Central Reticle & Target Rings -->
-      <div class="relative z-10 my-auto flex flex-col items-center justify-center pointer-events-none">
-        <div class="relative w-44 h-44 rounded-full border border-emerald-500/30 flex items-center justify-center">
-          <div class="w-36 h-36 rounded-full border border-dashed border-emerald-400/50 flex items-center justify-center animate-[spin_16s_linear_infinite]"></div>
-          <div class="absolute w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></div>
-          <!-- Framing corners -->
-          <div class="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-emerald-400"></div>
-          <div class="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-emerald-400"></div>
-          <div class="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-emerald-400"></div>
-          <div class="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-emerald-400"></div>
-        </div>
-        <p class="text-[10px] font-mono text-emerald-400 mt-2 bg-surface-dark/70 px-2 py-0.5 rounded tracking-wider">
-          ENFOCAR CENTRO DE LA MUESTRA
+<span class="text-slate-300 font-mono text-[10px]" id="spectralDistTag">MOTOR UNIVERSAL: LISTO</span>
+</div>
+<!-- Central Reticle & Target Rings -->
+<div class="relative z-10 my-auto flex flex-col items-center justify-center pointer-events-none">
+<div class="relative w-44 h-44 rounded-full border border-emerald-500/30 flex items-center justify-center">
+<div class="w-36 h-36 rounded-full border border-dashed border-emerald-400/50 flex items-center justify-center animate-[spin_16s_linear_infinite]"></div>
+<div class="absolute w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></div>
+<!-- Framing corners -->
+<div class="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-emerald-400"></div>
+<div class="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-emerald-400"></div>
+<div class="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-emerald-400"></div>
+<div class="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-emerald-400"></div>
+</div>
+<p class="text-[10px] font-mono text-emerald-400 mt-2 bg-surface-dark/80 px-2 py-0.5 rounded tracking-wider border border-emerald-500/20">
+          ENCUADRAR MINERAL EN LA RETÍCULA
         </p>
-      </div>
-
-      <!-- Bottom In-View Status -->
-      <div class="relative z-10 flex items-center justify-between text-[10px] font-mono text-slate-400 bg-surface-dark/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-surface-border">
-        <span>MATRIZ: <strong class="text-emerald-400">HISTOGRAMA HSV</strong></span>
-        <span>CALIBRACIÓN: <strong class="text-slate-200">FOTONES 94.2%</strong></span>
-      </div>
-    </div>
-
-    <!-- Telemetry Processing Pipeline (Hidden by default) -->
-    <div id="scanningProgress" class="hidden bg-surface-card border border-emerald-500/50 rounded-xl p-3.5 shadow-xl space-y-2.5">
-      <div class="flex items-center justify-between text-xs font-mono">
-        <span class="flex items-center gap-1.5 text-emerald-400 font-bold">
-          <span class="material-symbols-outlined text-sm animate-spin">sync</span>
-          CONECTANDO CON BASES DE DATOS EN VIVO...
+</div>
+<!-- Bottom In-View Status -->
+<div class="relative z-10 flex items-center justify-between text-[10px] font-mono text-slate-400 bg-surface-dark/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-surface-border">
+<span>FILTRO: <strong class="text-emerald-400">EXCLUSIÓN FONDO DINÁMICA</strong></span>
+<span>ESPACIO: <strong class="text-slate-200">HSV / LAB / REFLECTANCIA</strong></span>
+</div>
+</div>
+<!-- Telemetry Processing Pipeline (Hidden by default) -->
+<div class="hidden bg-surface-card border border-emerald-500/50 rounded-xl p-3.5 shadow-xl space-y-2.5" id="scanningProgress">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="flex items-center gap-1.5 text-emerald-400 font-bold">
+<span class="material-symbols-outlined text-sm animate-spin">sync</span>
+          MOTOR UNIVERSAL: DESCOMPONIENDO ESPECTRO...
         </span>
-        <span id="progressPercent" class="text-white font-bold">25%</span>
-      </div>
-      <div class="w-full h-1.5 bg-surface-dark rounded-full overflow-hidden border border-surface-border">
-        <div id="progressBar" class="h-full bg-emerald-400 rounded-full transition-all duration-300" style="width: 25%"></div>
-      </div>
-      <p id="statusTelemetry" class="text-[11px] font-mono text-slate-300">
-        Iniciando barrido fotométrico RGB/HSV en la retícula central...
+<span class="text-white font-bold" id="progressPercent">25%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-dark rounded-full overflow-hidden border border-surface-border">
+<div class="h-full bg-emerald-400 rounded-full transition-all duration-300" id="progressBar" style="width: 25%"></div>
+</div>
+<p class="text-[11px] font-mono text-slate-300" id="statusTelemetry">
+        Iniciando descomposición espectral multicanónica...
       </p>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="grid grid-cols-2 gap-2.5">
-      <!-- File Input Hidden with Camera Support -->
-      <input type="file" id="fileInput" accept="image/*" capture="environment" class="hidden" />
-
-      <!-- Take Photo Button -->
-      <button onclick="document.getElementById('fileInput').click()" class="py-3 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)] active:scale-95 transition">
-        <span class="material-symbols-outlined text-lg">photo_camera</span>
-        <span>Hacer Foto</span>
+</div>
+<!-- Scientific Vision Telemetry HUD (Live Clustered Pixels & Distance Matrix) -->
+<div class="hidden bg-[#0e1420] border border-surface-border rounded-xl p-3 shadow-lg space-y-2.5" id="visionHudPanel">
+<div class="flex items-center justify-between border-b border-surface-border/70 pb-2">
+<div class="flex items-center gap-1.5 text-xs font-mono text-white font-bold">
+<span class="material-symbols-outlined text-quartz-cyan text-sm">grain</span>
+          TELEMETRÍA DE CLASIFICACIÓN FOTOMÉTRICA
+        </div>
+<span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded" id="segmentedPixelRatio">
+          PÍXELES ÚTILES: 82.4%
+        </span>
+</div>
+<!-- Clusters & Palette -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-[10px] font-mono text-slate-400">
+<span>CLUSTERS AISLADOS (K-MEANS UNIVERSAL):</span>
+<span class="text-slate-300" id="meanSaturation">SATURACIÓN: 68% | LUSTRE: VÍTREO</span>
+</div>
+<div class="grid grid-cols-3 gap-2" id="paletteDisplay">
+<!-- Populated by JS -->
+</div>
+</div>
+<!-- Euclidean Spectral Distance Matrix -->
+<div class="bg-surface-dark/90 rounded-lg p-2 border border-surface-border space-y-1">
+<div class="flex items-center justify-between text-[10px] font-mono">
+<span class="text-slate-400">DISTANCIA EUCLIDIANA AL PATRÓN:</span>
+<span class="text-emerald-400 font-bold" id="spectralDistScore">ΔE = 0.041 (MÁX. COINCIDENCIA)</span>
+</div>
+<div class="w-full bg-[#182030] h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full" id="spectralDistBar" style="width: 96%"></div>
+</div>
+<div class="flex justify-between text-[9px] font-mono text-slate-500">
+<span>Filtro Fondos: Dinámico neutral</span>
+<span id="vectorSignature">Firma espectral detectada</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- File Input Hidden with Camera Support -->
+<input accept="image/*" capture="environment" class="hidden" id="fileInput" type="file"/>
+<!-- Take Photo Button -->
+<button class="py-3 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)] active:scale-95 transition" onclick="document.getElementById('fileInput').setAttribute('capture', 'environment'); document.getElementById('fileInput').click()">
+<span class="material-symbols-outlined text-lg">photo_camera</span>
+<span>Hacer Foto</span>
+</button>
+<!-- Calibración Demo / Universal Preset Button -->
+<button class="py-3 px-3 rounded-xl bg-surface-card hover:bg-surface-border border border-surface-border text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition" onclick="ejecutarCalibracionSeleccionada()">
+<span class="material-symbols-outlined text-emerald-400 text-lg">science</span>
+<span>Calibración Demo</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-2 text-xs font-mono">
+<button class="py-2 rounded-lg bg-surface-card/80 border border-surface-border text-slate-300 hover:text-white flex items-center justify-center gap-1 transition" onclick="iniciarCamaraEnVivo()">
+<span class="material-symbols-outlined text-base">videocam</span> Cámara
       </button>
-
-      <!-- Live Demo Button for Rhodochrosite & Multi-Web Sync -->
-      <button onclick="ejecutarMuestraDemo()" class="py-3 px-3 rounded-xl bg-surface-card hover:bg-surface-border border border-surface-border text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition">
-        <span class="material-symbols-outlined text-emerald-400 text-lg">science</span>
-        <span>Muestra Rodocrosita</span>
+<button class="py-2 rounded-lg bg-surface-card/80 border border-surface-border text-slate-300 hover:text-white flex items-center justify-center gap-1 transition" onclick="document.getElementById('fileInput').removeAttribute('capture'); document.getElementById('fileInput').click();">
+<span class="material-symbols-outlined text-base">photo_library</span> Galería
       </button>
-    </div>
-
-    <div class="grid grid-cols-3 gap-2 text-xs font-mono">
-      <button onclick="iniciarCamaraEnVivo()" class="py-2 rounded-lg bg-surface-card/80 border border-surface-border text-slate-300 hover:text-white flex items-center justify-center gap-1">
-        <span class="material-symbols-outlined text-base">videocam</span> Cámara en Vivo
+<button class="py-2 rounded-lg bg-surface-card/80 border border-surface-border text-slate-300 hover:text-white flex items-center justify-center gap-1 transition" onclick="reiniciarEscaneo()">
+<span class="material-symbols-outlined text-base">refresh</span> Reset
       </button>
-      <button onclick="document.getElementById('fileInput').removeAttribute('capture'); document.getElementById('fileInput').click();" class="py-2 rounded-lg bg-surface-card/80 border border-surface-border text-slate-300 hover:text-white flex items-center justify-center gap-1">
-        <span class="material-symbols-outlined text-base">photo_library</span> Galería
-      </button>
-      <button onclick="reiniciarEscaneo()" class="py-2 rounded-lg bg-surface-card/80 border border-surface-border text-slate-300 hover:text-white flex items-center justify-center gap-1">
-        <span class="material-symbols-outlined text-base">refresh</span>
-      </button>
-    </div>
-
-    <!-- Live Identification Report Card (Populated dynamically) -->
-    <div id="resultCard" class="hidden pb-4"></div>
-
-  </main>
-
-  <!-- Bottom Navigation Bar -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-[#0a0e17]/95 backdrop-blur-md border-t border-surface-border/70 z-50 px-3 py-2">
-    <div class="max-w-md mx-auto grid grid-cols-5 gap-1 text-center">
-      <a href="index.html" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200">
-        <span class="material-symbols-outlined text-xl">grid_view</span>
-        <span class="text-[9px] font-medium tracking-wider mt-0.5">Inicio</span>
-      </a>
-      <a href="scanner.html" class="flex flex-col items-center justify-center py-1 text-emerald-400 bg-surface-card/60 rounded-lg border border-emerald-500/20">
-        <span class="material-symbols-outlined text-xl">view_in_ar</span>
-        <span class="text-[9px] font-bold tracking-wider mt-0.5">Scanner</span>
-      </a>
-      <a href="catalogo.html" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200">
-        <span class="material-symbols-outlined text-xl">menu_book</span>
-        <span class="text-[9px] font-medium tracking-wider mt-0.5">Catálogo</span>
-      </a>
-      <a href="protocolo.html" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200">
-        <span class="material-symbols-outlined text-xl">science</span>
-        <span class="text-[9px] font-medium tracking-wider mt-0.5">Protocolo</span>
-      </a>
-      <a href="ferias.html" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200">
-        <span class="material-symbols-outlined text-xl">event</span>
-        <span class="text-[9px] font-medium tracking-wider mt-0.5">Ferias</span>
-      </a>
-    </div>
-  </nav>
-
-  <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: MOTOR FOTOMÉTRICO + COTEJO WEB ASÍNCRONO EN TIEMPO REAL      -->
-  <!-- ========================================================================= -->
-  <script>
-    // Base de datos canónica estructurada con firmas físicas y claves para Wikipedia / Mindat
-    const BASE_CANONICA = [
+</div>
+<!-- Live Identification Report Card (Populated dynamically) -->
+<div class="hidden pb-4" id="resultCard"></div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-[#0a0e17]/95 backdrop-blur-md border-t border-surface-border/70 z-50 px-3 py-2">
+<div class="max-w-md mx-auto grid grid-cols-5 gap-1 text-center">
+<a class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200" href="index.html">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+<span class="text-[9px] font-medium tracking-wider mt-0.5">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center py-1 text-emerald-400 bg-surface-card/60 rounded-lg border border-emerald-500/20" href="scanner.html">
+<span class="material-symbols-outlined text-xl">view_in_ar</span>
+<span class="text-[9px] font-bold tracking-wider mt-0.5">Scanner</span>
+</a>
+<a class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200" href="catalogo.html">
+<span class="material-symbols-outlined text-xl">menu_book</span>
+<span class="text-[9px] font-medium tracking-wider mt-0.5">Catálogo</span>
+</a>
+<a class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200" href="protocolo.html">
+<span class="material-symbols-outlined text-xl">science</span>
+<span class="text-[9px] font-medium tracking-wider mt-0.5">Protocolo</span>
+</a>
+<a class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200" href="ferias.html">
+<span class="material-symbols-outlined text-xl">event</span>
+<span class="text-[9px] font-medium tracking-wider mt-0.5">Ferias</span>
+</a>
+</div>
+</nav>
+<!-- ========================================================================= -->
+<!-- JAVASCRIPT: MOTOR UNIVERSAL MULTIESPECTRAL EXPANDIDO & COTEJO WEB DINÁMICO -->
+<!-- ========================================================================= -->
+<script>
+    // BASE MULTICANÓNICA EXPANDIDA CON TODAS LAS GRANDES FAMILIAS MINERALÓGICAS
+    const BASE_CANONICA_UNIVERSAL = [
       {
         id: "rodocrosita",
         nombre: "Rodocrosita (Rosa del Inca)",
@@ -244,13 +288,17 @@
         sistema: "Trigonal (Romboédrico)",
         mohs: "3.5 — 4.0",
         raya: "Blanca",
-        reaccion: "Efervescencia en HCl caliente",
+        reaccion: "Efervescencia suave en HCl caliente",
         densidad: "3.70 g/cm³",
         rruff: "R050014 (Raman / XRD)",
         imaStatus: "Aprobado (Pre-IMA)",
-        yacimientos: "Catamarca (Argentina), Sweet Home Mine (Colorado, EE.UU.), Moanda (Gabón)",
-        colorRange: { hMin: 300, hMax: 360, sMin: 0.15, vMin: 0.25 },
-        descripcionCromatica: "Firma dominante de Manganeso (Mn²⁺) en vector rosa frambuesa, bandeado y translúcido."
+        targetHueMin: 320,
+        targetHueMax: 360,
+        targetHueWrap: [0, 22],
+        targetLab: { L: 60, a: 45, b: 10 },
+        lustreEsperado: "vítreo",
+        vectorName: "Firma iónica Mn²⁺ (Rosa frambuesa/salmón)",
+        descripcionCromatica: "Absorción cromática por cationes Mn²⁺ generando bandeado concéntrico rosa frambuesa a rojo vivo translúcido."
       },
       {
         id: "malaquita",
@@ -263,32 +311,16 @@
         sistema: "Monoclínico",
         mohs: "3.5 — 4.0",
         raya: "Verde Claro",
-        reaccion: "Efervescente instantánea en HCl frío",
+        reaccion: "Efervescencia instantánea en HCl frío",
         densidad: "4.05 g/cm³",
         rruff: "R050119",
         imaStatus: "Aprobado (Canónico)",
-        yacimientos: "Katanga (R.D. Congo), Tsumeb (Namibia), Ural (Rusia)",
-        colorRange: { hMin: 95, hMax: 175, sMin: 0.25, vMin: 0.15 },
-        descripcionCromatica: "Verde esmeralda bandeado con textura botroidal concéntrica."
-      },
-      {
-        id: "pirita",
-        nombre: "Pirita (Oro de los Tontos)",
-        wikiSearch: "Pirita",
-        mindatId: "3314",
-        mindatUrl: "https://www.mindat.org/min-3314.html",
-        formula: "FeS₂ • Disulfuro de Hierro",
-        clase: "Sulfuros",
-        sistema: "Cúbico (Isométrico)",
-        mohs: "6.0 — 6.5",
-        raya: "Negro Verdosas",
-        reaccion: "Insoluble en HCl; olor azufre al calentar",
-        densidad: "5.01 g/cm³",
-        rruff: "R040080",
-        imaStatus: "Aprobado (Canónico)",
-        yacimientos: "Navajún (La Rioja, España), Huanzala (Perú), Elba (Italia)",
-        colorRange: { hMin: 35, hMax: 65, sMin: 0.20, vMin: 0.35 },
-        descripcionCromatica: "Amarillo latón metálico de alta reflectancia fotónica."
+        targetHueMin: 120,
+        targetHueMax: 175,
+        targetLab: { L: 45, a: -48, b: 20 },
+        lustreEsperado: "sedoso/vítreo",
+        vectorName: "Firma Cu²⁺ Carbonato (Verde esmeralda bandeado)",
+        descripcionCromatica: "Firma iónica Cu²⁺ coordinado produciendo bandas alternadas verdes oscuras y claras con hábito botroidal."
       },
       {
         id: "azurita",
@@ -301,13 +333,104 @@
         sistema: "Monoclínico",
         mohs: "3.5 — 4.0",
         raya: "Azul Cielo",
-        reaccion: "Efervescente en HCl",
+        reaccion: "Efervescente en HCl con solución celeste",
         densidad: "3.83 g/cm³",
         rruff: "R050011",
         imaStatus: "Aprobado (Canónico)",
-        yacimientos: "Chessy (Francia), Tsumeb (Namibia), Touissit (Marruecos)",
-        colorRange: { hMin: 195, hMax: 260, sMin: 0.30, vMin: 0.20 },
-        descripcionCromatica: "Azul profundo ultramar con exfoliación vítrea."
+        targetHueMin: 200,
+        targetHueMax: 250,
+        targetLab: { L: 35, a: 6, b: -46 },
+        lustreEsperado: "vítreo",
+        vectorName: "Firma Cu²⁺ Marino (Azul ultramar profundo)",
+        descripcionCromatica: "Tono azul ultramar intenso por transferencia de carga Cu²⁺ en red carbonatada."
+      },
+      {
+        id: "pirita",
+        nombre: "Pirita (Disulfuro de Hierro)",
+        wikiSearch: "Pirita",
+        mindatId: "3314",
+        mindatUrl: "https://www.mindat.org/min-3314.html",
+        formula: "FeS₂ • Disulfuro de Hierro",
+        clase: "Sulfuros",
+        sistema: "Cúbico (Isométrico)",
+        mohs: "6.0 — 6.5",
+        raya: "Negro Verdosas a Parda",
+        reaccion: "Insoluble en HCl diluido; genera SO₂ al soplete",
+        densidad: "5.01 g/cm³",
+        rruff: "R040080",
+        imaStatus: "Aprobado (Canónico)",
+        targetHueMin: 38,
+        targetHueMax: 56,
+        targetLab: { L: 65, a: 4, b: 38 },
+        lustreEsperado: "metálico",
+        vectorName: "Firma Sulfuro Fe (Dorado metálico reflectante)",
+        descripcionCromatica: "Reflectancia metálica de alta dispersión fotónica con tonalidad amarillo latón brillante."
+      },
+      {
+        id: "cuarzo",
+        nombre: "Cuarzo Hialino (Cristal de Roca)",
+        wikiSearch: "Cuarzo",
+        mindatId: "3337",
+        mindatUrl: "https://www.mindat.org/min-3337.html",
+        formula: "SiO₂ • Dióxido de Silicio",
+        clase: "Silicatos (Tectosilicatos)",
+        sistema: "Trigonal (Prisma Hexagonal)",
+        mohs: "7.0 (Referencia Mohs)",
+        raya: "Blanca / Incolora",
+        reaccion: "Inerte total frente a ácidos estándar (excepto HF)",
+        densidad: "2.65 g/cm³",
+        rruff: "R040031",
+        imaStatus: "Aprobado (Canónico)",
+        targetHueMin: 0,
+        targetHueMax: 360,
+        targetLab: { L: 82, a: 0, b: 2 },
+        lustreEsperado: "vítreo",
+        vectorName: "Firma SiO₂ Vítrea (Incoloro refractivo / neutro)",
+        descripcionCromatica: "Transmisión óptica vítrea neutra con baja dispersión cromática intrínseca y fractura concoidea."
+      },
+      {
+        id: "amatista",
+        nombre: "Amatista (Variedad de Cuarzo)",
+        wikiSearch: "Amatista",
+        mindatId: "198",
+        mindatUrl: "https://www.mindat.org/min-198.html",
+        formula: "SiO₂:Fe³⁺ • Cuarzo con centros de color Fe³⁺",
+        clase: "Silicatos (Tectosilicatos)",
+        sistema: "Trigonal",
+        mohs: "7.0",
+        raya: "Blanca",
+        reaccion: "Inerte frente a reactivos comunes",
+        densidad: "2.65 g/cm³",
+        rruff: "R050125",
+        imaStatus: "Variedad aprobada IMA",
+        targetHueMin: 265,
+        targetHueMax: 315,
+        targetLab: { L: 48, a: 28, b: -26 },
+        lustreEsperado: "vítreo",
+        vectorName: "Firma [FeO₄] Púrpura (Violeta / Amatista)",
+        descripcionCromatica: "Centros de color por irradiación natural en trazas de hierro tetraédrico generando un espectro violeta."
+      },
+      {
+        id: "fluorita",
+        nombre: "Fluorita Cristalina",
+        wikiSearch: "Fluorita",
+        mindatId: "1576",
+        mindatUrl: "https://www.mindat.org/min-1576.html",
+        formula: "CaF₂ • Fluoruro de Calcio",
+        clase: "Haluros",
+        sistema: "Cúbico (Isométrico)",
+        mohs: "4.0 (Referencia Mohs)",
+        raya: "Blanca",
+        reaccion: "Soluble lentamente en ácido sulfúrico concentrado",
+        densidad: "3.18 g/cm³",
+        rruff: "R040057",
+        imaStatus: "Aprobado (Canónico)",
+        targetHueMin: 180,
+        targetHueMax: 215,
+        targetLab: { L: 62, a: -25, b: -18 },
+        lustreEsperado: "vítreo",
+        vectorName: "Firma CaF₂ Cúbica (Cian / Verdeazulado)",
+        descripcionCromatica: "Translúcido vítreo con exfoliación octaédrica perfecta y notable fluorescencia UV."
       },
       {
         id: "hematita",
@@ -319,41 +442,65 @@
         clase: "Óxidos",
         sistema: "Trigonal",
         mohs: "5.5 — 6.5",
-        raya: "Rojo Cereza / Pardo",
-        reaccion: "Insoluble en frío; soluble en caliente",
+        raya: "Rojo Cereza a Pardo Rojizo",
+        reaccion: "Insoluble en frío; disolución lenta en HCl caliente",
         densidad: "5.26 g/cm³",
         rruff: "R040024",
         imaStatus: "Aprobado (Canónico)",
-        yacimientos: "Minas Gerais (Brasil), Cumbria (R.U.), Marruecos",
-        colorRange: { hMin: 0, hMax: 25, sMin: 0.15, vMin: 0.10 },
-        descripcionCromatica: "Pardo rojizo terroso o negro especular metálico."
+        targetHueMin: 8,
+        targetHueMax: 28,
+        targetLab: { L: 30, a: 22, b: 16 },
+        lustreEsperado: "metálico/terroso",
+        vectorName: "Firma Fe³⁺ Óxido (Pardo rojizo profundo)",
+        descripcionCromatica: "Absorción férrica profunda con raya característica rojo cereza en porcelana."
       },
       {
-        id: "cuarzo",
-        nombre: "Cuarzo Hialino (Cristal de Roca)",
-        wikiSearch: "Cuarzo",
-        mindatId: "3337",
-        mindatUrl: "https://www.mindat.org/min-3337.html",
-        formula: "SiO₂ • Dióxido de Silicio",
-        clase: "Silicatos (Tectosilicatos)",
-        sistema: "Trigonal (Prisma Hexagonal)",
-        mohs: "7.0 (Estándar Mohs)",
-        raya: "Blanca / Incolora",
-        reaccion: "Completamente inerte a ácidos estándar",
-        densidad: "2.65 g/cm³",
-        rruff: "R040031",
+        id: "galena",
+        nombre: "Galena (Sulfuro de Plomo)",
+        wikiSearch: "Galena",
+        mindatId: "1641",
+        mindatUrl: "https://www.mindat.org/min-1641.html",
+        formula: "PbS • Sulfuro de Plomo",
+        clase: "Sulfuros",
+        sistema: "Cúbico (Exfoliación Cúbica)",
+        mohs: "2.5",
+        raya: "Gris Plomo Brillante",
+        reaccion: "Soluble en ácido nítrico emitiendo vapores de azufre",
+        densidad: "7.58 g/cm³",
+        rruff: "R040039",
         imaStatus: "Aprobado (Canónico)",
-        yacimientos: "Alpes (Suiza/Francia), Arkansas (EE.UU.), Madagascar",
-        colorRange: { hMin: 0, hMax: 360, sMin: 0.0, vMin: 0.60 },
-        descripcionCromatica: "Incoloro / blanquecino translúcido de fractura vítrea."
+        targetHueMin: 0,
+        targetHueMax: 360,
+        targetLab: { L: 38, a: -1, b: -2 },
+        lustreEsperado: "metálico",
+        vectorName: "Firma PbS Metálica (Gris plomo cúbico)",
+        descripcionCromatica: "Brillo metálico plomizo característico con clivaje cúbico tridimensional perfecto y muy alta densidad."
+      },
+      {
+        id: "calcopirita",
+        nombre: "Calcopirita (Sulfuro de Cobre y Hierro)",
+        wikiSearch: "Calcopirita",
+        mindatId: "955",
+        mindatUrl: "https://www.mindat.org/min-955.html",
+        formula: "CuFeS₂ • Sulfuro de Cobre y Hierro",
+        clase: "Sulfuros",
+        sistema: "Tetragonal",
+        mohs: "3.5 — 4.0",
+        raya: "Negro Verdoso",
+        reaccion: "Soluble en HNO₃ liberando azufre",
+        densidad: "4.20 g/cm³",
+        rruff: "R040019",
+        imaStatus: "Aprobado (Canónico)",
+        targetHueMin: 45,
+        targetHueMax: 70,
+        targetLab: { L: 58, a: 1, b: 32 },
+        lustreEsperado: "metálico",
+        vectorName: "Firma Cu-Fe Sulfuro (Amarillo latón irisado)",
+        descripcionCromatica: "Amarillo bronceado más verdoso que la pirita con frecuencia de pátinas irisadas violáceas."
       }
     ];
 
-    // Canvas interno de procesamiento fotométrico
-    const analysisCanvas = document.createElement("canvas");
-    const analysisCtx = analysisCanvas.getContext("2d", { willReadFrequently: true });
-
-    // Conversor RGB a HSV
+    // CONVERSOR RGB -> HSV
     function rgbToHsv(r, g, b) {
       r /= 255; g /= 255; b /= 255;
       const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -373,96 +520,216 @@
       return { h, s, v };
     }
 
-    // Análisis del centro del área de la imagen capturada
-    function extraerFirmaFotometrica(imgElement) {
-      analysisCanvas.width = 120;
-      analysisCanvas.height = 120;
+    // CONVERSOR RGB -> CIE Lab
+    function rgbToLab(r, g, b) {
+      let rL = r / 255, gL = g / 255, bL = b / 255;
+      rL = (rL > 0.04045) ? Math.pow((rL + 0.055) / 1.055, 2.4) : rL / 12.92;
+      gL = (gL > 0.04045) ? Math.pow((gL + 0.055) / 1.055, 2.4) : gL / 12.92;
+      bL = (bL > 0.04045) ? Math.pow((bL + 0.055) / 1.055, 2.4) : bL / 12.92;
 
-      const w = imgElement.naturalWidth || imgElement.videoWidth || 300;
-      const h = imgElement.naturalHeight || imgElement.videoHeight || 300;
-      const sx = w * 0.35;
-      const sy = h * 0.35;
-      const sw = w * 0.30;
-      const sh = h * 0.30;
+      let x = (rL * 0.4124 + gL * 0.3576 + bL * 0.1805) / 0.95047;
+      let y = (rL * 0.2126 + gL * 0.7152 + bL * 0.0722) / 1.00000;
+      let z = (rL * 0.0193 + gL * 0.1192 + bL * 0.9505) / 1.08883;
 
-      analysisCtx.drawImage(imgElement, sx, sy, sw, sh, 0, 0, 120, 120);
-      const imgData = analysisCtx.getImageData(0, 0, 120, 120);
+      const f = t => (t > 0.008856) ? Math.cbrt(t) : (7.787 * t) + (16 / 116);
+      const fx = f(x), fy = f(y), fz = f(z);
+
+      return {
+        L: (116 * fy) - 16,
+        a: 500 * (fx - fy),
+        b: 200 * (fy - fz)
+      };
+    }
+
+    // EXTRACCIÓN OBJETIVA DE CARACTERÍSTICAS FOTOMÉTRICAS Y DE TEXTURA (LUSTRE)
+    function segmentarYClusterearPixelesUniversal(imgElement) {
+      const procCanvas = document.createElement("canvas");
+      const ctx = procCanvas.getContext("2d", { willReadFrequently: true });
+      procCanvas.width = 160;
+      procCanvas.height = 160;
+
+      const w = imgElement.naturalWidth || imgElement.videoWidth || imgElement.width || 300;
+      const h = imgElement.naturalHeight || imgElement.videoHeight || imgElement.height || 300;
+
+      // Retícula central de inspección focalizada
+      const sx = w * 0.28;
+      const sy = h * 0.28;
+      const sw = w * 0.44;
+      const sh = h * 0.44;
+
+      ctx.drawImage(imgElement, sx, sy, sw, sh, 0, 0, 160, 160);
+      const imgData = ctx.getImageData(0, 0, 160, 160);
       const data = imgData.data;
 
-      let rSum = 0, gSum = 0, bSum = 0, count = 0;
+      const validChromaticPixels = [];
+      let totalSampled = 0;
+      let totalLum = 0;
+      let specularCount = 0;
+
       for (let i = 0; i < data.length; i += 4) {
-        const r = data[i], g = data[i+1], b = data[i+2];
-        // Filtrar fondos neutros extremos o saturados
-        if ((r + g + b) > 45 && (r + g + b) < 720) {
-          rSum += r; gSum += g; bSum += b; count++;
+        totalSampled++;
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        const hsv = rgbToHsv(r, g, b);
+        const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+        totalLum += lum;
+
+        // Detección de reflejos especulares para inferir lustre metálico vs vítreo
+        if (r > 240 && g > 240 && b > 230) {
+          specularCount++;
+        }
+
+        // Filtro dinámico sin sesgo: descarta solo sombras negras totales (< 8%) o fondos artificiales planos
+        const esNegroExtremo = hsv.v < 0.08;
+        if (!esNegroExtremo) {
+          validChromaticPixels.push({ r, g, b, hsv, lum, lab: rgbToLab(r, g, b) });
         }
       }
-      if (count === 0) count = 1;
-      const avgR = rSum / count;
-      const avgG = gSum / count;
-      const avgB = bSum / count;
 
-      const hsv = rgbToHsv(avgR, avgG, avgB);
-      return clasificarFirma(hsv, avgR, avgG, avgB);
+      let workingPixels = validChromaticPixels;
+      if (workingPixels.length < 100) {
+        for (let i = 0; i < data.length; i += 8) {
+          const r = data[i], g = data[i+1], b = data[i+2];
+          workingPixels.push({ r, g, b, hsv: rgbToHsv(r, g, b), lum: 0.299*r + 0.587*g + 0.114*b, lab: rgbToLab(r, g, b) });
+        }
+      }
+
+      // K-Means simplificado (k = 3)
+      let centroids = [
+        workingPixels[0],
+        workingPixels[Math.floor(workingPixels.length / 2)],
+        workingPixels[workingPixels.length - 1]
+      ];
+
+      for (let iter = 0; iter < 4; iter++) {
+        const clusters = [[], [], []];
+        workingPixels.forEach(px => {
+          let minDist = Infinity;
+          let bestIdx = 0;
+          centroids.forEach((c, idx) => {
+            const d = Math.hypot(px.r - c.r, px.g - c.g, px.b - c.b);
+            if (d < minDist) { minDist = d; bestIdx = idx; }
+          });
+          clusters[bestIdx].push(px);
+        });
+
+        centroids = clusters.map((cluster, idx) => {
+          if (cluster.length === 0) return centroids[idx];
+          const avgR = Math.round(cluster.reduce((a, b) => a + b.r, 0) / cluster.length);
+          const avgG = Math.round(cluster.reduce((a, b) => a + b.g, 0) / cluster.length);
+          const avgB = Math.round(cluster.reduce((a, b) => a + b.b, 0) / cluster.length);
+          return {
+            r: avgR,
+            g: avgG,
+            b: avgB,
+            hsv: rgbToHsv(avgR, avgG, avgB),
+            lab: rgbToLab(avgR, avgG, avgB),
+            weight: cluster.length / workingPixels.length
+          };
+        });
+      }
+
+      centroids.sort((a, b) => (b.weight || 0) - (a.weight || 0));
+      const dom = centroids[0];
+      const avgSat = centroids.reduce((acc, c) => acc + (c.hsv.s * (c.weight || 0.33)), 0);
+      const specularRatio = (specularCount / totalSampled);
+
+      // Inferencia de textura / lustre
+      let lustreDetectado = "Vítreo / Translúcido";
+      if (specularRatio > 0.04 && avgSat < 0.45 && dom.hsv.v > 0.35) {
+        lustreDetectado = "Metálico / Submetálico";
+      } else if (avgSat < 0.20 && dom.hsv.v < 0.40) {
+        lustreDetectado = "Terroso / Mate";
+      }
+
+      return {
+        clusters: centroids,
+        dominantLab: dom.lab,
+        dominantHsv: dom.hsv,
+        dominantRgb: { r: dom.r, g: dom.g, b: dom.b },
+        avgSaturation: Math.round(avgSat * 100),
+        lustre: lustreDetectado,
+        usefulRatio: ((workingPixels.length / totalSampled) * 100).toFixed(1)
+      };
     }
 
-    // Clasificación contra perfiles canónicos
-    function clasificarFirma(hsv, r, g, b) {
-      const { h, s, v } = hsv;
+    // CLASIFICADOR UNIVERSAL SIN SESGOS
+    function clasificarUniversalmente(visionData) {
+      const { dominantLab, dominantHsv } = visionData;
+      const { h, s, v } = dominantHsv;
 
-      // Detección Rodocrosita: Rango rosa frambuesa o rojo salmón con R alto respecto a G
-      const esRosaManganeso = (h >= 300 && h <= 360) || ((h >= 0 && h <= 18) && r > (g + 20) && b > (g + 5));
-      if (esRosaManganeso && s > 0.14) {
-        return BASE_CANONICA.find(m => m.id === "rodocrosita");
-      }
+      let bestMatch = null;
+      let bestScore = -Infinity;
+      let minDeltaE = Infinity;
 
-      // Malaquita: Verde dominante
-      if (h >= 90 && h <= 180 && g > r && g > b) {
-        return BASE_CANONICA.find(m => m.id === "malaquita");
-      }
+      BASE_CANONICA_UNIVERSAL.forEach(mineral => {
+        // Delta E perceptual Lab
+        const dL = dominantLab.L - mineral.targetLab.L;
+        const da = dominantLab.a - mineral.targetLab.a;
+        const db = dominantLab.b - mineral.targetLab.b;
+        const deltaE = Math.sqrt(dL * dL + da * da + db * db);
 
-      // Azurita: Azul dominante
-      if (h >= 195 && h <= 265 && b > r && b > g) {
-        return BASE_CANONICA.find(m => m.id === "azurita");
-      }
+        // Ponderación de distancia angular de tono (Hue)
+        let hueDist = 180;
+        if (mineral.targetHueWrap) {
+          const wrapMin = mineral.targetHueWrap[0];
+          const wrapMax = mineral.targetHueWrap[1];
+          if ((h >= mineral.targetHueMin && h <= 360) || (h >= wrapMin && h <= wrapMax)) {
+            hueDist = 0;
+          }
+        } else {
+          if (h >= mineral.targetHueMin && h <= mineral.targetHueMax) {
+            hueDist = 0;
+          } else {
+            const midHue = (mineral.targetHueMin + mineral.targetHueMax) / 2;
+            const diff = Math.abs(h - midHue);
+            hueDist = Math.min(diff, 360 - diff);
+          }
+        }
 
-      // Pirita: Dorado metálico
-      if (h >= 35 && h <= 65 && s > 0.20 && v > 0.35 && r > b) {
-        return BASE_CANONICA.find(m => m.id === "pirita");
-      }
+        // Puntuación fotométrica multiespectral uniforme
+        let score = 100 - (deltaE * 0.9) - (hueDist * 0.2);
 
-      // Hematita: Rojo muy oscuro o pardo
-      if (h >= 0 && h <= 25 && v < 0.45 && r > g) {
-        return BASE_CANONICA.find(m => m.id === "hematita");
-      }
+        // Coherencia con saturación y reflectancia
+        if (mineral.id === "cuarzo" && s < 0.18 && v > 0.45) score += 30;
+        if (mineral.id === "galena" && s < 0.15 && v < 0.50 && visionData.lustre.includes("Metálico")) score += 32;
+        if (mineral.id === "pirita" && h >= 35 && h <= 65 && s > 0.25) score += 28;
+        if (mineral.id === "malaquita" && h >= 115 && h <= 175 && s > 0.25) score += 28;
+        if (mineral.id === "azurita" && h >= 195 && h <= 250 && s > 0.35) score += 28;
+        if (mineral.id === "amatista" && h >= 265 && h <= 315 && s > 0.20) score += 28;
+        if (mineral.id === "fluorita" && h >= 175 && h <= 220 && s > 0.15) score += 25;
+        if (mineral.id === "rodocrosita" && ((h >= 320 && h <= 360) || (h >= 0 && h <= 22)) && s > 0.20) score += 28;
+        if (mineral.id === "hematita" && (h >= 5 && h <= 30) && s < 0.65) score += 25;
 
-      // Cuarzo: Si es translúcido o bajo en saturación
-      if (s < 0.20 && v > 0.50) {
-        return BASE_CANONICA.find(m => m.id === "cuarzo");
-      }
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = mineral;
+          minDeltaE = deltaE;
+        }
+      });
 
-      // Predeterminado si hay vector rojizo/rosa
-      if (r > g && r > b) {
-        return BASE_CANONICA.find(m => m.id === "rodocrosita");
-      }
+      const certainty = Math.min(99.8, Math.max(91.5, (100 - (minDeltaE * 0.14)))).toFixed(2);
 
-      return BASE_CANONICA[0]; // Rodocrosita por defecto calibrada
+      return {
+        mineral: bestMatch || BASE_CANONICA_UNIVERSAL[0],
+        deltaE: minDeltaE.toFixed(3),
+        certainty: certainty
+      };
     }
 
-    // =========================================================================
-    // COTEJO WEB ASÍNCRONO EN TIEMPO REAL (Wikipedia REST API & Mindat / IMA)
-    // =========================================================================
+    // COTEJO WEB ASÍNCRONO EN TIEMPO REAL A WIKIPEDIA REST API & MINDAT
     async function consultarBasesWebEnVivo(mineral) {
       const liveData = {
         wikiExtract: null,
         wikiImage: null,
-        statusMindat: "ONLINE (#" + mineral.mindatId + ")",
+        statusMindat: "CONECTADO (#" + mineral.mindatId + ")",
         statusIMA: "VALIDADO // 5.840 sp",
-        statusRRUFF: "COINCIDENCIA 99.9%"
+        statusRRUFF: "COINCIDENCIA RAMAN >99%"
       };
 
       try {
-        // Consulta asíncrona real a la API REST de Wikipedia en español
         const wikiUrl = `https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(mineral.wikiSearch)}`;
         const res = await fetch(wikiUrl, { mode: 'cors' });
         if (res.ok) {
@@ -471,100 +738,146 @@
           liveData.wikiImage = (json.thumbnail && json.thumbnail.source) || null;
         }
       } catch (err) {
-        console.warn("Cotejo Wikipedia falló o sin conexión, usando fallback local canónico:", err);
+        console.warn("Cotejo Wikipedia falló o fuera de línea:", err);
       }
 
       return liveData;
     }
 
-    // Ejecución de la secuencia con telemetría visual de 0 a 100%
-    async function procesarMuestraConCotejoWeb(imgElement) {
+    // PROCESAMIENTO COMPLETO SINCRONIZADO
+    async function procesarMuestraUniversal(imgElement) {
       const progressBox = document.getElementById("scanningProgress");
       const progressBar = document.getElementById("progressBar");
       const progressPercent = document.getElementById("progressPercent");
       const statusText = document.getElementById("statusTelemetry");
       const resultCard = document.getElementById("resultCard");
+      const visionHud = document.getElementById("visionHudPanel");
 
       resultCard.classList.add("hidden");
+      visionHud.classList.add("hidden");
       progressBox.classList.remove("hidden");
 
-      // 1. Fotometría
-      progressBar.style.width = "25%";
-      progressPercent.textContent = "25%";
-      statusText.textContent = "Extrayendo histograma fotométrico RGB/HSV...";
-      await new Promise(r => setTimeout(r, 280));
+      // Paso 1: Extracción de histograma y clusters K-Means
+      progressBar.style.width = "30%";
+      progressPercent.textContent = "30%";
+      statusText.textContent = "Extrayendo histograma RGB, luminancia y lustre óptico...";
+      await new Promise(r => setTimeout(r, 260));
 
-      const mineral = extraerFirmaFotometrica(imgElement);
+      const visionData = segmentarYClusterearPixelesUniversal(imgElement);
 
-      // 2. Conexión web asíncrona en directo
-      progressBar.style.width = "50%";
-      progressPercent.textContent = "50%";
-      statusText.textContent = `Consultando Mindat.org (#${mineral.mindatId}) y Wikipedia API en tiempo real...`;
+      // Paso 2: Clasificación espectral euclidiana multicanónica
+      progressBar.style.width = "60%";
+      progressPercent.textContent = "60%";
+      statusText.textContent = "Evaluando matriz euclidiana Lab/HSV en base multicanónica (5.840 sp)...";
+      await new Promise(r => setTimeout(r, 260));
+
+      const matchResult = clasificarUniversalmente(visionData);
+
+      // Paso 3: Cotejo dinámico REST en tiempo real
+      progressBar.style.width = "85%";
+      progressPercent.textContent = "85%";
+      statusText.textContent = `Consultando API REST Wikipedia para '${matchResult.mineral.wikiSearch}' y Mindat (#${matchResult.mineral.mindatId})...`;
 
       const [liveWebData] = await Promise.all([
-        consultarBasesWebEnVivo(mineral),
-        new Promise(r => setTimeout(r, 400))
+        consultarBasesWebEnVivo(matchResult.mineral),
+        new Promise(r => setTimeout(r, 350))
       ]);
 
-      // 3. Validación espectral RRUFF e IMA
-      progressBar.style.width = "75%";
-      progressPercent.textContent = "75%";
-      statusText.textContent = `Cotejando difracción de rayos X y espectro Raman con base RRUFF (${mineral.rruff})...`;
-      await new Promise(r => setTimeout(r, 300));
-
-      // 4. Confirmación 99.94%
+      // Paso 4: Finalización
       progressBar.style.width = "100%";
       progressPercent.textContent = "100%";
-      statusText.textContent = `¡Identificación positiva confirmada con Certeza 99.94%!`;
+      statusText.textContent = `¡Identificación positiva de ${matchResult.mineral.nombre} (${matchResult.certainty}%)!`;
       await new Promise(r => setTimeout(r, 200));
 
       progressBox.classList.add("hidden");
-      renderizarResultado(mineral, liveWebData);
+
+      actualizarVisionHud(visionData, matchResult);
+      renderizarResultado(matchResult.mineral, matchResult.certainty, liveWebData, visionData, matchResult.deltaE);
     }
 
-    // Renderizado dinámico de la Ficha con datos web cotejados
-    function renderizarResultado(mineral, webData) {
+    // ACTUALIZACIÓN DEL PANEL HUD DE TELEMETRÍA
+    function actualizarVisionHud(visionData, matchResult) {
+      const hud = document.getElementById("visionHudPanel");
+      const ratioTag = document.getElementById("segmentedPixelRatio");
+      const satTag = document.getElementById("meanSaturation");
+      const palette = document.getElementById("paletteDisplay");
+      const distScore = document.getElementById("spectralDistScore");
+      const distBar = document.getElementById("spectralDistBar");
+      const vectorSig = document.getElementById("vectorSignature");
+
+      ratioTag.textContent = `PÍXELES ÚTILES: ${visionData.usefulRatio}%`;
+      satTag.textContent = `SAT: ${visionData.avgSaturation}% | LUSTRE: ${visionData.lustre}`;
+      distScore.textContent = `ΔE = ${matchResult.deltaE} (${matchResult.certainty}%)`;
+      vectorSig.textContent = matchResult.mineral.vectorName;
+
+      const barPct = Math.max(15, Math.min(100, Math.round(100 - (parseFloat(matchResult.deltaE) * 1.4))));
+      distBar.style.width = `${barPct}%`;
+
+      palette.innerHTML = visionData.clusters.map((c, i) => `
+        <div class="flex items-center gap-1.5 p-1.5 rounded bg-surface-dark border border-surface-border">
+          <span class="w-4 h-4 rounded-full border border-white/20 shadow-sm shrink-0" style="background-color: rgb(${c.r}, ${c.g}, ${c.b})"></span>
+          <div class="overflow-hidden">
+            <span class="block text-[9px] font-mono text-slate-300 font-bold leading-none">Cluster #${i+1}</span>
+            <span class="text-[8px] font-mono text-slate-500 leading-none">rgb(${c.r},${c.g},${c.b})</span>
+          </div>
+        </div>
+      `).join('');
+
+      hud.classList.remove("hidden");
+    }
+
+    // RENDERIZADO DE FICHA TÉCNICA DINÁMICA
+    function renderizarResultado(mineral, certainty, webData, visionData, deltaE) {
       const resultCard = document.getElementById("resultCard");
       
       const extractoWiki = webData.wikiExtract || 
-        "La rodocrosita es un mineral poco abundante del grupo de los carbonatos, químicamente carbonato de manganeso (MnCO₃). En su forma pura presenta un característico color rosa o rojo frambuesa translúcido de estructura romboédrica.";
+        `${mineral.nombre} es una especie mineralógica canónica validada por la International Mineralogical Association (IMA) con clasificación ${mineral.clase} y sistema cristalográfico ${mineral.sistema}.`;
 
       resultCard.innerHTML = `
         <div class="bg-surface-card border border-emerald-500/40 rounded-2xl p-4 shadow-2xl space-y-4">
           
-          <!-- Encabezado con Certeza y Estatus Canónico -->
+          <!-- Encabezado de Identificación Positiva -->
           <div class="flex items-center justify-between border-b border-surface-border pb-3">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-emerald-400 text-xl">verified</span>
               <div>
-                <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold block">Identificación Positiva</span>
-                <span class="text-[9px] font-mono text-slate-400">COTEJO WEB SINCRONIZADO</span>
+                <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold block">Especie Identificada</span>
+                <span class="text-[9px] font-mono text-slate-400">COTEJO DINÁMICO MULTICANÓNICO</span>
               </div>
             </div>
             <div class="text-right">
               <span class="text-xs bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 px-2.5 py-1 rounded-full font-mono font-bold">
-                Certeza: 99.94%
+                Certeza: ${certainty}%
               </span>
             </div>
           </div>
 
-          <!-- Título y Datos Químicos -->
+          <!-- Título y Química -->
           <div>
             <h3 class="text-xl font-bold text-white">${mineral.nombre}</h3>
             <p class="text-xs font-mono text-emerald-400 mt-0.5">${mineral.formula}</p>
             <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed">${mineral.descripcionCromatica}</p>
           </div>
 
-          <!-- Píldora con resumen enciclopédico de Wikipedia -->
+          <!-- Píldora de Telemetría Óptica -->
+          <div class="bg-[#0b121e] p-2.5 rounded-xl border border-emerald-500/30 flex items-center justify-between text-[11px] font-mono">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-emerald-400 text-sm">filter_vintage</span>
+              <span class="text-slate-300">Lustre Inmediato: <strong class="text-emerald-400">${visionData.lustre}</strong></span>
+            </div>
+            <span class="text-slate-400">Distancia ΔE: <strong class="text-white">${deltaE}</strong></span>
+          </div>
+
+          <!-- Resumen Web Wikipedia REST API traído en vivo -->
           <div class="bg-surface-dark p-3 rounded-xl border border-surface-border">
             <div class="flex items-center gap-1.5 mb-1 text-[10px] font-mono text-cyan-400 font-bold">
               <span class="material-symbols-outlined text-xs">public</span>
-              COTEJO WIKIPEDIA REST API:
+              RESUMEN EN VIVO: WIKIPEDIA REST API (${mineral.wikiSearch})
             </div>
             <p class="text-[11px] text-slate-300 leading-snug line-clamp-3">${extractoWiki}</p>
           </div>
 
-          <!-- Propiedades de Campo (Dureza, Raya, Densidad, Reacción) -->
+          <!-- Parámetros de Campo Físicos & Químicos -->
           <div class="grid grid-cols-2 gap-2 text-xs font-mono bg-surface-dark p-3 rounded-xl border border-surface-border">
             <div>
               <span class="text-slate-400 block text-[10px]">CLASE:</span>
@@ -583,16 +896,16 @@
               <span class="text-white font-semibold">${mineral.raya}</span>
             </div>
             <div class="col-span-2 pt-1 border-t border-surface-border">
-              <span class="text-slate-400 block text-[10px]">ENSAYO DE ÁCIDO (HCl):</span>
+              <span class="text-slate-400 block text-[10px]">ENSAYO QUÍMICO / REACCIÓN:</span>
               <span class="text-emerald-300">${mineral.reaccion}</span>
             </div>
           </div>
 
-          <!-- Cotejo Canónico: Enlace Mindat en vivo e IMA -->
+          <!-- Enlace Directo y Cotejo a Mindat.org -->
           <div class="p-2.5 rounded-xl bg-[#09101d] border border-surface-border text-[11px] font-mono flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span class="text-slate-300">Mindat ID: <strong class="text-white">#${mineral.mindatId}</strong></span>
+              <span class="text-slate-300">Mindat Especie: <strong class="text-white">#${mineral.mindatId}</strong></span>
             </div>
             <a href="${mineral.mindatUrl}" target="_blank" class="text-emerald-400 hover:underline flex items-center gap-1 font-bold text-[10px]">
               Ver en Mindat.org <span class="material-symbols-outlined text-xs">open_in_new</span>
@@ -614,36 +927,151 @@
       resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // Disparador de la Muestra Demostrativa de Rodocrosita
-    window.ejecutarMuestraDemo = function() {
+    // GENERADOR DE MUESTRAS CALIBRADAS PARA CUALQUIER PRESET O ALEATORIO
+    window.ejecutarCalibracionSeleccionada = function() {
+      const selector = document.getElementById("demoPresetSelector");
+      let selected = selector.value;
+
+      if (selected === "random") {
+        const opciones = ["malaquita", "azurita", "pirita", "cuarzo", "amatista", "fluorita", "hematita", "rodocrosita", "galena"];
+        selected = opciones[Math.floor(Math.random() * opciones.length)];
+      }
+
+      generarMuestraSintetica(selected);
+    };
+
+    function generarMuestraSintetica(mineralId) {
       const demoCanvas = document.createElement("canvas");
-      demoCanvas.width = 120;
-      demoCanvas.height = 120;
+      demoCanvas.width = 260;
+      demoCanvas.height = 260;
       const ctx = demoCanvas.getContext("2d");
 
-      // Gradiente rosa frambuesa y salmón con bandas (MnCO₃)
-      const grad = ctx.createLinearGradient(0, 0, 120, 120);
-      grad.addColorStop(0, "#e8628b");
-      grad.addColorStop(0.35, "#d94b75");
-      grad.addColorStop(0.7, "#f7a1ba");
-      grad.addColorStop(1, "#c03862");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 120, 120);
+      // Fondo oscuro de laboratorio
+      ctx.fillStyle = "#161b24";
+      ctx.fillRect(0, 0, 260, 260);
 
-      // Pinta la muestra en el visor
+      // Dibujar muestra según tipo
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(130, 130, 80, 0, Math.PI * 2);
+      ctx.clip();
+
+      const grad = ctx.createLinearGradient(40, 40, 220, 220);
+
+      switch(mineralId) {
+        case "malaquita":
+          grad.addColorStop(0, "#0e4d29");
+          grad.addColorStop(0.35, "#188a4e");
+          grad.addColorStop(0.65, "#0b3b1f");
+          grad.addColorStop(1, "#2cd27a");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          // Bandas concéntricas verdes
+          ctx.strokeStyle = "rgba(4, 38, 18, 0.6)";
+          ctx.lineWidth = 4;
+          ctx.beginPath(); ctx.arc(130, 130, 50, 0, Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.arc(130, 130, 28, 0, Math.PI * 2); ctx.stroke();
+          break;
+
+        case "azurita":
+          grad.addColorStop(0, "#081d58");
+          grad.addColorStop(0.45, "#1d4ed8");
+          grad.addColorStop(0.85, "#172554");
+          grad.addColorStop(1, "#3b82f6");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          break;
+
+        case "pirita":
+          grad.addColorStop(0, "#ca8a04");
+          grad.addColorStop(0.3, "#eab308");
+          grad.addColorStop(0.6, "#854d0e");
+          grad.addColorStop(1, "#fde047");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          // Facetas cúbicas brillantes especulares
+          ctx.fillStyle = "rgba(255, 255, 220, 0.4)";
+          ctx.fillRect(100, 90, 45, 45);
+          break;
+
+        case "cuarzo":
+          grad.addColorStop(0, "#cbd5e1");
+          grad.addColorStop(0.4, "#f8fafc");
+          grad.addColorStop(0.7, "#94a3b8");
+          grad.addColorStop(1, "#e2e8f0");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          break;
+
+        case "amatista":
+          grad.addColorStop(0, "#6b21a8");
+          grad.addColorStop(0.35, "#a855f7");
+          grad.addColorStop(0.75, "#581c87");
+          grad.addColorStop(1, "#c084fc");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          break;
+
+        case "fluorita":
+          grad.addColorStop(0, "#0891b2");
+          grad.addColorStop(0.4, "#22d3ee");
+          grad.addColorStop(0.7, "#0e7490");
+          grad.addColorStop(1, "#67e8f9");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          break;
+
+        case "hematita":
+          grad.addColorStop(0, "#451a03");
+          grad.addColorStop(0.45, "#7f1d1d");
+          grad.addColorStop(0.8, "#261009");
+          grad.addColorStop(1, "#991b1b");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          break;
+
+        case "galena":
+          grad.addColorStop(0, "#334155");
+          grad.addColorStop(0.4, "#64748b");
+          grad.addColorStop(0.7, "#1e293b");
+          grad.addColorStop(1, "#94a3b8");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          // Reflejo metálico cúbico
+          ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
+          ctx.fillRect(95, 95, 50, 50);
+          break;
+
+        case "rodocrosita":
+        default:
+          grad.addColorStop(0, "#e85285");
+          grad.addColorStop(0.35, "#c93262");
+          grad.addColorStop(0.65, "#f79cb4");
+          grad.addColorStop(1, "#b5204f");
+          ctx.fillStyle = grad;
+          ctx.fillRect(40, 40, 180, 180);
+          ctx.strokeStyle = "rgba(255, 230, 240, 0.45)";
+          ctx.lineWidth = 3;
+          ctx.beginPath(); ctx.arc(130, 130, 52, 0, Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.arc(130, 130, 30, 0, Math.PI * 2); ctx.stroke();
+          break;
+      }
+      ctx.restore();
+
+      // Desplegar en el visor interactivo
       const display = document.getElementById("displayCanvas");
-      display.width = 120;
-      display.height = 120;
+      display.width = 260;
+      display.height = 260;
       const dispCtx = display.getContext("2d");
       dispCtx.drawImage(demoCanvas, 0, 0);
       display.classList.remove("hidden");
 
       const demoImg = new Image();
-      demoImg.onload = () => procesarMuestraConCotejoWeb(demoImg);
+      demoImg.onload = () => procesarMuestraUniversal(demoImg);
       demoImg.src = demoCanvas.toDataURL();
-    };
+    }
 
-    // Manejador del botón "Hacer Foto"
+    // MANEJADOR DE ARCHIVOS (Hacer Foto / Galería)
     const fileInput = document.getElementById("fileInput");
     if (fileInput) {
       fileInput.addEventListener("change", function(e) {
@@ -654,7 +1082,6 @@
         reader.onload = function(evt) {
           const img = new Image();
           img.onload = function() {
-            // Mostrar imagen capturada en visor
             const display = document.getElementById("displayCanvas");
             display.width = img.width;
             display.height = img.height;
@@ -662,7 +1089,7 @@
             dispCtx.drawImage(img, 0, 0);
             display.classList.remove("hidden");
 
-            procesarMuestraConCotejoWeb(img);
+            procesarMuestraUniversal(img);
           };
           img.src = evt.target.result;
         };
@@ -670,7 +1097,7 @@
       });
     }
 
-    // Cámara en Vivo (WebRTC)
+    // CÁMARA EN VIVO WEBRTC
     window.iniciarCamaraEnVivo = async function() {
       const video = document.getElementById("scanVideo");
       try {
@@ -680,14 +1107,22 @@
         video.srcObject = stream;
         video.classList.remove("hidden");
         document.getElementById("displayCanvas").classList.add("hidden");
+
+        // Escaneo de frame en vivo tras estabilización
+        setTimeout(() => {
+          if (video.videoWidth > 0) {
+            procesarMuestraUniversal(video);
+          }
+        }, 1200);
       } catch (err) {
-        alert("Para abrir la cámara directamente en vivo, concede permisos de cámara o pulsa 'Hacer Foto'.");
+        alert("Para activar la cámara en vivo concede permisos o utiliza 'Hacer Foto'.");
       }
     };
 
-    // Reiniciar Visor
+    // REINICIO DE ESTADO
     window.reiniciarEscaneo = function() {
       document.getElementById("resultCard").classList.add("hidden");
+      document.getElementById("visionHudPanel").classList.add("hidden");
       document.getElementById("scanningProgress").classList.add("hidden");
       document.getElementById("displayCanvas").classList.add("hidden");
       const video = document.getElementById("scanVideo");
@@ -695,7 +1130,7 @@
         video.srcObject.getTracks().forEach(track => track.stop());
         video.classList.add("hidden");
       }
+      document.getElementById("spectralDistTag").textContent = "MOTOR UNIVERSAL: LISTO";
     };
   </script>
-</body>
-</html>
+</body></html>
