@@ -16,13 +16,13 @@
   </style>
 </head>
 <body>
-<!-- STITCH_THREEJS_START:ANIMATION_40 class="fixed inset-0 w-full h-full bg-transparent" -->
+<!-- STITCH_THREEJS_START:ANIMATION_41 class="fixed inset-0 w-full h-full bg-transparent" -->
 <div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
 <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
-<div id="threejs-container-ANIMATION_40" style="width:100%;height:100%"></div>
+<div id="threejs-container-ANIMATION_41" style="width:100%;height:100%"></div>
 <script>
 (function() {
-  const container = document.getElementById('threejs-container-ANIMATION_40');
+  const container = document.getElementById('threejs-container-ANIMATION_41');
   const devicePixelRatio = window.devicePixelRatio || 1;
   <!DOCTYPE html>
 <html lang="es" class="dark">
@@ -108,7 +108,7 @@
 <div class="absolute w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
 </div>
 <!-- OVERLAY DE ANÁLISIS EN CURSO CON BARRA DE PROGRESO -->
-<div class="absolute inset-0 z-25 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center space-y-3 hidden pointer-events-none" id="overlay-analizando">
+<div class="absolute inset-0 z-25 bg-black/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center space-y-3 hidden pointer-events-none" id="overlay-analizando">
 <div class="w-14 h-14 rounded-full border-2 border-emerald-500/30 border-t-emerald-400 animate-spin flex items-center justify-center">
 <span class="material-symbols-outlined text-emerald-400 text-[26px]">biotech</span>
 </div>
@@ -139,7 +139,7 @@
 <!-- BOTONES DE ACCIÓN PRINCIPALES -->
 <div class="space-y-2 pt-1">
 <div class="grid grid-cols-2 gap-2">
-<!-- BOTÓN HACER FOTO (ABRE CÁMARA TRASERA DIRECTA) -->
+<!-- BOTÓN HACER FOTO (CÁMARA DEL MÓVIL) -->
 <label class="py-3.5 px-3 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-black font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 cursor-pointer transition-transform text-center" for="input-foto-camara">
 <span class="material-symbols-outlined text-[20px]">photo_camera</span>
 <span>Hacer Foto</span>
@@ -411,19 +411,19 @@
         if (oProg) oProg.style.width = "35%";
       }
 
-      // Fase 1: Extracción óptica
+      // Fase 1: Extracción óptica (600ms)
       setTimeout(function() {
         if (oTitulo) oTitulo.textContent = "Cotejando en Mindat & IMA...";
         if (oPaso) oPaso.textContent = "Contrastando con 5.840 espectros canónicos (75%)";
         if (oProg) oProg.style.width = "75%";
 
-        // Fase 2: Determinación positiva garantizada
+        // Fase 2: Determinación positiva (600ms)
         setTimeout(function() {
           if (oTitulo) oTitulo.textContent = "Convergencia Confirmada";
           if (oPaso) oPaso.textContent = "Cálculo de Certeza > 99.9% (100%)";
           if (oProg) oProg.style.width = "100%";
 
-          // Fase 3: Despliegue de resultados en ficha técnica con desplazamiento visible
+          // Fase 3: Despliegue de resultados con auto-scroll
           setTimeout(function() {
             if (overlay) overlay.classList.add('hidden');
 
@@ -488,6 +488,6 @@
 })();
 
 </div>
-<!-- STITCH_THREEJS_END:ANIMATION_40 -->
+<!-- STITCH_THREEJS_END:ANIMATION_41 -->
 </body>
 </html>
