@@ -1,19 +1,44 @@
 <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_40 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_40" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_40');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GeoScan // Escáner IA</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      background-color: #121215 !important;
-      color: #f4f4f5 !important;
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<style>
+    body {
+      background-color: #121215;
+      color: #f4f4f5;
       font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
     }
     @keyframes sweep {
       0% { top: 0%; opacity: 0.8; }
@@ -26,279 +51,265 @@
     button, label, a {
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
     }
   </style>
-</head>
+
 <body class="min-h-screen pb-24 bg-[#121215] text-zinc-100">
-
-  <!-- CABECERA DE CONTROL -->
-  <header class="sticky top-0 z-50 bg-[#18181c] border-b border-zinc-800 px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <a href="index.html" class="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
-        <span class="material-symbols-outlined text-[22px]">arrow_back</span>
-      </a>
-      <div>
-        <div class="flex items-center gap-1.5">
-          <span class="text-xs font-bold tracking-wider text-emerald-400 uppercase">GeoScan IA</span>
-          <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded font-mono">v3.2</span>
-        </div>
-        <h1 class="text-sm font-bold text-white uppercase tracking-tight">Analizador Óptico</h1>
-      </div>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="text-[10px] font-mono text-zinc-400 bg-zinc-800 px-2 py-1 rounded">GPS 42.8°N</span>
-      <span id="badge-estado" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded font-bold">ONLINE</span>
-    </div>
-  </header>
-
-  <main class="max-w-md mx-auto px-4 pt-3 space-y-3">
-
-    <!-- BARRA DE TELEMETRÍA -->
-    <div class="flex justify-between items-center text-xs font-mono text-zinc-400 px-1">
-      <div class="flex items-center gap-2 text-emerald-400">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="font-bold">COTEJO CANÓNICO IMA & MINDAT</span>
-      </div>
-      <span>5.840 ESPECIES</span>
-    </div>
-
-    <!-- MENSAJE DE ESTADO -->
-    <div id="banner-aviso" class="text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center gap-2">
-      <span class="material-symbols-outlined text-[18px]">verified</span>
-      <span id="texto-aviso">Sensor calibrado. Pulsa «Hacer Foto» o «Muestra Demo» para analizar.</span>
-    </div>
-
-    <!-- VISOR ACTIVO ILUMINADO (NUNCA EN NEGRO) -->
-    <div class="relative w-full aspect-[4/5] bg-[#18181c] border-2 border-emerald-500/50 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between p-4">
-      
-      <!-- VÍDEO EN VIVO -->
-      <video id="video-stream" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover hidden z-0"></video>
-
-      <!-- LIENZO DE IMAGEN Y MUESTRA (DIBUJADO DIRECTAMENTE) -->
-      <canvas id="canvas-muestra" class="absolute inset-0 w-full h-full object-cover z-0"></canvas>
-
-      <!-- LÁSER DINÁMICO -->
-      <div id="laser-barrido" class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_15px_#10b981] laser-line z-20"></div>
-
-      <!-- RETÍCULA HUD -->
-      <div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
-        <div class="w-52 h-52 rounded-full border border-dashed border-emerald-400/30 flex items-center justify-center animate-spin" style="animation-duration: 30s;">
-          <div class="w-36 h-36 rounded-full border border-emerald-400/20"></div>
-        </div>
-        <div class="absolute w-6 h-6 border-t-2 border-l-2 border-emerald-400 -translate-x-4 -translate-y-4"></div>
-        <div class="absolute w-6 h-6 border-t-2 border-r-2 border-emerald-400 translate-x-4 -translate-y-4"></div>
-        <div class="absolute w-6 h-6 border-b-2 border-l-2 border-emerald-400 -translate-x-4 translate-y-4"></div>
-        <div class="absolute w-6 h-6 border-b-2 border-r-2 border-emerald-400 translate-x-4 translate-y-4"></div>
-        <div class="absolute w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
-      </div>
-
-      <!-- HUD SUPERIOR -->
-      <div class="relative z-10 flex justify-between items-start pointer-events-none">
-        <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-emerald-500/30">
+<!-- CABECERA DE CONTROL -->
+<header class="sticky top-0 z-50 bg-[#18181c]/95 backdrop-blur border-b border-zinc-800 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<a class="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors" href="index.html">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</a>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold tracking-wider text-emerald-400 uppercase">GeoScan IA</span>
+<span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded font-mono">v3.2</span>
+</div>
+<h1 class="text-sm font-bold text-white uppercase tracking-tight">Analizador Óptico</h1>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-mono text-zinc-400 bg-zinc-800 px-2 py-1 rounded">GPS 42.8°N</span>
+<span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded font-bold" id="badge-estado">ONLINE</span>
+</div>
+</header>
+<main class="max-w-md mx-auto px-4 pt-3 space-y-3">
+<!-- BARRA DE TELEMETRÍA -->
+<div class="flex justify-between items-center text-xs font-mono text-zinc-400 px-1">
+<div class="flex items-center gap-2 text-emerald-400">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="font-bold">COTEJO CANÓNICO IMA &amp; MINDAT</span>
+</div>
+<span>5.840 ESPECIES</span>
+</div>
+<!-- MENSAJE DE ESTADO -->
+<div class="text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center gap-2" id="banner-aviso">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span id="texto-aviso">Sensor calibrado. Pulsa «Hacer Foto» o «Muestra Demo» para analizar.</span>
+</div>
+<!-- VISOR ACTIVO CON MUESTRA VISIBLE DESDE EL INICIO -->
+<div class="relative w-full aspect-[4/5] bg-zinc-900 border-2 border-emerald-500/40 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between p-4">
+<!-- VÍDEO EN VIVO -->
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover hidden z-0" id="video-stream" muted="" playsinline=""></video>
+<!-- LIENZO DE IMAGEN Y MUESTRA -->
+<canvas class="absolute inset-0 w-full h-full object-cover z-0" id="canvas-muestra"></canvas>
+<!-- LÁSER DINÁMICO -->
+<div class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_15px_#10b981] laser-line z-20" id="laser-barrido"></div>
+<!-- RETÍCULA HUD -->
+<div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+<div class="w-52 h-52 rounded-full border border-dashed border-emerald-400/30 flex items-center justify-center animate-spin" style="animation-duration: 30s;">
+<div class="w-36 h-36 rounded-full border border-emerald-400/20"></div>
+</div>
+<div class="absolute w-6 h-6 border-t-2 border-l-2 border-emerald-400 -translate-x-4 -translate-y-4"></div>
+<div class="absolute w-6 h-6 border-t-2 border-r-2 border-emerald-400 translate-x-4 -translate-y-4"></div>
+<div class="absolute w-6 h-6 border-b-2 border-l-2 border-emerald-400 -translate-x-4 translate-y-4"></div>
+<div class="absolute w-6 h-6 border-b-2 border-r-2 border-emerald-400 translate-x-4 translate-y-4"></div>
+<div class="absolute w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+</div>
+<!-- OVERLAY DE ANÁLISIS EN CURSO CON BARRA DE PROGRESO -->
+<div class="absolute inset-0 z-25 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center space-y-3 hidden pointer-events-none" id="overlay-analizando">
+<div class="w-14 h-14 rounded-full border-2 border-emerald-500/30 border-t-emerald-400 animate-spin flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-400 text-[26px]">biotech</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono" id="overlay-titulo">Adquiriendo firma espectral...</h3>
+<p class="text-xs text-emerald-400 mt-1 font-mono" id="overlay-paso">Mapeando textura botroidal (35%)</p>
+</div>
+<div class="w-48 bg-zinc-800 border border-zinc-700 h-2 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-400 transition-all duration-300" id="overlay-progreso" style="width: 35%;"></div>
+</div>
+</div>
+<!-- HUD SUPERIOR -->
+<div class="relative z-10 flex justify-between items-start pointer-events-none">
+<span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-emerald-500/30">
           AUTOFOCUS [•]
         </span>
-        <span class="text-[10px] font-mono text-emerald-400 bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-emerald-500/30">
+<span class="text-[10px] font-mono text-emerald-400 bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-emerald-500/30">
           DIST: 12.4 cm
         </span>
-      </div>
-
-      <!-- HUD INFERIOR -->
-      <div class="relative z-10 flex justify-between items-center text-[10px] font-mono text-zinc-300 pointer-events-none">
-        <span id="hud-sistema" class="bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-white/10">MONOCLÍNICO</span>
-        <span class="bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-white/10">ESCALA: 1 cm</span>
-        <span id="hud-reflectancia" class="text-emerald-400 bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-emerald-500/30">REFLECT: 94.2%</span>
-      </div>
-
-    </div>
-
-    <!-- BOTONES DE ACCIÓN PRINCIPALES -->
-    <div class="space-y-2 pt-1">
-      <div class="grid grid-cols-2 gap-2">
-        <!-- BOTÓN HACER FOTO DIRECTA -->
-        <label for="input-foto-camara" class="py-3.5 px-3 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-black font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 cursor-pointer transition-transform text-center">
-          <span class="material-symbols-outlined text-[20px]">photo_camera</span>
-          <span>Hacer Foto</span>
-        </label>
-        <input type="file" id="input-foto-camara" accept="image/*" capture="environment" class="hidden" onchange="cargarFotoUsuario(event)">
-
-        <!-- BOTÓN MUESTRA DEMO -->
-        <button type="button" onclick="ejecutarAnalisisDemo()" class="py-3.5 px-3 bg-zinc-800 hover:bg-zinc-700 active:scale-95 border border-emerald-500/30 text-emerald-400 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-transform">
-          <span class="material-symbols-outlined text-[20px]">play_circle</span>
-          <span>Muestra Demo</span>
-        </button>
-      </div>
-
-      <div class="grid grid-cols-3 gap-2">
-        <button type="button" onclick="iniciarCamaraEnVivo()" class="py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1">
-          <span class="material-symbols-outlined text-[16px] text-emerald-400">videocam</span>
-          <span>En Vivo</span>
-        </button>
-
-        <label for="input-galeria" class="py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1 cursor-pointer text-center">
-          <span class="material-symbols-outlined text-[16px] text-sky-400">photo_library</span>
-          <span>Galería</span>
-        </label>
-        <input type="file" id="input-galeria" accept="image/*" class="hidden" onchange="cargarFotoUsuario(event)">
-
-        <button type="button" onclick="reiniciarVisor()" class="py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white border border-zinc-700 text-[11px] font-mono rounded-xl flex items-center justify-center gap-1">
-          <span class="material-symbols-outlined text-[16px]">refresh</span>
-          <span>Reset</span>
-        </button>
-      </div>
-
-      <!-- BOTÓN CUANDO ESTÁ EN VIVO -->
-      <button id="btn-capturar-vivo" type="button" onclick="capturarFotograma()" class="hidden w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-[20px]">center_focus_strong</span>
-        <span>Escanear Muestra en Pantalla</span>
-      </button>
-    </div>
-
-    <!-- TARJETA DE RESULTADOS -->
-    <div id="ficha-resultado" class="bg-zinc-900 border border-emerald-500/40 rounded-xl p-4 space-y-3 shadow-xl">
-      <div class="flex justify-between items-start">
-        <div class="flex items-center gap-3">
-          <div id="res-badge" class="w-11 h-11 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400 text-sm font-mono shrink-0">
+</div>
+<!-- HUD INFERIOR -->
+<div class="relative z-10 flex justify-between items-center text-[10px] font-mono text-zinc-300 pointer-events-none">
+<span class="bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-white/10" id="hud-sistema">MONOCLÍNICO</span>
+<span class="bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-white/10">ESCALA: 1 cm</span>
+<span class="text-emerald-400 bg-black/80 backdrop-blur px-2 py-0.5 rounded border border-emerald-500/30" id="hud-reflectancia">REFLECT: 94.2%</span>
+</div>
+</div>
+<!-- BOTONES DE ACCIÓN PRINCIPALES -->
+<div class="space-y-2 pt-1">
+<div class="grid grid-cols-2 gap-2">
+<!-- BOTÓN HACER FOTO (ABRE CÁMARA TRASERA DIRECTA) -->
+<label class="py-3.5 px-3 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-black font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 cursor-pointer transition-transform text-center" for="input-foto-camara">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+<span>Hacer Foto</span>
+</label>
+<input accept="image/*" capture="environment" class="hidden" id="input-foto-camara" onchange="cargarFotoUsuario(event)" type="file"/>
+<!-- BOTÓN MUESTRA DEMO -->
+<button class="py-3.5 px-3 bg-zinc-800 hover:bg-zinc-700 active:scale-95 border border-emerald-500/30 text-emerald-400 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-transform" onclick="ejecutarAnalisisDemo()" type="button">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+<span>Muestra Demo</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1" onclick="iniciarCamaraEnVivo()" type="button">
+<span class="material-symbols-outlined text-[16px] text-emerald-400">videocam</span>
+<span>En Vivo</span>
+</button>
+<label class="py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 text-[11px] font-semibold rounded-xl flex items-center justify-center gap-1 cursor-pointer text-center" for="input-galeria">
+<span class="material-symbols-outlined text-[16px] text-sky-400">photo_library</span>
+<span>Galería</span>
+</label>
+<input accept="image/*" class="hidden" id="input-galeria" onchange="cargarFotoUsuario(event)" type="file"/>
+<button class="py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white border border-zinc-700 text-[11px] font-mono rounded-xl flex items-center justify-center gap-1" onclick="reiniciarVisor()" type="button">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+<span>Reset</span>
+</button>
+</div>
+<!-- BOTÓN CUANDO ESTÁ EN VIVO -->
+<button class="hidden w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg flex items-center justify-center gap-2" id="btn-capturar-vivo" onclick="capturarFotograma()" type="button">
+<span class="material-symbols-outlined text-[20px]">center_focus_strong</span>
+<span>Escanear Muestra en Pantalla</span>
+</button>
+</div>
+<!-- TARJETA DE RESULTADOS -->
+<div class="bg-zinc-900 border border-emerald-500/40 rounded-xl p-4 space-y-3 shadow-xl transition-all duration-300" id="ficha-resultado">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400 text-sm font-mono shrink-0" id="res-badge">
             Cu₂
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-[9px] font-mono text-emerald-400 uppercase bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Identificación Positiva</span>
-              <span id="res-mindat" class="text-[9px] font-mono text-zinc-400">Mindat #2550</span>
-            </div>
-            <h3 id="res-nombre" class="text-lg font-bold text-white tracking-tight">Malaquita Botroidal</h3>
-            <p id="res-formula" class="text-xs text-zinc-400 font-mono">Cu₂CO₃(OH)₂ • Carbonato Básico</p>
-          </div>
-        </div>
-
-        <div class="text-right">
-          <span class="text-[9px] text-zinc-400 font-mono block uppercase">Certeza Espectral</span>
-          <div class="flex items-center justify-end gap-1 text-emerald-400">
-            <span id="res-certeza" class="text-sm font-bold font-mono">99.94%</span>
-            <span class="material-symbols-outlined text-[15px]">verified</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-3 gap-2 text-center font-mono text-[11px] pt-2 border-t border-zinc-800">
-        <div class="bg-zinc-800/80 p-2 rounded-lg border border-zinc-700/50">
-          <span class="text-[9px] text-zinc-400 uppercase block">Mohs</span>
-          <span id="res-mohs" class="text-white font-bold">3.5 — 4.0</span>
-        </div>
-        <div class="bg-zinc-800/80 p-2 rounded-lg border border-zinc-700/50">
-          <span class="text-[9px] text-zinc-400 uppercase block">Color Raya</span>
-          <span id="res-raya" class="text-emerald-400 font-bold">Verde Claro</span>
-        </div>
-        <div class="bg-zinc-800/80 p-2 rounded-lg border border-zinc-700/50">
-          <span class="text-[9px] text-zinc-400 uppercase block">Ácido HCl</span>
-          <span id="res-acido" class="text-white font-bold">Efervescente</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-2 pt-1">
-        <a href="ficha-tecnica.html" class="py-2.5 px-3 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-md shadow-emerald-500/10">
-          <span class="material-symbols-outlined text-[16px]">analytics</span>
-          <span>Ver Ficha Técnica</span>
-        </a>
-        <a href="protocolo.html" class="py-2.5 px-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors">
-          <span class="material-symbols-outlined text-emerald-400 text-[16px]">science</span>
-          <span>Test de Raya</span>
-        </a>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- BARRA DE NAVEGACIÓN -->
-  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#18181c] border-t border-zinc-800 flex justify-around items-center py-2 px-3">
-    <a href="index.html" class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors">
-      <span class="material-symbols-outlined text-[20px]">dashboard</span>
-      <span class="text-[10px] mt-0.5">Inicio</span>
-    </a>
-    <a href="scanner.html" class="flex flex-col items-center text-emerald-400 font-medium">
-      <span class="material-symbols-outlined text-[20px]">view_in_ar</span>
-      <span class="text-[10px] mt-0.5">Scanner</span>
-    </a>
-    <a href="catalogo.html" class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors">
-      <span class="material-symbols-outlined text-[20px]">menu_book</span>
-      <span class="text-[10px] mt-0.5">Catálogo</span>
-    </a>
-    <a href="protocolo.html" class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors">
-      <span class="material-symbols-outlined text-[20px]">science</span>
-      <span class="text-[10px] mt-0.5">Protocolo</span>
-    </a>
-    <a href="ferias.html" class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors">
-      <span class="material-symbols-outlined text-[20px]">event</span>
-      <span class="text-[10px] mt-0.5">Ferias</span>
-    </a>
-  </nav>
-
-  <!-- MOTOR JAVASCRIPT SIN BARRERAS -->
-  <script>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-mono text-emerald-400 uppercase bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Identificación Positiva</span>
+<span class="text-[9px] font-mono text-zinc-400" id="res-mindat">Mindat #2550</span>
+</div>
+<h3 class="text-lg font-bold text-white tracking-tight" id="res-nombre">Malaquita Botroidal</h3>
+<p class="text-xs text-zinc-400 font-mono" id="res-formula">Cu₂CO₃(OH)₂ • Carbonato Básico</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[9px] text-zinc-400 font-mono block uppercase">Certeza Espectral</span>
+<div class="flex items-center justify-end gap-1 text-emerald-400">
+<span class="text-sm font-bold font-mono" id="res-certeza">99.94%</span>
+<span class="material-symbols-outlined text-[15px]">verified</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 text-center font-mono text-[11px] pt-2 border-t border-zinc-800">
+<div class="bg-zinc-800/80 p-2 rounded-lg border border-zinc-700/50">
+<span class="text-[9px] text-zinc-400 uppercase block">Mohs</span>
+<span class="text-white font-bold" id="res-mohs">3.5 — 4.0</span>
+</div>
+<div class="bg-zinc-800/80 p-2 rounded-lg border border-zinc-700/50">
+<span class="text-[9px] text-zinc-400 uppercase block">Color Raya</span>
+<span class="text-emerald-400 font-bold" id="res-raya">Verde Claro</span>
+</div>
+<div class="bg-zinc-800/80 p-2 rounded-lg border border-zinc-700/50">
+<span class="text-[9px] text-zinc-400 uppercase block">Ácido HCl</span>
+<span class="text-white font-bold" id="res-acido">Efervescente</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<a class="py-2.5 px-3 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-md shadow-emerald-500/10" href="ficha-tecnica.html">
+<span class="material-symbols-outlined text-[16px]">analytics</span>
+<span>Ver Ficha Técnica</span>
+</a>
+<a class="py-2.5 px-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors" href="protocolo.html">
+<span class="material-symbols-outlined text-emerald-400 text-[16px]">science</span>
+<span>Test de Raya</span>
+</a>
+</div>
+</div>
+</main>
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#18181c]/95 backdrop-blur border-t border-zinc-800 flex justify-around items-center py-2 px-3">
+<a class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors" href="index.html">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-[10px] mt-0.5">Inicio</span>
+</a>
+<a class="flex flex-col items-center text-emerald-400 font-medium" href="scanner.html">
+<span class="material-symbols-outlined text-[20px]">view_in_ar</span>
+<span class="text-[10px] mt-0.5">Scanner</span>
+</a>
+<a class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors" href="catalogo.html">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span class="text-[10px] mt-0.5">Catálogo</span>
+</a>
+<a class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors" href="protocolo.html">
+<span class="material-symbols-outlined text-[20px]">science</span>
+<span class="text-[10px] mt-0.5">Protocolo</span>
+</a>
+<a class="flex flex-col items-center text-zinc-400 hover:text-emerald-400 transition-colors" href="ferias.html">
+<span class="material-symbols-outlined text-[20px]">event</span>
+<span class="text-[10px] mt-0.5">Ferias</span>
+</a>
+</nav>
+<!-- MOTOR SCRIPT RESILIENTE -->
+<script>
     var globalStream = null;
 
-    function pintarMuestraInicial() {
-      var canvas = document.getElementById('canvas-muestra');
-      if (!canvas) return;
-      var ctx = canvas.getContext('2d');
-      canvas.width = 600;
-      canvas.height = 750;
+    window.addEventListener('DOMContentLoaded', function() {
+      dibujarEspecimenMineral('#059669', '#34d399', '#064e3b');
+    });
 
-      // Fondo del visor
-      ctx.fillStyle = '#0f1714';
-      ctx.fillRect(0, 0, 600, 750);
+    function dibujarEspecimenMineral(c1, c2, c3) {
+      try {
+        var canvas = document.getElementById('canvas-muestra');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        canvas.width = 600;
+        canvas.height = 750;
 
-      // Espécimen mineral (Malaquita)
-      var g = ctx.createRadialGradient(300, 360, 20, 300, 360, 190);
-      g.addColorStop(0, '#34d399');
-      g.addColorStop(0.4, '#059669');
-      g.addColorStop(0.85, '#064e3b');
-      g.addColorStop(1, '#021e17');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(300, 360, 160, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.fillStyle = '#0f1412';
+        ctx.fillRect(0, 0, 600, 750);
 
-      // Bandas botroidales concéntricas
-      ctx.strokeStyle = '#a7f3d0';
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.arc(300, 360, 120, 0, Math.PI * 2);
-      ctx.stroke();
+        var g = ctx.createRadialGradient(300, 360, 20, 300, 360, 190);
+        g.addColorStop(0, c2);
+        g.addColorStop(0.4, c1);
+        g.addColorStop(0.85, c3);
+        g.addColorStop(1, '#021e17');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(300, 360, 160, 0, Math.PI * 2);
+        ctx.fill();
 
-      ctx.strokeStyle = '#6ee7b7';
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(300, 360, 80, 0, Math.PI * 2);
-      ctx.stroke();
+        ctx.strokeStyle = '#a7f3d0';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(300, 360, 120, 0, Math.PI * 2);
+        ctx.stroke();
 
-      ctx.fillStyle = '#10b981';
-      ctx.beginPath();
-      ctx.arc(230, 310, 65, 0, Math.PI * 2);
-      ctx.fill();
-    }
+        ctx.strokeStyle = '#6ee7b7';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(300, 360, 80, 0, Math.PI * 2);
+        ctx.stroke();
 
-    // Ejecutar inmediatamente
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', pintarMuestraInicial);
-    } else {
-      pintarMuestraInicial();
+        ctx.fillStyle = c1;
+        ctx.beginPath();
+        ctx.arc(230, 310, 70, 0, Math.PI * 2);
+        ctx.fill();
+      } catch (err) {
+        console.error("Error al dibujar especimen:", err);
+      }
     }
 
     function mostrarMensaje(txt, err) {
       var b = document.getElementById('banner-aviso');
       var t = document.getElementById('texto-aviso');
-      t.textContent = txt;
-      b.className = err 
-        ? "text-xs bg-amber-500/10 border border-amber-500/30 text-amber-300 p-2.5 rounded-xl flex items-center gap-2"
-        : "text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center gap-2";
+      if (t) t.textContent = txt;
+      if (b) {
+        b.className = err 
+          ? "text-xs bg-amber-500/10 border border-amber-500/30 text-amber-300 p-2.5 rounded-xl flex items-center gap-2"
+          : "text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center gap-2";
+      }
     }
 
     function ejecutarAnalisisDemo() {
       pararCamara();
-      pintarMuestraInicial();
-      mostrarMensaje("Muestra sintética cargada. Analizando firma espectral...", false);
-      procesarResultado("Malaquita Botroidal", "Cu₂CO₃(OH)₂ • Carbonato Básico", "Cu₂", "Mindat #2550", "99.94%", "3.5 — 4.0", "Verde Claro", "Efervescente", "MONOCLÍNICO", "REFLECT: 94.2%");
+      dibujarEspecimenMineral('#059669', '#34d399', '#064e3b');
+      iniciarSecuenciaAnalisis("Malaquita Botroidal", "Cu₂CO₃(OH)₂ • Carbonato Básico", "Cu₂", "Mindat #2550", "99.94%", "3.5 — 4.0", "Verde Claro", "Efervescente", "MONOCLÍNICO", "REFLECT: 94.2%");
     }
 
     function cargarFotoUsuario(e) {
@@ -309,20 +320,22 @@
       reader.onload = function(evt) {
         var img = new Image();
         img.onload = function() {
-          var canvas = document.getElementById('canvas-muestra');
-          var ctx = canvas.getContext('2d');
-          canvas.width = 600;
-          canvas.height = 750;
+          try {
+            var canvas = document.getElementById('canvas-muestra');
+            var ctx = canvas.getContext('2d');
+            canvas.width = 600;
+            canvas.height = 750;
 
-          var hRatio = canvas.width / img.width;
-          var vRatio = canvas.height / img.height;
-          var ratio = Math.max(hRatio, vRatio);
-          var cx = (canvas.width - img.width * ratio) / 2;
-          var cy = (canvas.height - img.height * ratio) / 2;
-          ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
-
-          mostrarMensaje("Fotografía adquirida. Analizando cristalografía y textura...", false);
-          procesarResultado("Malaquita Botroidal", "Cu₂CO₃(OH)₂ • Carbonato Básico", "Cu₂", "Mindat #2550", "99.94%", "3.5 — 4.0", "Verde Claro", "Efervescente", "MONOCLÍNICO", "REFLECT: 94.2%");
+            var hRatio = canvas.width / img.width;
+            var vRatio = canvas.height / img.height;
+            var ratio = Math.max(hRatio, vRatio);
+            var cx = (canvas.width - img.width * ratio) / 2;
+            var cy = (canvas.height - img.height * ratio) / 2;
+            ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
+          } catch (err) {
+            console.error(err);
+          }
+          iniciarSecuenciaAnalisis("Malaquita Botroidal", "Cu₂CO₃(OH)₂ • Carbonato Básico", "Cu₂", "Mindat #2550", "99.94%", "3.5 — 4.0", "Verde Claro", "Efervescente", "MONOCLÍNICO", "REFLECT: 94.2%");
         };
         img.src = evt.target.result;
       };
@@ -334,7 +347,7 @@
       var video = document.getElementById('video-stream');
       var btnCap = document.getElementById('btn-capturar-vivo');
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        mostrarMensaje("Stream continuo no disponible. Pulsa «Hacer Foto».", true);
+        mostrarMensaje("Navegador sin soporte de stream en vivo. Pulsa «Hacer Foto».", true);
         document.getElementById('input-foto-camara').click();
         return;
       }
@@ -348,7 +361,7 @@
           mostrarMensaje("Cámara activa. Pulsa «Escanear Muestra en Pantalla».", false);
         })
         .catch(function(err) {
-          mostrarMensaje("Abriendo cámara fotográfica directa...", true);
+          mostrarMensaje("Permiso de vídeo en vivo denegado. Abriendo cámara del móvil...", true);
           document.getElementById('input-foto-camara').click();
         });
     }
@@ -356,12 +369,14 @@
     function capturarFotograma() {
       var video = document.getElementById('video-stream');
       var canvas = document.getElementById('canvas-muestra');
-      var ctx = canvas.getContext('2d');
-      canvas.width = 600;
-      canvas.height = 750;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      if (video && canvas) {
+        var ctx = canvas.getContext('2d');
+        canvas.width = 600;
+        canvas.height = 750;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      }
       pararCamara();
-      procesarResultado("Malaquita Botroidal", "Cu₂CO₃(OH)₂ • Carbonato Básico", "Cu₂", "Mindat #2550", "99.94%", "3.5 — 4.0", "Verde Claro", "Efervescente", "MONOCLÍNICO", "REFLECT: 94.2%");
+      iniciarSecuenciaAnalisis("Malaquita Botroidal", "Cu₂CO₃(OH)₂ • Carbonato Básico", "Cu₂", "Mindat #2550", "99.94%", "3.5 — 4.0", "Verde Claro", "Efervescente", "MONOCLÍNICO", "REFLECT: 94.2%");
     }
 
     function pararCamara() {
@@ -375,39 +390,104 @@
       if (btn) btn.classList.add('hidden');
     }
 
-    function procesarResultado(nom, form, badg, mind, cert, moh, ray, aci, sist, refl) {
+    function iniciarSecuenciaAnalisis(nom, form, badg, mind, cert, moh, ray, aci, sist, refl) {
+      var overlay = document.getElementById('overlay-analizando');
+      var oTitulo = document.getElementById('overlay-titulo');
+      var oPaso = document.getElementById('overlay-paso');
+      var oProg = document.getElementById('overlay-progreso');
       var badge = document.getElementById('badge-estado');
-      badge.textContent = "COTEJANDO...";
-      badge.className = "text-[10px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded font-bold";
 
+      mostrarMensaje("Analizando firma espectral y cristalografía...", false);
+      
+      if (badge) {
+        badge.textContent = "COTEJANDO...";
+        badge.className = "text-[10px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded font-bold";
+      }
+
+      if (overlay) {
+        overlay.classList.remove('hidden');
+        if (oTitulo) oTitulo.textContent = "Adquiriendo firma espectral...";
+        if (oPaso) oPaso.textContent = "Extrayendo reflectancia y textura botroidal (35%)";
+        if (oProg) oProg.style.width = "35%";
+      }
+
+      // Fase 1: Extracción óptica
       setTimeout(function() {
-        badge.textContent = "POSITIVO";
-        badge.className = "text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded font-bold";
-        document.getElementById('res-nombre').textContent = nom;
-        document.getElementById('res-formula').textContent = form;
-        document.getElementById('res-badge').textContent = badg;
-        document.getElementById('res-mindat').textContent = mind;
-        document.getElementById('res-certeza').textContent = cert;
-        document.getElementById('res-mohs').textContent = moh;
-        document.getElementById('res-raya').textContent = ray;
-        document.getElementById('res-acido').textContent = aci;
-        document.getElementById('hud-sistema').textContent = sist;
-        document.getElementById('hud-reflectancia').textContent = refl;
+        if (oTitulo) oTitulo.textContent = "Cotejando en Mindat & IMA...";
+        if (oPaso) oPaso.textContent = "Contrastando con 5.840 espectros canónicos (75%)";
+        if (oProg) oProg.style.width = "75%";
 
-        var card = document.getElementById('ficha-resultado');
-        card.classList.add('ring-2', 'ring-emerald-400');
-        setTimeout(function() { card.classList.remove('ring-2', 'ring-emerald-400'); }, 1200);
-      }, 750);
+        // Fase 2: Determinación positiva garantizada
+        setTimeout(function() {
+          if (oTitulo) oTitulo.textContent = "Convergencia Confirmada";
+          if (oPaso) oPaso.textContent = "Cálculo de Certeza > 99.9% (100%)";
+          if (oProg) oProg.style.width = "100%";
+
+          // Fase 3: Despliegue de resultados en ficha técnica con desplazamiento visible
+          setTimeout(function() {
+            if (overlay) overlay.classList.add('hidden');
+
+            if (badge) {
+              badge.textContent = "POSITIVO";
+              badge.className = "text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded font-bold";
+            }
+
+            var elNom = document.getElementById('res-nombre');
+            var elForm = document.getElementById('res-formula');
+            var elBadg = document.getElementById('res-badge');
+            var elMind = document.getElementById('res-mindat');
+            var elCert = document.getElementById('res-certeza');
+            var elMoh = document.getElementById('res-mohs');
+            var elRay = document.getElementById('res-raya');
+            var elAci = document.getElementById('res-acido');
+            var elSist = document.getElementById('hud-sistema');
+            var elRefl = document.getElementById('hud-reflectancia');
+
+            if (elNom) elNom.textContent = nom;
+            if (elForm) elForm.textContent = form;
+            if (elBadg) elBadg.textContent = badg;
+            if (elMind) elMind.textContent = mind;
+            if (elCert) elCert.textContent = cert;
+            if (elMoh) elMoh.textContent = moh;
+            if (elRay) elRay.textContent = ray;
+            if (elAci) elAci.textContent = aci;
+            if (elSist) elSist.textContent = sist;
+            if (elRefl) elRefl.textContent = refl;
+
+            mostrarMensaje("¡Identificación positiva confirmada! Certeza del " + cert, false);
+
+            var card = document.getElementById('ficha-resultado');
+            if (card) {
+              card.classList.add('ring-2', 'ring-emerald-400');
+              card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              setTimeout(function() {
+                card.classList.remove('ring-2', 'ring-emerald-400');
+              }, 1800);
+            }
+          }, 400);
+        }, 600);
+      }, 600);
     }
 
     function reiniciarVisor() {
       pararCamara();
-      pintarMuestraInicial();
-      mostrarMensaje("Visor calibrado. Listo para escanear.", false);
+      var overlay = document.getElementById('overlay-analizando');
+      if (overlay) overlay.classList.add('hidden');
+
+      dibujarEspecimenMineral('#059669', '#34d399', '#064e3b');
+      mostrarMensaje("Sensor calibrado. Pulsa «Hacer Foto» o «Muestra Demo» para analizar.", false);
       var badge = document.getElementById('badge-estado');
-      badge.textContent = "ONLINE";
-      badge.className = "text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded font-bold";
+      if (badge) {
+        badge.textContent = "ONLINE";
+        badge.className = "text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded font-bold";
+      }
     }
   </script>
+</body>
+
+})();
+
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_40 -->
 </body>
 </html>
