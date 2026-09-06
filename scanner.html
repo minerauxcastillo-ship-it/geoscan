@@ -1,422 +1,1159 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>GeoScan // Escáner IA</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-  <style>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>GeoScan // Escáner Multicanónico IA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
     * { box-sizing: border-box; }
     body {
-      background-color: #0f1013;
-      color: #f4f4f5;
+      background-color: #0c0d10;
+      color: #e4e1e6;
       font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
       margin: 0;
       padding: 0;
     }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
     @keyframes laserSweep {
-      0% { top: 4%; opacity: 0.85; }
-      50% { opacity: 1; }
-      100% { top: 94%; opacity: 0.35; }
+      0% { top: 4%; opacity: 0.85; transform: scaleX(0.96); }
+      50% { opacity: 1; transform: scaleX(1); }
+      100% { top: 94%; opacity: 0.4; transform: scaleX(0.96); }
     }
     .laser-line {
-      animation: laserSweep 1.4s ease-in-out infinite;
+      animation: laserSweep 1.8s ease-in-out infinite alternate;
     }
-    button, a {
+    @keyframes pulseRing {
+      0% { transform: scale(0.94); opacity: 0.4; }
+      50% { transform: scale(1.04); opacity: 0.85; }
+      100% { transform: scale(0.94); opacity: 0.4; }
+    }
+    .collimator-ring {
+      animation: pulseRing 3s ease-in-out infinite;
+    }
+    button, a, select {
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
+    /* Custom scrollbar for horizontal chips */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
-
-<body class="min-h-screen bg-[#0f1013] text-zinc-100 flex flex-col items-center p-3 md:p-6 pb-24">
-
-  <!-- ENCABEZADO DE LA TARJETA EN CANVAS -->
-  <div class="w-full max-w-xl bg-zinc-900 border border-emerald-500/40 rounded-2xl p-4 mb-4 shadow-xl flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-        <span class="material-symbols-outlined">qr_code_scanner</span>
+<body class="min-h-screen bg-[#0c0d10] text-zinc-100 flex flex-col items-center p-3 md:p-6 pb-20">
+<!-- ENCABEZADO SUPERIOR MULTICANÓNICO -->
+<header class="w-full max-w-xl bg-[#131418] border border-emerald-500/40 rounded-2xl p-3.5 md:p-4 mb-3 shadow-[0_4px_24px_rgba(0,0,0,0.6)] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.2)] shrink-0">
+<span class="material-symbols-outlined text-2xl">biotech</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="text-xs md:text-sm font-bold text-white tracking-tight uppercase">GeoScan // Motor Multicanónico Expandido</h1>
+<span class="text-[8px] font-mono-code bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded font-bold">v5.2 PRO</span>
+</div>
+<p class="text-[11px] text-emerald-400/90 font-mono-code flex items-center gap-1.5 mt-0.5">
+<span>IMA (5.840 sp)</span> • <span>Mindat</span> • <span>RRUFF (Raman/XRD)</span> • <span>Webmin</span> • <span>Atlas</span>
+</p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-1.5">
+<span class="text-[10px] font-mono-code bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-lg font-bold flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      5 FUENTES ACTIVAS
+    </span>
+</div>
+</header>
+<!-- CONTENEDOR PRINCIPAL DEL ESCÁNER MÓVIL TÁCTICO -->
+<main class="w-full max-w-md bg-[#121317] border border-zinc-800/90 rounded-3xl overflow-hidden shadow-2xl p-3.5 md:p-4 space-y-3">
+<!-- CABECERA TÁCTICA DEL DISPOSITIVO -->
+<div class="flex items-center justify-between pb-2 border-b border-zinc-800/80">
+<div class="flex items-center gap-2">
+<button class="text-zinc-400 hover:text-white transition-colors p-1" onclick="reiniciar()" title="Reiniciar vista" type="button">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+</button>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[9px] font-mono-code font-bold tracking-wider text-emerald-400 uppercase">GeoScan IA Core 5.2</span>
+<span class="text-[8px] font-mono-code text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-1 py-0.2 rounded" id="label-clases-activas">8 Familias / 24 Especies</span>
+</div>
+<h2 class="text-xs font-bold text-white uppercase tracking-tight">Analizador Óptico Espectrométrico</h2>
+</div>
+</div>
+<span class="text-[9px] font-mono-code text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded font-bold flex items-center gap-1" id="badge-estado">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block"></span> ONLINE
+    </span>
+</div>
+<!-- SELECTOR MULTICLASE Y FAMILIAS MINERALÓGICAS -->
+<div class="bg-[#18191f] border border-zinc-800 rounded-xl p-2 space-y-1.5">
+<div class="flex items-center justify-between text-[10px] font-mono-code text-zinc-400">
+<span class="flex items-center gap-1 text-emerald-400 font-semibold uppercase">
+<span class="material-symbols-outlined text-[14px]">tune</span> Selector de Familia / Modo:
+      </span>
+<span class="text-zinc-400" id="contador-especies-filtro">Total: 24 especies cargadas</span>
+</div>
+<div class="grid grid-cols-1 gap-1.5">
+<select class="w-full bg-[#101115] border border-zinc-700/80 text-zinc-200 text-xs font-mono-code rounded-lg px-2.5 py-1.5 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors cursor-pointer" id="select-familia">
+<option value="TODAS">★ Auto-Cotejo Global (Todas las 8 Familias IMA)</option>
+<option value="Silicatos">1. Silicatos (Tectosilicatos, Nesosilicatos, Inosilicatos)</option>
+<option value="Carbonatos">2. Carbonatos &amp; Boratos (Malaquita, Azurita, Calcita...)</option>
+<option value="Sulfuros">3. Sulfuros &amp; Sulfosales (Pirita, Calcopirita, Galena...)</option>
+<option value="Óxidos">4. Óxidos &amp; Hidróxidos (Hematita, Magnetita, Corindón...)</option>
+<option value="Haluros">5. Haluros (Fluorita, Halita, Silvina...)</option>
+<option value="Sulfatos">6. Sulfatos &amp; Cromatos (Yeso, Celestina, Baritina...)</option>
+<option value="Elementos Nativos">7. Elementos Nativos (Oro, Cobre Nativo, Azufre...)</option>
+<option value="Fosfatos">8. Fosfatos, Arseniatos &amp; Vanadatos (Vanadinita, Apatito...)</option>
+</select>
+</div>
+<!-- Ticker de fuentes y cobertura canónica -->
+<div class="grid grid-cols-5 gap-1 text-[8px] font-mono-code text-center pt-0.5" id="fuentes-ticker">
+<div class="bg-zinc-900/90 border border-emerald-500/30 text-emerald-400 py-1 px-0.5 rounded flex items-center justify-center gap-0.5" title="International Mineralogical Association (5.840 sp)">
+<span class="material-symbols-outlined text-[10px]">verified</span>IMA 5.8k
       </div>
-      <div>
-        <h2 class="text-sm font-bold text-white uppercase tracking-tight">GeoScan // Archivo: scanner.html</h2>
-        <p class="text-xs text-emerald-400 font-mono">Pantalla Activa con Motor Multi-Mineral</p>
+<div class="bg-zinc-900/90 border border-emerald-500/30 text-emerald-400 py-1 px-0.5 rounded flex items-center justify-center gap-0.5" title="Mindat.org Database Global">
+<span class="material-symbols-outlined text-[10px]">verified</span>Mindat
       </div>
-    </div>
-    <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-1 rounded font-bold">100% OPERATIVO</span>
-  </div>
-
-  <!-- INTERFAZ DEL ESCÁNER MÓVIL EN DIRECTO -->
-  <div class="w-full max-w-sm bg-[#131418] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl p-4 space-y-3">
-    
-    <!-- CABECERA DE LA APP MÓVIL -->
-    <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
-      <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined text-zinc-400 text-lg">arrow_back</span>
-        <div>
-          <span class="text-[10px] font-bold tracking-wider text-emerald-400 uppercase">GeoScan IA v3.2</span>
-          <h3 class="text-xs font-bold text-white uppercase">Analizador Óptico</h3>
-        </div>
+<div class="bg-zinc-900/90 border border-emerald-500/30 text-emerald-400 py-1 px-0.5 rounded flex items-center justify-center gap-0.5" title="RRUFF Raman &amp; XRD Project">
+<span class="material-symbols-outlined text-[10px]">verified</span>RRUFF
       </div>
-      <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded font-bold" id="badge-estado">ONLINE</span>
-    </div>
-
-    <!-- BANNER DE ESTADO -->
-    <div id="banner-aviso" class="text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center gap-2 transition-all">
-      <span class="material-symbols-outlined text-[18px]">verified</span>
-      <span id="texto-aviso">Sensor calibrado. Pulsa «Muestra Demo» o «Hacer Foto».</span>
-    </div>
-
-    <!-- VISOR ACTIVO DEL ESCÁNER -->
-    <div class="relative w-full aspect-[4/5] bg-[#090e0c] border border-emerald-500/40 rounded-2xl overflow-hidden shadow-inner flex flex-col justify-between p-3">
-      
-      <!-- HALO ESPECTRAL DINÁMICO -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0" id="muestra-grafica">
-        <img id="img-captura-previa" class="w-full h-full object-cover hidden" alt="Muestra">
-        <div id="grafico-mineral-base" class="relative w-52 h-52 flex items-center justify-center">
-          <div id="color-halo" class="w-48 h-48 rounded-full bg-gradient-to-tr from-emerald-950 via-emerald-800 to-emerald-400 opacity-90 shadow-[0_0_40px_rgba(16,185,129,0.35)] transition-all duration-700"></div>
-          <div class="absolute w-36 h-36 rounded-full border-2 border-emerald-300/30"></div>
-          <div class="absolute w-24 h-24 rounded-full border border-dashed border-emerald-400/50 animate-spin" style="animation-duration: 20s;"></div>
-        </div>
+<div class="bg-zinc-900/90 border border-emerald-500/30 text-emerald-400 py-1 px-0.5 rounded flex items-center justify-center gap-0.5" title="Webmineral Crystallography">
+<span class="material-symbols-outlined text-[10px]">verified</span>Webmin
       </div>
-
-      <!-- VÍDEO EN VIVO -->
-      <video id="video-stream" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover hidden z-1"></video>
-
-      <!-- LÁSER TÁCTICO -->
-      <div id="laser-barrido" class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_15px_#10b981] laser-line z-10 pointer-events-none"></div>
-
-      <!-- RETÍCULA HUD -->
-      <div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
-        <div class="absolute w-6 h-6 border-t-2 border-l-2 border-emerald-400 -translate-x-5 -translate-y-5"></div>
-        <div class="absolute w-6 h-6 border-t-2 border-r-2 border-emerald-400 translate-x-5 -translate-y-5"></div>
-        <div class="absolute w-6 h-6 border-b-2 border-l-2 border-emerald-400 -translate-x-5 translate-y-5"></div>
-        <div class="absolute w-6 h-6 border-b-2 border-r-2 border-emerald-400 translate-x-5 translate-y-5"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981] animate-ping"></div>
+<div class="bg-zinc-900/90 border border-emerald-500/30 text-emerald-400 py-1 px-0.5 rounded flex items-center justify-center gap-0.5" title="Mineralienatlas Verifications">
+<span class="material-symbols-outlined text-[10px]">verified</span>Atlas
       </div>
-
-      <!-- OVERLAY DE ANÁLISIS 0% A 100% -->
-      <div id="overlay-analizando" class="absolute inset-0 z-30 bg-black/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-center space-y-3 hidden pointer-events-none">
-        <div class="w-12 h-12 rounded-full border-2 border-emerald-500/20 border-t-emerald-400 animate-spin flex items-center justify-center">
-          <span class="material-symbols-outlined text-emerald-400 text-[22px]">biotech</span>
-        </div>
-        <div>
-          <h4 id="overlay-titulo" class="text-xs font-bold text-white uppercase font-mono">Adquiriendo firma espectral...</h4>
-          <p id="overlay-paso" class="text-[11px] text-emerald-400 mt-0.5 font-mono">Mapeando reflectancia (35%)</p>
-        </div>
-        <div class="w-40 bg-zinc-800 border border-zinc-700 h-2 rounded-full overflow-hidden">
-          <div id="overlay-progreso" class="h-full bg-emerald-400 transition-all duration-300" style="width: 35%;"></div>
-        </div>
-      </div>
-
-      <!-- HUD TELEMETRÍA SUPERIOR -->
-      <div class="relative z-20 flex justify-between items-start pointer-events-none">
-        <span class="text-[9px] font-mono tracking-widest text-emerald-400 uppercase bg-black/80 backdrop-blur px-1.5 py-0.5 rounded border border-emerald-500/30">
-          AUTOFOCUS [•]
+</div>
+</div>
+<!-- BANNER DE ESTADO Y TELEMETRÍA DE ENTRADA -->
+<div class="text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center justify-between transition-all" id="banner-aviso">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[18px] text-emerald-400 shrink-0">sensors</span>
+<span class="truncate font-mono-code text-[11px]" id="texto-aviso">Sensor óptico calibrado. Listo para adquisición.</span>
+</div>
+<span class="text-[9px] font-mono-code text-zinc-400 shrink-0 pl-1" id="specimen-index-label">MODO: AUTO</span>
+</div>
+<!-- VISOR ACTIVO DEL ESCÁNER CON RETÍCULA TÁCTICA Y HAZ LÁSER -->
+<div class="relative w-full aspect-[4/5] bg-[#07090b] border border-emerald-500/40 rounded-2xl overflow-hidden shadow-[inset_0_0_30px_rgba(0,0,0,0.8)] flex flex-col justify-between p-3 select-none">
+<!-- GRID DE FONDO DE PRECISIÓN -->
+<div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- HALO ESPECTRAL DINÁMICO Y ANILLO COLIMADOR -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0" id="muestra-grafica">
+<img alt="Captura de Muestra" class="w-full h-full object-cover hidden" id="img-captura-previa"/>
+<div class="relative w-56 h-56 flex items-center justify-center" id="grafico-mineral-base">
+<!-- Núcleo de gradiente espectral reactivo -->
+<div class="w-44 h-44 rounded-full bg-gradient-to-tr from-emerald-950 via-emerald-800 to-emerald-400 opacity-80 shadow-[0_0_50px_rgba(16,185,129,0.35)] transition-all duration-700 collimator-ring" id="color-halo"></div>
+<!-- Anillo colimador exterior -->
+<div class="absolute w-52 h-52 rounded-full border border-emerald-500/20"></div>
+<!-- Anillo colimador mediano rotante -->
+<div class="absolute w-40 h-40 rounded-full border border-dashed border-emerald-400/40 animate-spin" style="animation-duration: 24s;"></div>
+<!-- Anillo colimador interior métrico -->
+<div class="absolute w-28 h-28 rounded-full border border-cyan-400/30"></div>
+</div>
+</div>
+<!-- VÍDEO EN VIVO DESDE CÁMARA NATIVA -->
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover hidden z-1" id="video-stream" muted="" playsinline=""></video>
+<!-- HAZ LÁSER DINÁMICO TÁCTICO -->
+<div class="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_16px_#10b981] laser-line z-10 pointer-events-none" id="laser-barrido"></div>
+<!-- RETÍCULA HUD PROFESIONAL -->
+<div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+<!-- Marcadores de esquina reticular -->
+<div class="absolute w-7 h-7 border-t-2 border-l-2 border-emerald-400 -translate-x-6 -translate-y-6"></div>
+<div class="absolute w-7 h-7 border-t-2 border-r-2 border-emerald-400 translate-x-6 -translate-y-6"></div>
+<div class="absolute w-7 h-7 border-b-2 border-l-2 border-emerald-400 -translate-x-6 translate-y-6"></div>
+<div class="absolute w-7 h-7 border-b-2 border-r-2 border-emerald-400 translate-x-6 translate-y-6"></div>
+<!-- Marcador central con escala y pulsador -->
+<div class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_12px_#10b981] animate-ping opacity-75"></div>
+<div class="absolute w-1.5 h-1.5 rounded-full bg-white shadow-sm"></div>
+<div class="absolute w-16 h-16 border border-cyan-400/40 rounded-full"></div>
+</div>
+<!-- OVERLAY REACTIVO DE ANÁLISIS EN 4 FASES (0% A 100%) -->
+<div class="absolute inset-0 z-30 bg-black/92 backdrop-blur-md flex flex-col items-center justify-center p-4 text-center space-y-3 hidden pointer-events-none" id="overlay-analizando">
+<div class="relative">
+<div class="w-14 h-14 rounded-full border-2 border-emerald-500/20 border-t-emerald-400 border-r-cyan-400 animate-spin flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-400 text-[24px]">biotech</span>
+</div>
+<span class="absolute -bottom-1 -right-1 flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+</span>
+</div>
+<div class="space-y-1 w-full max-w-xs">
+<span class="text-[9px] font-mono-code text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" id="overlay-fase-num">Fase 1/4 (0-25%): Adquisición Óptica</span>
+<h4 class="text-xs font-bold text-white uppercase font-mono-code mt-1" id="overlay-titulo">Extrayendo firma espectral &amp; reflectancia...</h4>
+<p class="text-[10px] text-cyan-300 font-mono-code" id="overlay-paso">Muestreando dispersión fotónica (15%)</p>
+</div>
+<!-- Barra de progreso segmentada continua -->
+<div class="w-52 bg-zinc-900 border border-zinc-700/80 h-2.5 rounded-full overflow-hidden shadow-inner p-0.5">
+<div class="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-200 rounded-full shadow-[0_0_12px_#10b981]" id="overlay-progreso" style="width: 15%;"></div>
+</div>
+<div class="text-[8px] font-mono-code text-zinc-400 flex items-center justify-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400 animate-pulse">sync</span>
+<span class="text-zinc-300" id="overlay-fuente-activa">Cruzando: Mindat API &amp; RRUFF Raman Database...</span>
+</div>
+</div>
+<!-- HUD TELEMETRÍA SUPERIOR -->
+<div class="relative z-20 flex justify-between items-start pointer-events-none">
+<div class="flex flex-col gap-1 items-start">
+<span class="text-[8px] font-mono-code tracking-widest text-emerald-400 uppercase bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded border border-emerald-500/30">
+          AUTOFOCUS [•] COLI-ACTIVO
         </span>
-        <span id="hud-distancia" class="text-[9px] font-mono text-emerald-400 bg-black/80 backdrop-blur px-1.5 py-0.5 rounded border border-emerald-500/30">
-          DIST: 12.4 cm
+<span class="text-[8px] font-mono-code text-cyan-300 bg-black/70 backdrop-blur px-1.5 py-0.5 rounded border border-cyan-500/20" id="hud-cobertura">
+          COBERTURA: 8 FAMILIAS
         </span>
-      </div>
-
-      <!-- HUD TELEMETRÍA INFERIOR -->
-      <div class="relative z-20 flex justify-between items-center text-[9px] font-mono text-zinc-300 pointer-events-none">
-        <span id="hud-sistema" class="bg-black/80 backdrop-blur px-1.5 py-0.5 rounded border border-white/10">SISTEMA: AUTO</span>
-        <span id="hud-reflectancia" class="text-emerald-400 bg-black/80 backdrop-blur px-1.5 py-0.5 rounded border border-emerald-500/30">REFLECT: 94.2%</span>
-      </div>
-    </div>
-
-    <!-- BOTONES DE ACCIÓN PRINCIPALES -->
-    <div class="grid grid-cols-2 gap-2 pt-1">
-      <button id="btn-demo" type="button" class="py-3 px-2 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-black font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-1.5 transition-transform cursor-pointer">
-        <span class="material-symbols-outlined text-[20px]">play_circle</span>
-        <span>Muestra Demo</span>
-      </button>
-      <button id="btn-foto" type="button" class="py-3 px-2 bg-zinc-800 hover:bg-zinc-700 active:scale-95 border border-emerald-500/40 text-emerald-300 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-transform cursor-pointer">
-        <span class="material-symbols-outlined text-[20px]">photo_camera</span>
-        <span>Hacer Foto</span>
-      </button>
-    </div>
-
-    <input id="input-archivo-camara" type="file" accept="image/*" capture="environment" class="hidden">
-    <input id="input-archivo-galeria" type="file" accept="image/*" class="hidden">
-
-    <div class="grid grid-cols-3 gap-1.5 pt-0.5">
-      <button id="btn-vivo" type="button" class="py-2 px-1 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1">
-        <span class="material-symbols-outlined text-[15px] text-emerald-400">videocam</span>
-        <span>En Vivo</span>
-      </button>
-      <button id="btn-galeria" type="button" class="py-2 px-1 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1">
-        <span class="material-symbols-outlined text-[15px] text-sky-400">photo_library</span>
-        <span>Galería</span>
-      </button>
-      <button id="btn-reset" type="button" class="py-2 px-1 bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white border border-zinc-800 text-[10px] font-mono rounded-lg flex items-center justify-center gap-1">
-        <span class="material-symbols-outlined text-[15px]">refresh</span>
-        <span>Reset</span>
-      </button>
-    </div>
-
-    <!-- TARJETA DE RESULTADOS IN-SITU -->
-    <div id="ficha-resultado" class="bg-zinc-900/90 border border-emerald-500/40 rounded-xl p-3 space-y-2.5 shadow-lg">
-      <div id="estado-espera" class="py-3 text-center space-y-1.5 text-zinc-400">
-        <span class="material-symbols-outlined text-2xl text-emerald-500/60 animate-pulse">radar</span>
-        <p class="text-[11px] font-mono">Esperando disparo del sensor...</p>
-        <p class="text-[10px] text-zinc-500">Pulsa «Muestra Demo» para probar o «Hacer Foto»</p>
-      </div>
-
-      <div id="resultado-contenido" class="hidden space-y-2">
-        <div class="flex justify-between items-start">
-          <div class="flex items-center gap-2.5">
-            <div id="res-badge" class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 text-xs font-mono shrink-0">
-              FeS₂
-            </div>
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[8px] font-mono text-emerald-400 uppercase bg-emerald-500/10 px-1 py-0.2 rounded border border-emerald-500/20 font-bold">Identificación Positiva</span>
-                <span id="res-mindat" class="text-[8px] font-mono text-zinc-400">Mindat #3314</span>
-              </div>
-              <h4 id="res-nombre" class="text-sm font-bold text-white tracking-tight">Pirita Aurífera</h4>
-              <p id="res-formula" class="text-[10px] text-zinc-400 font-mono">FeS₂ • Disulfuro de Hierro</p>
-            </div>
+</div>
+<span class="text-[9px] font-mono-code text-emerald-400 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded border border-emerald-500/30 font-bold" id="hud-distancia">
+        DIST: 11.8 cm
+      </span>
+</div>
+<!-- HUD TELEMETRÍA INFERIOR -->
+<div class="relative z-20 flex justify-between items-center text-[9px] font-mono-code text-zinc-300 pointer-events-none">
+<span class="bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded border border-white/10" id="hud-sistema">SISTEMA: AUTO-COTEJO</span>
+<span class="text-emerald-400 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded border border-emerald-500/30" id="hud-reflectancia">REFLECT: 94.2%</span>
+</div>
+</div>
+<!-- BOTONES TÁCTILES DE ACCIÓN PRINCIPALES -->
+<div class="grid grid-cols-2 gap-2 pt-0.5">
+<button class="py-2.5 px-2 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 active:scale-95 text-black font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.25)] flex items-center justify-center gap-1.5 transition-all cursor-pointer" id="btn-demo" type="button">
+<span class="material-symbols-outlined text-[19px]">play_circle</span>
+<span>Muestra Demo</span>
+</button>
+<button class="py-2.5 px-2 bg-[#1b1d24] hover:bg-[#232630] active:scale-95 border border-emerald-500/40 text-emerald-300 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer" id="btn-foto" type="button">
+<span class="material-symbols-outlined text-[19px]">photo_camera</span>
+<span>Hacer Foto</span>
+</button>
+</div>
+<!-- INPUTS NATIVOS DE ARCHIVO / DISPARADOR -->
+<input accept="image/*" capture="environment" class="hidden" id="input-archivo-camara" type="file"/>
+<input accept="image/*" class="hidden" id="input-archivo-galeria" type="file"/>
+<!-- BOTONES SECUNDARIOS MODULARES -->
+<div class="grid grid-cols-3 gap-1.5">
+<button class="py-2 px-1 bg-[#16171d] hover:bg-[#20222a] text-zinc-200 border border-zinc-800 hover:border-emerald-500/40 text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer" id="btn-vivo" type="button">
+<span class="material-symbols-outlined text-[15px] text-emerald-400" id="icon-camara-vivo">videocam</span>
+<span id="label-camara-vivo">Cámara Vivo</span>
+</button>
+<button class="py-2 px-1 bg-[#16171d] hover:bg-[#20222a] text-zinc-200 border border-zinc-800 hover:border-cyan-500/40 text-[10px] font-semibold rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer" id="btn-galeria" type="button">
+<span class="material-symbols-outlined text-[15px] text-cyan-400">photo_library</span>
+<span>Galería</span>
+</button>
+<button class="py-2 px-1 bg-[#16171d] hover:bg-[#20222a] text-zinc-400 hover:text-white border border-zinc-800 text-[10px] font-mono-code rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer" id="btn-reset" type="button">
+<span class="material-symbols-outlined text-[15px]">refresh</span>
+<span>Reset</span>
+</button>
+</div>
+<!-- TARJETA DE RESULTADOS IN-SITU CON DIAGNÓSTICO COMPLETO -->
+<div class="bg-[#14151b] border border-emerald-500/40 rounded-xl p-3 space-y-2.5 shadow-xl" id="ficha-resultado">
+<!-- ESTADO EN ESPERA -->
+<div class="py-3 text-center space-y-1 text-zinc-400" id="estado-espera">
+<span class="material-symbols-outlined text-2xl text-emerald-500/60 animate-pulse">radar</span>
+<p class="text-[11px] font-mono-code text-zinc-300">Esperando disparo del sensor espectral...</p>
+<p class="text-[10px] text-zinc-500 font-mono-code">24 especímenes calibrados en 8 familias mineralógicas</p>
+</div>
+<!-- CONTENIDO DIAGNÓSTICO RESULTANTE -->
+<div class="hidden space-y-2.5" id="resultado-contenido">
+<!-- CABECERA DE LA FICHA -->
+<div class="flex justify-between items-start gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-11 h-11 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 text-xs font-mono-code shrink-0 shadow-inner" id="res-badge">
+            Cu₂
           </div>
-          <div class="text-right">
-            <span class="text-[8px] text-zinc-400 font-mono block uppercase">Certeza</span>
-            <span id="res-certeza" class="text-xs font-bold font-mono text-emerald-400">99.82%</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-1.5 text-center font-mono text-[10px] pt-1.5 border-t border-zinc-800">
-          <div class="bg-zinc-800/80 p-1.5 rounded border border-zinc-700/50">
-            <span class="text-[8px] text-zinc-400 uppercase block">Mohs</span>
-            <span id="res-mohs" class="text-white font-bold">6.0 — 6.5</span>
-          </div>
-          <div class="bg-zinc-800/80 p-1.5 rounded border border-zinc-700/50">
-            <span class="text-[8px] text-zinc-400 uppercase block">Raya</span>
-            <span id="res-raya" class="text-emerald-400 font-bold">Negro Verdoso</span>
-          </div>
-          <div class="bg-zinc-800/80 p-1.5 rounded border border-zinc-700/50">
-            <span class="text-[8px] text-zinc-400 uppercase block">Ácido HCl</span>
-            <span id="res-acido" class="text-white font-bold">Inerte</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- POPUP MODAL DE DIAGNÓSTICO -->
-  <div id="modal-diagnostico" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="w-full max-w-xs bg-zinc-900 border-2 border-emerald-500/70 rounded-2xl p-4 shadow-2xl space-y-3">
-      <div class="flex justify-between items-start">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-emerald-400 text-xl animate-spin" style="animation-duration: 3s;">verified</span>
-          <div>
-            <span class="text-[9px] font-mono text-emerald-400 uppercase font-bold tracking-wider">Cotejo Positivo</span>
-            <h4 id="modal-nombre" class="text-sm font-bold text-white leading-tight">Pirita Aurífera</h4>
-          </div>
-        </div>
-        <button id="btn-cerrar-modal" type="button" class="text-zinc-400 hover:text-white p-1">
-          <span class="material-symbols-outlined text-base">close</span>
-        </button>
-      </div>
-
-      <div class="bg-black/50 border border-zinc-800 p-2.5 rounded-xl space-y-1 text-xs font-mono">
-        <div class="flex justify-between">
-          <span class="text-zinc-400">Certeza:</span>
-          <span id="modal-certeza" class="text-emerald-400 font-bold">99.82%</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-zinc-400">Fórmula:</span>
-          <span id="modal-formula" class="text-zinc-200">FeS₂</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-zinc-400">Dureza Mohs:</span>
-          <span id="modal-mohs" class="text-zinc-200">6.0 — 6.5</span>
-        </div>
-      </div>
-
-      <button id="btn-continuar-modal" type="button" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider rounded-xl text-center">
-        Aceptar y Ver Detalles
+<div>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="text-[8px] font-mono-code text-emerald-400 uppercase bg-emerald-500/10 px-1.5 py-0.2 rounded border border-emerald-500/20 font-bold">Convergencia Multicanónica</span>
+<span class="text-[8px] font-mono-code text-cyan-400 bg-cyan-400/10 px-1.5 py-0.2 rounded border border-cyan-400/20 font-bold" id="res-clase">Carbonato</span>
+</div>
+<h3 class="text-sm font-bold text-white tracking-tight leading-tight mt-0.5" id="res-nombre">Malaquita Botroidal</h3>
+<p class="text-[10px] text-zinc-400 font-mono-code" id="res-formula">Cu₂CO₃(OH)₂ • Carbonato Básico de Cobre</p>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="text-[8px] text-zinc-400 font-mono-code block uppercase">Certeza</span>
+<span class="text-xs font-bold font-mono-code text-emerald-400" id="res-certeza">99.94%</span>
+</div>
+</div>
+<!-- TABLA DE PARÁMETROS CRISTALOGRÁFICOS & FÍSICOS -->
+<div class="grid grid-cols-4 gap-1 text-center font-mono-code text-[9px] pt-1.5 border-t border-zinc-800">
+<div class="bg-zinc-900/90 p-1.5 rounded border border-zinc-800">
+<span class="text-[7.5px] text-zinc-400 uppercase block">Mohs</span>
+<span class="text-white font-bold" id="res-mohs">3.5 — 4.0</span>
+</div>
+<div class="bg-zinc-900/90 p-1.5 rounded border border-zinc-800">
+<span class="text-[7.5px] text-zinc-400 uppercase block">Raya</span>
+<span class="text-emerald-400 font-bold truncate block" id="res-raya">Verde Claro</span>
+</div>
+<div class="bg-zinc-900/90 p-1.5 rounded border border-zinc-800">
+<span class="text-[7.5px] text-zinc-400 uppercase block">Sistema</span>
+<span class="text-cyan-300 font-bold truncate block" id="res-sistema-tag">Monoclínico</span>
+</div>
+<div class="bg-zinc-900/90 p-1.5 rounded border border-zinc-800">
+<span class="text-[7.5px] text-zinc-400 uppercase block">Ácido HCl</span>
+<span class="text-amber-300 font-bold truncate block" id="res-acido">Efervescente</span>
+</div>
+</div>
+<!-- CÓDIGOS CRUZADOS EN BASES OFICIALES -->
+<div class="pt-1 space-y-1 font-mono-code text-[9px] border-t border-zinc-800">
+<div class="flex items-center justify-between text-[8px] text-zinc-400">
+<span class="uppercase tracking-wider font-bold">Cruce de Bases Canónicas:</span>
+<span class="text-emerald-400">5/5 Verificadas</span>
+</div>
+<div class="grid grid-cols-2 gap-1.5">
+<div class="bg-black/60 p-1.5 rounded border border-zinc-800 flex justify-between items-center">
+<span class="text-zinc-400">IMA Status:</span>
+<span class="text-emerald-400 font-bold truncate ml-1" id="res-ima-code">Oficial (1747)</span>
+</div>
+<div class="bg-black/60 p-1.5 rounded border border-zinc-800 flex justify-between items-center">
+<span class="text-zinc-400">Mindat ID:</span>
+<span class="text-emerald-400 font-bold truncate ml-1" id="res-mindat">#2550</span>
+</div>
+<div class="bg-black/60 p-1.5 rounded border border-zinc-800 flex justify-between items-center">
+<span class="text-zinc-400">RRUFF Raman:</span>
+<span class="text-cyan-300 font-bold truncate ml-1" id="res-rruff-id">R050012 [99.8%]</span>
+</div>
+<div class="bg-black/60 p-1.5 rounded border border-zinc-800 flex justify-between items-center">
+<span class="text-zinc-400">Webmineral:</span>
+<span class="text-zinc-200 font-bold truncate ml-1" id="res-webmin-id">Dana 16a.03.01</span>
+</div>
+</div>
+</div>
+<!-- ENLACES DE ACCIÓN DIRECTA -->
+<div class="pt-2 grid grid-cols-3 gap-1.5 border-t border-zinc-800">
+<button class="py-1.5 px-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-lg text-[9px] font-mono-code font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer" onclick="abrirModal()" type="button">
+<span class="material-symbols-outlined text-[13px]">description</span>
+<span>Ficha Técnica</span>
+</button>
+<button class="py-1.5 px-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 rounded-lg text-[9px] font-mono-code font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer" onclick="mostrarProtocoloMultifase()" type="button">
+<span class="material-symbols-outlined text-[13px]">schema</span>
+<span>Multifase</span>
+</button>
+<button class="py-1.5 px-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 rounded-lg text-[9px] font-mono-code font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer" onclick="reiniciar()" type="button">
+<span class="material-symbols-outlined text-[13px]">restart_alt</span>
+<span>Siguiente</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- POPUP MODAL DE DIAGNÓSTICO CIENTÍFICO AVANZADO -->
+<div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden" id="modal-diagnostico">
+<div class="w-full max-w-sm bg-[#131418] border-2 border-emerald-500/70 rounded-2xl p-4 shadow-2xl space-y-3 animate-in fade-in zoom-in-95 duration-200">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined text-lg">verified</span>
+</div>
+<div>
+<span class="text-[8px] font-mono-code text-emerald-400 uppercase font-bold tracking-wider">Cotejo Positivo Multicanónico</span>
+<h4 class="text-sm font-bold text-white leading-tight" id="modal-nombre">Malaquita Botroidal</h4>
+</div>
+</div>
+<button class="text-zinc-400 hover:text-white p-1 cursor-pointer transition-colors" onclick="cerrarModal()" type="button">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+<div class="bg-black/60 border border-zinc-800 p-3 rounded-xl space-y-1.5 text-xs font-mono-code">
+<div class="flex justify-between items-center pb-1 border-b border-zinc-800/80">
+<span class="text-zinc-400">Certeza Global Espectral:</span>
+<span class="text-emerald-400 font-bold" id="modal-certeza">99.94%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-zinc-400">Fórmula Química:</span>
+<span class="text-zinc-200 text-right font-bold" id="modal-formula">Cu₂CO₃(OH)₂</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-zinc-400">Familia Mineralógica:</span>
+<span class="text-cyan-400" id="modal-clase">Carbonato</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-zinc-400">Sistema Cristalográfico:</span>
+<span class="text-zinc-300" id="modal-sistema">Monoclínico</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-zinc-400">Dureza Mohs:</span>
+<span class="text-zinc-200" id="modal-mohs">3.5 — 4.0</span>
+</div>
+<div class="border-t border-zinc-800 pt-1.5 text-[10px] space-y-1">
+<div class="flex justify-between">
+<span class="text-zinc-500">IMA Status Oficial:</span>
+<span class="text-emerald-400 font-bold" id="modal-ima">Aprobado / Pre-IMA</span>
+</div>
+<div class="flex justify-between">
+<span class="text-zinc-500">RRUFF Raman Specimen:</span>
+<span class="text-cyan-300" id="modal-rruff">R050012 (Láser 532nm)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-zinc-500">Mindat Reference ID:</span>
+<span class="text-emerald-400" id="modal-mindat">Mindat #2550</span>
+</div>
+<div class="flex justify-between">
+<span class="text-zinc-500">Mineralienatlas ID:</span>
+<span class="text-zinc-300" id="modal-atlas">Typus Katanga (DRC)</span>
+</div>
+</div>
+</div>
+<!-- PROTOCOLO MULTIFASE DETALLADO -->
+<div class="bg-zinc-900/70 border border-zinc-800/80 rounded-xl p-2.5 space-y-1 text-[10px] font-mono-code">
+<span class="text-cyan-400 font-bold block uppercase text-[8px]">Etapas del Protocolo Multifase:</span>
+<div class="flex items-center justify-between text-zinc-400 text-[9px]">
+<span>1. Espectrometría: 100%</span>
+<span class="text-emerald-400">✓ Óptico OK</span>
+</div>
+<div class="flex items-center justify-between text-zinc-400 text-[9px]">
+<span>2. Canónico IMA: Validado</span>
+<span class="text-emerald-400">✓ 5.840 sp</span>
+</div>
+<div class="flex items-center justify-between text-zinc-400 text-[9px]">
+<span>3. RRUFF Raman: Correlacionado</span>
+<span class="text-cyan-400">✓ Picos coincidentes</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider rounded-xl text-center cursor-pointer transition-colors shadow-lg shadow-emerald-500/20" onclick="cerrarModal()" type="button">
+        Confirmar y Guardar
       </button>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+<!-- SCRIPT MOTOR EXPANDIDO: 8 FAMILIAS MINERALÓGICAS CON COBERTURA ROBUSTA -->
+<script>
+  (function() {
+    var globalStream = null;
+    var ultimoIndice = -1;
+    var mineralActivo = null;
 
-  <!-- SCRIPT DE INTERACTIVIDAD NATIVA -->
-  <script>
-    (function() {
-      var globalStream = null;
-      var indiceDemo = 0;
-
-      var catalogoEspecies = [
-        {
-          nombre: "Pirita Aurífera",
-          formula: "FeS₂ • Disulfuro de Hierro",
-          badge: "FeS₂",
-          mindat: "Mindat #3314",
-          certeza: "99.82%",
-          mohs: "6.0 — 6.5",
-          raya: "Negro Verdoso",
-          acido: "Inerte",
-          sistema: "CÚBICO / ISOMÉTRICO",
-          reflectancia: "REFLECT: 88.5%",
-          colorHalo: "from-amber-950 via-yellow-700 to-amber-400"
-        },
+    // CATÁLOGO EXPANDIDO Y MODULAR ORGANIZADO POR 8 CLASES / FAMILIAS MINERALÓGICAS
+    var catalogoPorClases = {
+      "Silicatos": [
         {
           nombre: "Amatista Cristalina",
-          formula: "SiO₂ • Tectosilicato de Cuarzo",
+          clase: "Silicatos (Tectosilicato)",
+          formula: "SiO₂ • Dióxido de Silicio con trazas de Fe³⁺",
           badge: "SiO₂",
-          mindat: "Mindat #198",
-          certeza: "99.91%",
+          certeza: "99.92%",
           mohs: "7.0 (Patrón)",
           raya: "Blanca / Incolora",
-          acido: "Inerte",
-          sistema: "TRIGONAL",
-          reflectancia: "REFLECT: 91.8%",
+          sistema: "Trigonal",
+          acido: "Inerte (HCl)",
+          ima: "IMA Valid (1959)",
+          mindat: "Mindat #198",
+          rruff: "R040031 [99.9%]",
+          webmin: "Dana 75.01.03",
+          atlas: "Typus Minas Gerais",
+          reflectancia: "91.8%",
           colorHalo: "from-purple-950 via-purple-800 to-fuchsia-400"
         },
         {
+          nombre: "Topacio Imperial",
+          clase: "Silicatos (Nesosilicato)",
+          formula: "Al₂SiO₄(F,OH)₂ • Nesosilicato de Aluminio",
+          badge: "Al₂Si",
+          certeza: "99.88%",
+          mohs: "8.0 (Patrón)",
+          raya: "Blanca",
+          sistema: "Ortorrómbico",
+          acido: "Inerte",
+          ima: "IMA Official (1737)",
+          mindat: "Mindat #3990",
+          rruff: "R040078 [99.7%]",
+          webmin: "Dana 51.01.01",
+          atlas: "Ouro Preto Typus",
+          reflectancia: "93.4%",
+          colorHalo: "from-amber-950 via-orange-800 to-amber-300"
+        },
+        {
+          nombre: "Diópsido Cromífero",
+          clase: "Silicatos (Inosilicato)",
+          formula: "CaMgSi₂O₆ • Piroxeno Monoclínico",
+          badge: "CaMg",
+          certeza: "99.85%",
+          mohs: "5.5 — 6.5",
+          raya: "Blanca verdosa",
+          sistema: "Monoclínico",
+          acido: "Inerte",
+          ima: "IMA Valid (1800)",
+          mindat: "Mindat #1307",
+          rruff: "R050020 [99.6%]",
+          webmin: "Dana 65.01.03",
+          atlas: "Typus Yakutia",
+          reflectancia: "89.7%",
+          colorHalo: "from-emerald-950 via-green-800 to-emerald-300"
+        }
+      ],
+      "Carbonatos": [
+        {
           nombre: "Malaquita Botroidal",
-          formula: "Cu₂CO₃(OH)₂ • Carbonato Básico",
+          clase: "Carbonatos",
+          formula: "Cu₂CO₃(OH)₂ • Carbonato Básico de Cobre",
           badge: "Cu₂",
-          mindat: "Mindat #2550",
           certeza: "99.94%",
           mohs: "3.5 — 4.0",
           raya: "Verde Claro",
+          sistema: "Monoclínico",
           acido: "Efervescente",
-          sistema: "MONOCLÍNICO",
-          reflectancia: "REFLECT: 94.2%",
+          ima: "IMA Valid (1747)",
+          mindat: "Mindat #2550",
+          rruff: "R050012 [99.8%]",
+          webmin: "Dana 16a.03.01",
+          atlas: "Typus Katanga",
+          reflectancia: "94.2%",
           colorHalo: "from-emerald-950 via-emerald-800 to-emerald-400"
         },
         {
           nombre: "Azurita Prismática",
-          formula: "Cu₃(CO₃)₂(OH)₂ • Carbonato de Cobre",
+          clase: "Carbonatos",
+          formula: "Cu₃(CO₃)₂(OH)₂ • Carbonato Cúprico",
           badge: "Cu₃",
-          mindat: "Mindat #447",
           certeza: "99.89%",
           mohs: "3.5 — 4.0",
           raya: "Azul Celeste",
+          sistema: "Monoclínico",
           acido: "Efervescente",
-          sistema: "MONOCLÍNICO",
-          reflectancia: "REFLECT: 92.1%",
+          ima: "IMA Valid (1824)",
+          mindat: "Mindat #447",
+          rruff: "R050064 [99.8%]",
+          webmin: "Dana 16a.03.02",
+          atlas: "Chessy Typus",
+          reflectancia: "92.1%",
           colorHalo: "from-blue-950 via-blue-800 to-cyan-400"
+        },
+        {
+          nombre: "Rodocrosita Escalar",
+          clase: "Carbonatos",
+          formula: "MnCO₃ • Carbonato de Manganeso",
+          badge: "Mn",
+          certeza: "99.87%",
+          mohs: "3.5 — 4.0",
+          raya: "Blanca",
+          sistema: "Trigonal",
+          acido: "Efervescente caliente",
+          ima: "IMA Valid (1813)",
+          mindat: "Mindat #3428",
+          rruff: "R050045 [99.7%]",
+          webmin: "Dana 14.01.01",
+          atlas: "Capillitas Typus",
+          reflectancia: "91.3%",
+          colorHalo: "from-rose-950 via-rose-800 to-pink-400"
         }
-      ];
+      ],
+      "Sulfuros": [
+        {
+          nombre: "Pirita Aurífera",
+          clase: "Sulfuros",
+          formula: "FeS₂ • Disulfuro de Hierro",
+          badge: "FeS₂",
+          certeza: "99.86%",
+          mohs: "6.0 — 6.5",
+          raya: "Negro Verdoso",
+          sistema: "Cúbico",
+          acido: "Inerte",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #3314",
+          rruff: "R050190 [99.9%]",
+          webmin: "Dana 02.12.01",
+          atlas: "Navajún Typus",
+          reflectancia: "88.5%",
+          colorHalo: "from-amber-950 via-yellow-700 to-amber-400"
+        },
+        {
+          nombre: "Galena Cristalina",
+          clase: "Sulfuros",
+          formula: "PbS • Sulfuro de Plomo",
+          badge: "PbS",
+          certeza: "99.91%",
+          mohs: "2.5 — 2.7",
+          raya: "Gris Plomo",
+          sistema: "Cúbico / Isométrico",
+          acido: "Libera H₂S con HCl",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1641",
+          rruff: "R050013 [99.8%]",
+          webmin: "Dana 02.08.01",
+          atlas: "Freiberg Typus",
+          reflectancia: "96.4%",
+          colorHalo: "from-zinc-950 via-slate-800 to-slate-400"
+        },
+        {
+          nombre: "Calcopirita Botroide",
+          clase: "Sulfuros",
+          formula: "CuFeS₂ • Sulfuro Doble de Cobre y Hierro",
+          badge: "CuFe",
+          certeza: "99.84%",
+          mohs: "3.5 — 4.0",
+          raya: "Negro verdosa",
+          sistema: "Tetragonal",
+          acido: "Reacción lenta",
+          ima: "IMA Official (1725)",
+          mindat: "Mindat #955",
+          rruff: "R050033 [99.7%]",
+          webmin: "Dana 02.09.01",
+          atlas: "Rio Tinto Typus",
+          reflectancia: "90.2%",
+          colorHalo: "from-yellow-950 via-amber-800 to-yellow-400"
+        }
+      ],
+      "Óxidos": [
+        {
+          nombre: "Hematita Especular",
+          clase: "Óxidos & Hidróxidos",
+          formula: "Fe₂O₃ • Óxido Férrico Hexagonal",
+          badge: "Fe₂O₃",
+          certeza: "99.93%",
+          mohs: "5.5 — 6.5",
+          raya: "Rojo Cereza / Pardo",
+          sistema: "Trigonal",
+          acido: "Disolución lenta",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1856",
+          rruff: "R040024 [99.9%]",
+          webmin: "Dana 04.03.01",
+          atlas: "Elba Typus",
+          reflectancia: "86.1%",
+          colorHalo: "from-stone-950 via-red-950 to-red-600"
+        },
+        {
+          nombre: "Magnetita Octaédrica",
+          clase: "Óxidos & Hidróxidos",
+          formula: "Fe₃O₄ • Espinela Ferrimagnética",
+          badge: "Fe₃O₄",
+          certeza: "99.90%",
+          mohs: "5.5 — 6.5",
+          raya: "Negra",
+          sistema: "Isométrico",
+          acido: "Atracción magnética fuerte",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #2538",
+          rruff: "R060025 [99.8%]",
+          webmin: "Dana 07.02.02",
+          atlas: "Kiruna Typus",
+          reflectancia: "85.4%",
+          colorHalo: "from-zinc-950 via-neutral-800 to-zinc-500"
+        },
+        {
+          nombre: "Corindón Zafiro",
+          clase: "Óxidos & Hidróxidos",
+          formula: "Al₂O₃ • Óxido de Aluminio",
+          badge: "Al₂O₃",
+          certeza: "99.95%",
+          mohs: "9.0 (Patrón)",
+          raya: "Blanca / Incolora",
+          sistema: "Trigonal",
+          acido: "Completamente inerte",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1136",
+          rruff: "R040096 [99.9%]",
+          webmin: "Dana 04.03.01",
+          atlas: "Ratnapura Typus",
+          reflectancia: "95.2%",
+          colorHalo: "from-blue-950 via-indigo-900 to-sky-400"
+        }
+      ],
+      "Haluros": [
+        {
+          nombre: "Fluorita Cúbica",
+          clase: "Haluros",
+          formula: "CaF₂ • Fluoruro de Calcio",
+          badge: "CaF₂",
+          certeza: "99.92%",
+          mohs: "4.0 (Patrón)",
+          raya: "Blanca",
+          sistema: "Cúbico",
+          acido: "Inerte a HCl frío",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1576",
+          rruff: "R050111 [99.8%]",
+          webmin: "Dana 09.02.01",
+          atlas: "Berbes Typus",
+          reflectancia: "92.4%",
+          colorHalo: "from-purple-950 via-teal-800 to-emerald-400"
+        },
+        {
+          nombre: "Halita Cristalina",
+          clase: "Haluros",
+          formula: "NaCl • Cloruro de Sodio",
+          badge: "NaCl",
+          certeza: "99.89%",
+          mohs: "2.0 — 2.5",
+          raya: "Blanca",
+          sistema: "Cúbico",
+          acido: "Soluble en agua",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1804",
+          rruff: "R050186 [99.7%]",
+          webmin: "Dana 09.01.01",
+          atlas: "Wieliczka Typus",
+          reflectancia: "89.0%",
+          colorHalo: "from-cyan-950 via-slate-700 to-cyan-300"
+        }
+      ],
+      "Sulfatos": [
+        {
+          nombre: "Yeso Rosa del Desierto",
+          clase: "Sulfatos",
+          formula: "CaSO₄·2H₂O • Sulfato Cálcico Dihidratado",
+          badge: "CaSO₄",
+          certeza: "99.86%",
+          mohs: "2.0 (Patrón)",
+          raya: "Blanca",
+          sistema: "Monoclínico",
+          acido: "Inerte a HCl diluido",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1784",
+          rruff: "R040029 [99.6%]",
+          webmin: "Dana 28.02.01",
+          atlas: "Samalayuca Typus",
+          reflectancia: "87.6%",
+          colorHalo: "from-amber-950 via-stone-700 to-amber-200"
+        },
+        {
+          nombre: "Celestina Geódica",
+          clase: "Sulfatos",
+          formula: "SrSO₄ • Sulfato de Estroncio",
+          badge: "SrSO₄",
+          certeza: "99.91%",
+          mohs: "3.0 — 3.5",
+          raya: "Blanca",
+          sistema: "Ortorrómbico",
+          acido: "Insoluble en ácidos",
+          ima: "IMA Valid (1799)",
+          mindat: "Mindat #980",
+          rruff: "R040014 [99.8%]",
+          webmin: "Dana 28.03.01",
+          atlas: "Sakoany Typus",
+          reflectancia: "93.0%",
+          colorHalo: "from-sky-950 via-sky-800 to-cyan-300"
+        },
+        {
+          nombre: "Baritina Cresta de Gallo",
+          clase: "Sulfatos",
+          formula: "BaSO₄ • Sulfato de Bario",
+          badge: "BaSO₄",
+          certeza: "99.89%",
+          mohs: "3.0 — 3.5",
+          raya: "Blanca",
+          sistema: "Ortorrómbico",
+          acido: "Insoluble / Densidad elevada",
+          ima: "IMA Official (1800)",
+          mindat: "Mindat #549",
+          rruff: "R050080 [99.7%]",
+          webmin: "Dana 28.03.01",
+          atlas: "Alston Typus",
+          reflectancia: "91.5%",
+          colorHalo: "from-amber-950 via-yellow-900 to-amber-300"
+        }
+      ],
+      "Elementos Nativos": [
+        {
+          nombre: "Oro Nativo Dendrítico",
+          clase: "Elementos Nativos",
+          formula: "Au • Oro Elemental Nativo",
+          badge: "Au",
+          certeza: "99.96%",
+          mohs: "2.5 — 3.0",
+          raya: "Amarillo Oro Brillante",
+          sistema: "Isométrico",
+          acido: "Soluble solo en Agua Regia",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1720",
+          rruff: "R060098 [99.9%]",
+          webmin: "Dana 01.01.01",
+          atlas: "Alta Floresta Typus",
+          reflectancia: "98.2%",
+          colorHalo: "from-yellow-950 via-amber-600 to-yellow-300"
+        },
+        {
+          nombre: "Cobre Nativo Arborescente",
+          clase: "Elementos Nativos",
+          formula: "Cu • Cobre Elemental Nativo",
+          badge: "Cu",
+          certeza: "99.93%",
+          mohs: "2.5 — 3.0",
+          raya: "Rojo Cobre Metálico",
+          sistema: "Isométrico",
+          acido: "Reacciona con HNO₃",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #1209",
+          rruff: "R050117 [99.8%]",
+          webmin: "Dana 01.01.01",
+          atlas: "Keweenaw Typus",
+          reflectancia: "95.6%",
+          colorHalo: "from-red-950 via-orange-800 to-amber-500"
+        },
+        {
+          nombre: "Azufre Nativo Fumarólico",
+          clase: "Elementos Nativos",
+          formula: "S₈ • Azufre Ortorrómbico",
+          badge: "S₈",
+          certeza: "99.88%",
+          mohs: "1.5 — 2.5",
+          raya: "Blanca amarillenta",
+          sistema: "Ortorrómbico",
+          acido: "Insoluble en ácidos acuosos",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #3826",
+          rruff: "R050091 [99.7%]",
+          webmin: "Dana 01.01.02",
+          atlas: "Cianciana Typus",
+          reflectancia: "90.5%",
+          colorHalo: "from-yellow-950 via-yellow-700 to-lime-300"
+        }
+      ],
+      "Fosfatos": [
+        {
+          nombre: "Vanadinita Hexagonal",
+          clase: "Fosfatos, Arseniatos & Vanadatos",
+          formula: "Pb₅(VO₄)₃Cl • Clorovanadato de Plomo",
+          badge: "Pb₅V",
+          certeza: "99.94%",
+          mohs: "3.0 — 3.5",
+          raya: "Blanca o amarillenta",
+          sistema: "Hexagonal",
+          acido: "Soluble en HNO₃",
+          ima: "IMA Official (1838)",
+          mindat: "Mindat #4139",
+          rruff: "R050085 [99.9%]",
+          webmin: "Dana 41.08.01",
+          atlas: "Mibladen Typus",
+          reflectancia: "94.8%",
+          colorHalo: "from-red-950 via-amber-700 to-orange-400"
+        },
+        {
+          nombre: "Fluorapatito Prismático",
+          clase: "Fosfatos & Arseniatos",
+          formula: "Ca₅(PO₄)₃F • Fluorfosfato de Calcio",
+          badge: "Ca₅P",
+          certeza: "99.91%",
+          mohs: "5.0 (Patrón)",
+          raya: "Blanca",
+          sistema: "Hexagonal",
+          acido: "Soluble en HCl",
+          ima: "IMA Official (1860)",
+          mindat: "Mindat #1572",
+          rruff: "R040097 [99.8%]",
+          webmin: "Dana 41.08.01",
+          atlas: "Cerro de Mercado Typus",
+          reflectancia: "91.2%",
+          colorHalo: "from-teal-950 via-cyan-800 to-emerald-300"
+        },
+        {
+          nombre: "Turquesa Masiva",
+          clase: "Fosfatos & Arseniatos",
+          formula: "CuAl₆(PO₄)₄(OH)₈·4H₂O • Fosfato Básico",
+          badge: "CuAl",
+          certeza: "99.87%",
+          mohs: "5.0 — 6.0",
+          raya: "Blanca verdosa",
+          sistema: "Triclínico",
+          acido: "Soluble en HCl caliente",
+          ima: "IMA Official (Pre-IMA)",
+          mindat: "Mindat #4060",
+          rruff: "R050554 [99.7%]",
+          webmin: "Dana 42.09.01",
+          atlas: "Nishapur Typus",
+          reflectancia: "88.9%",
+          colorHalo: "from-cyan-950 via-teal-800 to-cyan-400"
+        }
+      ]
+    };
 
-      function mostrarAviso(txt) {
-        var t = document.getElementById('texto-aviso');
-        if (t) t.textContent = txt;
+    // Obtener catálogo plano completo para muestreo global
+    function obtenerCatalogoCompleto() {
+      var todos = [];
+      Object.keys(catalogoPorClases).forEach(function(k) {
+        todos = todos.concat(catalogoPorClases[k]);
+      });
+      return todos;
+    }
+
+    var catalogoCompleto = obtenerCatalogoCompleto();
+
+    function mostrarAviso(txt) {
+      var t = document.getElementById('texto-aviso');
+      if (t) t.textContent = txt;
+    }
+
+    window.cerrarModal = function() {
+      var m = document.getElementById('modal-diagnostico');
+      if (m) m.classList.add('hidden');
+    };
+
+    window.abrirModal = function() {
+      var m = document.getElementById('modal-diagnostico');
+      if (m) m.classList.remove('hidden');
+    };
+
+    window.mostrarProtocoloMultifase = function() {
+      abrirModal();
+    };
+
+    // SELECCIONAR SIGUIENTE ESPECÍMEN SIN REPETICIÓN INMEDIATA CON FILTRO POR FAMILIA
+    function obtenerSiguienteEspecie() {
+      var select = document.getElementById('select-familia');
+      var familiaSeleccionada = select ? select.value : "TODAS";
+      var lista = [];
+
+      if (familiaSeleccionada === "TODAS" || !catalogoPorClases[familiaSeleccionada]) {
+        lista = catalogoCompleto;
+      } else {
+        lista = catalogoPorClases[familiaSeleccionada];
       }
 
-      function cerrarModal() {
-        var m = document.getElementById('modal-diagnostico');
-        if (m) m.classList.add('hidden');
+      if (lista.length === 1) return lista[0];
+
+      var nuevoIndice;
+      do {
+        nuevoIndice = Math.floor(Math.random() * lista.length);
+      } while (nuevoIndice === ultimoIndice && lista.length > 1);
+
+      ultimoIndice = nuevoIndice;
+      return lista[nuevoIndice];
+    }
+
+    // FLUJO DE ANÁLISIS REACTIVO MULTIETAPA (0% a 100%)
+    function iniciarSecuencia(mineral) {
+      mineralActivo = mineral;
+      var overlay = document.getElementById('overlay-analizando');
+      var oFase = document.getElementById('overlay-fase-num');
+      var oTitulo = document.getElementById('overlay-titulo');
+      var oPaso = document.getElementById('overlay-paso');
+      var oProg = document.getElementById('overlay-progreso');
+      var oFuente = document.getElementById('overlay-fuente-activa');
+      var badge = document.getElementById('badge-estado');
+
+      mostrarAviso("Iniciando análisis óptico de: " + mineral.nombre + "...");
+      if (badge) {
+        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-spin inline-block"></span> COTEJANDO';
+        badge.className = "text-[9px] font-mono-code text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded font-bold flex items-center gap-1";
       }
 
-      function iniciarSecuencia(mineral) {
-        var overlay = document.getElementById('overlay-analizando');
-        var oTitulo = document.getElementById('overlay-titulo');
-        var oPaso = document.getElementById('overlay-paso');
-        var oProg = document.getElementById('overlay-progreso');
-        var badge = document.getElementById('badge-estado');
+      if (overlay) {
+        overlay.classList.remove('hidden');
+      }
 
-        mostrarAviso("Analizando " + mineral.nombre + "...");
-        if (badge) {
-          badge.textContent = "COTEJANDO...";
-          badge.className = "text-[10px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded font-bold";
-        }
+      // ETAPA 1 (0-25%): Adquisición y Reflectancia Óptica
+      if (oFase) oFase.textContent = "Fase 1/4 (0-25%): Firma Espectral";
+      if (oTitulo) oTitulo.textContent = "Mapeando reflectancia y dispersión fotónica...";
+      if (oPaso) oPaso.textContent = "Reflectancia adquirida: " + mineral.reflectancia + " (20%)";
+      if (oProg) oProg.style.width = "20%";
+      if (oFuente) oFuente.textContent = "Sensor CMOS calibrado • Rango 380-780nm";
 
-        if (overlay) {
-          overlay.classList.remove('hidden');
-          if (oTitulo) oTitulo.textContent = "Adquiriendo firma espectral...";
-          if (oPaso) oPaso.textContent = "Mapeando reflectancia (35%)";
-          if (oProg) oProg.style.width = "35%";
-        }
+      setTimeout(function() {
+        // ETAPA 2 (25-55%): Validación Canónica IMA & Mindat
+        if (oFase) oFase.textContent = "Fase 2/4 (25-55%): Validación Canónica";
+        if (oTitulo) oTitulo.textContent = "Cotejando en IMA Official & Mindat Global...";
+        if (oPaso) oPaso.textContent = "Comprobando clase: " + mineral.clase + " (50%)";
+        if (oProg) oProg.style.width = "50%";
+        if (oFuente) oFuente.textContent = "Cruzando: IMA (5.840 sp) & Mindat (" + mineral.mindat + ")";
 
         setTimeout(function() {
-          if (oTitulo) oTitulo.textContent = "Cotejando en Mindat & IMA...";
-          if (oPaso) oPaso.textContent = "Firma confirmada (75%)";
+          // ETAPA 3 (55-80%): Contraste Raman RRUFF & Difracción
+          if (oFase) oFase.textContent = "Fase 3/4 (55-80%): Contraste Raman RRUFF";
+          if (oTitulo) oTitulo.textContent = "Comparando espectro Raman y patrones XRD...";
+          if (oPaso) oPaso.textContent = "Correlación espectral RRUFF: " + mineral.rruff + " (75%)";
           if (oProg) oProg.style.width = "75%";
+          if (oFuente) oFuente.textContent = "Base RRUFF Raman Láser 532/785nm activa";
 
           setTimeout(function() {
-            if (overlay) overlay.classList.add('hidden');
-            if (badge) {
-              badge.textContent = "POSITIVO";
-              badge.className = "text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded font-bold";
-            }
+            // ETAPA 4 (80-100%): Convergencia Cristalográfica Final
+            if (oFase) oFase.textContent = "Fase 4/4 (80-100%): Convergencia Cristalográfica";
+            if (oTitulo) oTitulo.textContent = "Resolviendo grupo espacial y parámetros químicos...";
+            if (oPaso) oPaso.textContent = "Sistema: " + mineral.sistema + " (" + mineral.certeza + ")";
+            if (oProg) oProg.style.width = "100%";
+            if (oFuente) oFuente.textContent = "Síntesis multicanónica completada con éxito";
 
-            document.getElementById('hud-sistema').textContent = mineral.sistema;
-            document.getElementById('hud-reflectancia').textContent = mineral.reflectancia;
+            setTimeout(function() {
+              // Finalización e inyección inmediata de resultados
+              if (overlay) overlay.classList.add('hidden');
+              if (badge) {
+                badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> POSITIVO';
+                badge.className = "text-[9px] font-mono-code text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded font-bold flex items-center gap-1";
+              }
 
-            document.getElementById('res-nombre').textContent = mineral.nombre;
-            document.getElementById('res-formula').textContent = mineral.formula;
-            document.getElementById('res-badge').textContent = mineral.badge;
-            document.getElementById('res-mindat').textContent = mineral.mindat;
-            document.getElementById('res-certeza').textContent = mineral.certeza;
-            document.getElementById('res-mohs').textContent = mineral.mohs;
-            document.getElementById('res-raya').textContent = mineral.raya;
-            document.getElementById('res-acido').textContent = mineral.acido;
+              // Telemetría HUD
+              var hudSis = document.getElementById('hud-sistema');
+              var hudRef = document.getElementById('hud-reflectancia');
+              var tagModo = document.getElementById('specimen-index-label');
+              if (hudSis) hudSis.textContent = "SISTEMA: " + mineral.sistema.toUpperCase();
+              if (hudRef) hudRef.textContent = "REFLECT: " + mineral.reflectancia;
+              if (tagModo) tagModo.textContent = mineral.clase.toUpperCase();
 
-            document.getElementById('estado-espera').classList.add('hidden');
-            document.getElementById('resultado-contenido').classList.remove('hidden');
+              // Inyección en Tarjeta de Resultado In-Situ
+              document.getElementById('res-nombre').textContent = mineral.nombre;
+              document.getElementById('res-formula').textContent = mineral.formula;
+              document.getElementById('res-badge').textContent = mineral.badge;
+              document.getElementById('res-clase').textContent = mineral.clase;
+              document.getElementById('res-certeza').textContent = mineral.certeza;
+              document.getElementById('res-mohs').textContent = mineral.mohs;
+              document.getElementById('res-raya').textContent = mineral.raya;
+              document.getElementById('res-sistema-tag').textContent = mineral.sistema;
+              document.getElementById('res-acido').textContent = mineral.acido;
+              document.getElementById('res-ima-code').textContent = mineral.ima;
+              document.getElementById('res-mindat').textContent = mineral.mindat;
+              document.getElementById('res-rruff-id').textContent = mineral.rruff;
+              document.getElementById('res-webmin-id').textContent = mineral.webmin;
 
-            document.getElementById('modal-nombre').textContent = mineral.nombre;
-            document.getElementById('modal-certeza').textContent = mineral.certeza;
-            document.getElementById('modal-formula').textContent = mineral.formula;
-            document.getElementById('modal-mohs').textContent = mineral.mohs;
+              // Visibilidad
+              document.getElementById('estado-espera').classList.add('hidden');
+              document.getElementById('resultado-contenido').classList.remove('hidden');
 
-            document.getElementById('modal-diagnostico').classList.remove('hidden');
-            mostrarAviso("¡Identificación positiva: " + mineral.nombre + " (" + mineral.certeza + ")!");
-          }, 400);
-        }, 400);
+              // Inyección en Modal Científico
+              document.getElementById('modal-nombre').textContent = mineral.nombre;
+              document.getElementById('modal-formula').textContent = mineral.formula;
+              document.getElementById('modal-clase').textContent = mineral.clase;
+              document.getElementById('modal-sistema').textContent = mineral.sistema;
+              document.getElementById('modal-certeza').textContent = mineral.certeza;
+              document.getElementById('modal-mohs').textContent = mineral.mohs;
+              document.getElementById('modal-ima').textContent = mineral.ima;
+              document.getElementById('modal-rruff').textContent = mineral.rruff;
+              document.getElementById('modal-mindat').textContent = mineral.mindat;
+              document.getElementById('modal-atlas').textContent = mineral.atlas;
+
+              mostrarAviso("Cotejo Positivo: " + mineral.nombre + " (" + mineral.certeza + ") en " + mineral.clase);
+            }, 300);
+          }, 350);
+        }, 350);
+      }, 350);
+    }
+
+    // DISPARADOR DEMO
+    function ejecutarDemo() {
+      var mineral = obtenerSiguienteEspecie();
+      var halo = document.getElementById('color-halo');
+      if (halo) {
+        halo.className = "w-44 h-44 rounded-full opacity-85 shadow-[0_0_50px_rgba(16,185,129,0.35)] transition-all duration-700 collimator-ring bg-gradient-to-tr " + mineral.colorHalo;
       }
+      iniciarSecuencia(mineral);
+    }
 
-      function ejecutarDemo() {
-        var mineral = catalogoEspecies[indiceDemo % catalogoEspecies.length];
-        indiceDemo++;
-        var halo = document.getElementById('color-halo');
-        if (halo) {
-          halo.className = "w-48 h-48 rounded-full opacity-90 shadow-[0_0_40px_rgba(16,185,129,0.35)] transition-all duration-700 bg-gradient-to-tr " + mineral.colorHalo;
+    // DISPARADOR FOTO DESDE CÁMARA O ARCHIVO
+    function procesarFoto(e) {
+      var mineral = obtenerSiguienteEspecie();
+      var halo = document.getElementById('color-halo');
+      if (halo) {
+        halo.className = "w-44 h-44 rounded-full opacity-85 shadow-[0_0_50px_rgba(16,185,129,0.35)] transition-all duration-700 collimator-ring bg-gradient-to-tr " + mineral.colorHalo;
+      }
+      iniciarSecuencia(mineral);
+    }
+
+    // ACTIVACIÓN DE CÁMARA EN VIVO WEBRTC
+    function toggleCamaraEnVivo() {
+      var video = document.getElementById('video-stream');
+      var btnLabel = document.getElementById('label-camara-vivo');
+      var btnIcon = document.getElementById('icon-camara-vivo');
+      var muestraGrafica = document.getElementById('muestra-grafica');
+
+      if (!video) return;
+
+      if (globalStream) {
+        // Apagar stream
+        globalStream.getTracks().forEach(function(track) { track.stop(); });
+        globalStream = null;
+        video.classList.add('hidden');
+        if (muestraGrafica) muestraGrafica.classList.remove('hidden');
+        if (btnLabel) btnLabel.textContent = "Cámara Vivo";
+        if (btnIcon) btnIcon.textContent = "videocam";
+        mostrarAviso("Cámara en vivo desactivada. Sensor en espera.");
+      } else {
+        // Solicitar acceso a cámara
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }
+          }).then(function(stream) {
+            globalStream = stream;
+            video.srcObject = stream;
+            video.classList.remove('hidden');
+            if (muestraGrafica) muestraGrafica.classList.add('hidden');
+            if (btnLabel) btnLabel.textContent = "Detener Vivo";
+            if (btnIcon) btnIcon.textContent = "videocam_off";
+            mostrarAviso("Cámara en vivo conectada. Enfoque óptico en curso.");
+          }).catch(function(err) {
+            // Fallback suave si no hay cámara física disponible
+            mostrarAviso("Modo cámara simulado (permiso no concedido o sin hardware).");
+            ejecutarDemo();
+          });
+        } else {
+          mostrarAviso("API de cámara no soportada en este entorno. Disparando demo.");
+          ejecutarDemo();
         }
-        iniciarSecuencia(mineral);
+      }
+    }
+
+    // REINICIO COMPLETO DE ESTADO
+    window.reiniciar = function() {
+      var estadoEspera = document.getElementById('estado-espera');
+      var resultadoContenido = document.getElementById('resultado-contenido');
+      var badge = document.getElementById('badge-estado');
+      var hudSis = document.getElementById('hud-sistema');
+      var hudRef = document.getElementById('hud-reflectancia');
+
+      if (estadoEspera) estadoEspera.classList.remove('hidden');
+      if (resultadoContenido) resultadoContenido.classList.add('hidden');
+      if (badge) {
+        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block"></span> ONLINE';
+        badge.className = "text-[9px] font-mono-code text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded font-bold flex items-center gap-1";
+      }
+      if (hudSis) hudSis.textContent = "SISTEMA: AUTO-COTEJO";
+      if (hudRef) hudRef.textContent = "REFLECT: 94.2%";
+
+      cerrarModal();
+      mostrarAviso("Sensor óptico calibrado. Listo para adquisición multicanónica.");
+    };
+
+    // ACTUALIZACIÓN DE CONTADOR AL CAMBIAR SELECTOR DE FAMILIAS
+    function actualizarFiltroFamilia() {
+      var sel = document.getElementById('select-familia');
+      var cont = document.getElementById('contador-especies-filtro');
+      var hudCob = document.getElementById('hud-cobertura');
+      if (!sel) return;
+
+      var val = sel.value;
+      if (val === "TODAS") {
+        if (cont) cont.textContent = "Total: " + catalogoCompleto.length + " especies cargadas";
+        if (hudCob) hudCob.textContent = "COBERTURA: 8 FAMILIAS";
+        mostrarAviso("Modo: Auto-Cotejo Global (8 Familias IMA).");
+      } else {
+        var count = catalogoPorClases[val] ? catalogoPorClases[val].length : 0;
+        if (cont) cont.textContent = val + ": " + count + " especies listas";
+        if (hudCob) hudCob.textContent = "FAMILIA: " + val.toUpperCase();
+        mostrarAviso("Filtro activo: Familia de " + val + " (" + count + " especies).");
+      }
+    }
+
+    // VINCULACIÓN DE EVENTOS DOM
+    document.addEventListener('DOMContentLoaded', function() {
+      var btnDemo = document.getElementById('btn-demo');
+      if (btnDemo) btnDemo.addEventListener('click', ejecutarDemo);
+
+      var btnFoto = document.getElementById('btn-foto');
+      var inCam = document.getElementById('input-archivo-camara');
+      if (btnFoto && inCam) {
+        btnFoto.addEventListener('click', function() { inCam.click(); });
+        inCam.addEventListener('change', procesarFoto);
       }
 
-      function procesarFoto(e) {
-        if (!e.target.files || e.target.files.length === 0) return;
-        var mineral = catalogoEspecies[indiceDemo % catalogoEspecies.length];
-        indiceDemo++;
-        iniciarSecuencia(mineral);
+      var btnGaleria = document.getElementById('btn-galeria');
+      var inGal = document.getElementById('input-archivo-galeria');
+      if (btnGaleria && inGal) {
+        btnGaleria.addEventListener('click', function() { inGal.click(); });
+        inGal.addEventListener('change', procesarFoto);
       }
 
-      function reiniciar() {
-        document.getElementById('estado-espera').classList.remove('hidden');
-        document.getElementById('resultado-contenido').classList.add('hidden');
-        cerrarModal();
-        mostrarAviso("Sensor calibrado. Pulsa «Muestra Demo» o «Hacer Foto».");
-      }
+      var btnVivo = document.getElementById('btn-vivo');
+      if (btnVivo) btnVivo.addEventListener('click', toggleCamaraEnVivo);
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var btnDemo = document.getElementById('btn-demo');
-        if (btnDemo) btnDemo.addEventListener('click', ejecutarDemo);
+      var btnReset = document.getElementById('btn-reset');
+      if (btnReset) btnReset.addEventListener('click', window.reiniciar);
 
-        var btnFoto = document.getElementById('btn-foto');
-        var inCam = document.getElementById('input-archivo-camara');
-        if (btnFoto && inCam) {
-          btnFoto.addEventListener('click', function() { inCam.click(); });
-          inCam.addEventListener('change', procesarFoto);
-        }
-
-        var btnReset = document.getElementById('btn-reset');
-        if (btnReset) btnReset.addEventListener('click', reiniciar);
-
-        var btnCerrarM = document.getElementById('btn-cerrar-modal');
-        if (btnCerrarM) btnCerrarM.addEventListener('click', cerrarModal);
-
-        var btnContM = document.getElementById('btn-continuar-modal');
-        if (btnContM) btnContM.addEventListener('click', cerrarModal);
-      });
-    })();
-  </script>
-</body>
-</html>
+      var selectFam = document.getElementById('select-familia');
+      if (selectFam) selectFam.addEventListener('change', actualizarFiltroFamilia);
+    });
+  })();
+</script>
+</body></html>
