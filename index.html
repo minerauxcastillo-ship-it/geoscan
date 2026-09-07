@@ -1,1 +1,391 @@
-<!DOCTYPE html> <html lang="es" class="dark"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>GeoScan // Centro de Control Geológico</title> <script src="https://cdn.tailwindcss.com"></script> <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"> <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"> <script> tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['"Space Grotesk"', 'sans-serif'] }, colors: { surface: '#131316', 'surface-dim': '#0e0e11', 'surface-container': '#1b1b1e', 'surface-card': '#161619', primary: '#10b981', 'outline-subtle': '#27272a', 'text-muted': '#9ca3af' } } } } </script> </head> <body class="bg-[#0e0e11] text-gray-100 font-sans min-h-screen pb-24 selection:bg-emerald-500/30"> <!-- TOP BAR --> <header class="sticky top-0 z-40 bg-[#131316]/90 backdrop-blur-md border-b border-[#27272a] px-4 py-3 flex items-center justify-between"> <div class="flex items-center gap-2.5"> <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400"> <span class="material-symbols-outlined text-[20px]">satellite_alt</span> </div> <div> <div class="flex items-center gap-1.5"> <span class="text-sm font-bold tracking-tight text-white uppercase">GeoScan IA</span> <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.2 rounded font-mono">v3.2</span> </div> <p class="text-[10px] text-gray-400 tracking-wider uppercase">Centro de Control Geológico</p> </div> </div> <div class="flex items-center gap-2"> <span class="flex items-center gap-1 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded"> <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE </span> </div> </header> <main class="max-w-md mx-auto px-4 pt-4 space-y-4"> <!-- HERO CTA: ESCÁNER ACTIVO --> <div class="relative overflow-hidden bg-gradient-to-br from-[#161619] to-[#131316] border border-emerald-500/30 rounded-2xl p-5 shadow-lg"> <div class="flex justify-between items-start mb-3"> <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded"> Analizador Espectral Activo </span> <span class="text-xs text-gray-400 font-mono flex items-center gap-1"> <span class="material-symbols-outlined text-[14px] text-emerald-400">lock_reset</span> 60 FPS </span> </div> <h2 class="text-xl font-bold text-white tracking-tight">Lanzar Escáner de Minerales</h2> <p class="text-xs text-gray-400 mt-1 mb-4 leading-relaxed"> Adquisición multiespectral a 10–15 cm. Análisis cristalográfico, índice Mohs y reflectancia en tiempo real. </p> <a href="scanner.html" class="w-full py-3 bg-emerald-500 hover:bg-emerald-400 active:scale-[0.99] text-black font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-emerald-500/10"> <span class="material-symbols-outlined text-[18px]">photo_camera</span> <span>Iniciar Escáner IA</span> </a> </div> <!-- ÚLTIMO DIAGNÓSTICO / QUICK RESUME --> <div class="bg-[#161619] border border-[#27272a] rounded-xl p-3.5 flex items-center justify-between"> <div class="flex items-center gap-3"> <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-bold text-emerald-400 text-xs"> Cu₂ </div> <div> <span class="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Último Detectado</span> <h3 class="text-sm font-bold text-white">Malaquita (99.94%)</h3> </div> </div> <a href="ficha-tecnica.html" class="px-2.5 py-1.5 bg-[#1b1b1e] hover:bg-emerald-500 hover:text-black border border-[#27272a] rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors text-gray-300"> <span>Ficha</span> <span class="material-symbols-outlined text-[14px]">chevron_right</span> </a> </div> <!-- MÓDULOS DE SISTEMA --> <div> <div class="flex justify-between items-center mb-2 px-1"> <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Módulos de Sistema</span> <span class="text-[10px] text-emerald-400 font-mono">5 ACTIVOS</span> </div> <div class="space-y-2.5"> <!-- GUÍA DE CAMPO --> <a href="catalogo.html" class="block bg-[#161619] hover:bg-[#1b1b1e] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-3.5 transition-all"> <div class="flex items-center justify-between"> <div class="flex items-center gap-3"> <div class="w-8 h-8 rounded-lg bg-[#1b1b1e] border border-[#27272a] flex items-center justify-center text-emerald-400"> <span class="material-symbols-outlined text-[18px]">menu_book</span> </div> <div> <h4 class="text-xs font-bold text-white">Catálogo y Guía de Campo</h4> <p class="text-[11px] text-gray-400">5.840 especies IMA, Mohs, fórmulas y familias</p> </div> </div> <span class="material-symbols-outlined text-gray-500 text-[18px]">arrow_forward</span> </div> </a> <!-- PROTOCOLO MULTIFASE --> <a href="protocolo.html" class="block bg-[#161619] hover:bg-[#1b1b1e] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-3.5 transition-all"> <div class="flex items-center justify-between"> <div class="flex items-center gap-3"> <div class="w-8 h-8 rounded-lg bg-[#1b1b1e] border border-[#27272a] flex items-center justify-center text-emerald-400"> <span class="material-symbols-outlined text-[18px]">science</span> </div> <div> <h4 class="text-xs font-bold text-white">Protocolo de Certeza 99.9%</h4> <p class="text-[11px] text-gray-400">Ensayos guiados: raya, dureza Mohs y ácido HCl</p> </div> </div> <span class="material-symbols-outlined text-gray-500 text-[18px]">arrow_forward</span> </div> </a> <!-- CERTIFICACIÓN --> <a href="certificacion.html" class="block bg-[#161619] hover:bg-[#1b1b1e] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-3.5 transition-all"> <div class="flex items-center justify-between"> <div class="flex items-center gap-3"> <div class="w-8 h-8 rounded-lg bg-[#1b1b1e] border border-[#27272a] flex items-center justify-center text-emerald-400"> <span class="material-symbols-outlined text-[18px]">verified</span> </div> <div> <h4 class="text-xs font-bold text-white">Certificación y Validación</h4> <p class="text-[11px] text-gray-400">Firma pericial, hash SHA-256 y cotejo Mindat</p> </div> </div> <span class="material-symbols-outlined text-gray-500 text-[18px]">arrow_forward</span> </div> </a> <!-- FICHA TÉCNICA --> <a href="ficha-tecnica.html" class="block bg-[#161619] hover:bg-[#1b1b1e] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-3.5 transition-all"> <div class="flex items-center justify-between"> <div class="flex items-center gap-3"> <div class="w-8 h-8 rounded-lg bg-[#1b1b1e] border border-[#27272a] flex items-center justify-center text-emerald-400"> <span class="material-symbols-outlined text-[18px]">analytics</span> </div> <div> <h4 class="text-xs font-bold text-white">Diagnóstico y Ficha Técnica</h4> <p class="text-[11px] text-gray-400">Crystallography, Mindat y yacimientos activos</p> </div> </div> <span class="material-symbols-outlined text-gray-500 text-[18px]">arrow_forward</span> </div> </a> <!-- FERIAS MUNDIALES --> <a href="ferias.html" class="block bg-[#161619] hover:bg-[#1b1b1e] border border-[#27272a] hover:border-emerald-500/40 rounded-xl p-3.5 transition-all"> <div class="flex items-center justify-between"> <div class="flex items-center gap-3"> <div class="w-8 h-8 rounded-lg bg-[#1b1b1e] border border-[#27272a] flex items-center justify-center text-emerald-400"> <span class="material-symbols-outlined text-[18px]">event</span> </div> <div> <h4 class="text-xs font-bold text-white">Ferias y Eventos Mundiales</h4> <p class="text-[11px] text-gray-400">Tucson, Munich, Sainte-Marie y afluencia</p> </div> </div> <span class="material-symbols-outlined text-gray-500 text-[18px]">arrow_forward</span> </div> </a> </div> </div> </main> <!-- BARRA DE NAVEGACIÓN INFERIOR (INICIO ACTIVO) --> <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#131316]/95 backdrop-blur-md border-t border-[#27272a] flex justify-around items-center py-2 px-3"> <a href="index.html" class="flex flex-col items-center text-emerald-400 font-medium"> <span class="material-symbols-outlined text-[20px]">dashboard</span> <span class="text-[10px] mt-0.5">Inicio</span> </a> <a href="scanner.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">view_in_ar</span> <span class="text-[10px] mt-0.5">Scanner</span> </a> <a href="catalogo.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">menu_book</span> <span class="text-[10px] mt-0.5">Catálogo</span> </a> <a href="protocolo.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">science</span> <span class="text-[10px] mt-0.5">Protocolo</span> </a> <a href="ferias.html" class="flex flex-col items-center text-gray-400 hover:text-emerald-400 transition-colors"> <span class="material-symbols-outlined text-[20px]">event</span> <span class="text-[10px] mt-0.5">Ferias</span> </a> </nav> </body> </html>
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GeoScan // Centro de Control & Radar Geomineral</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: {
+              DEFAULT: '#131316',
+              dim: '#0e0e11',
+              card: '#1a1a1f',
+              raised: '#222228',
+              border: '#2a2a32',
+              borderHighlight: '#383844'
+            },
+            emerald: {
+              glow: '#10b981',
+              deep: '#059669',
+              dark: '#064e3b'
+            },
+            amber: {
+              alert: '#f59e0b'
+            },
+            cyan: {
+              signal: '#06b6d4'
+            }
+          },
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0e0e11;
+      color: #e4e4e7;
+      font-family: 'Space Grotesk', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .technical-grid {
+      background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .radar-beam {
+      background: conic-gradient(from 0deg at 50% 50%, rgba(16, 185, 129, 0.25) 0deg, rgba(16, 185, 129, 0) 60deg, transparent 360deg);
+      animation: rotate 6s linear infinite;
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #2a2a32;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between pb-24 text-zinc-100 selection:bg-emerald-500 selection:text-black">
+
+  <!-- Top System Bar -->
+  <header class="sticky top-0 z-40 bg-[#131316]/95 backdrop-blur border-b border-surface-border px-4 py-3">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+          <span class="material-symbols-outlined text-lg">radar</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-bold text-sm tracking-wider uppercase">GeoScan</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-raised text-emerald-400 border border-emerald-500/20 font-medium">RADAR v4.0</span>
+          </div>
+          <p class="text-[10px] text-zinc-400 font-mono">RED GLOBAL DE FERIAS & RUTAS</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-surface-dim border border-surface-border px-2 py-1 rounded text-[11px] font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-zinc-300">ONLINE</span>
+        </div>
+        <a href="ferias.html" class="p-1.5 rounded hover:bg-surface-raised text-zinc-400 hover:text-emerald-400 transition" title="Buscador de Ferias">
+          <span class="material-symbols-outlined text-xl">search</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-md w-full mx-auto px-4 pt-4 space-y-5">
+
+    <!-- Central Hero: Radar de Ferias Inminentes -->
+    <section class="relative overflow-hidden rounded-xl bg-[#16161b] border border-surface-border p-4 shadow-xl technical-grid">
+      <!-- Radar scan animation corner indicator -->
+      <div class="absolute -right-8 -top-8 w-28 h-28 rounded-full border border-emerald-500/20 flex items-center justify-center overflow-hidden pointer-events-none opacity-40">
+        <div class="absolute inset-0 radar-beam"></div>
+        <div class="w-14 h-14 rounded-full border border-emerald-500/30"></div>
+      </div>
+
+      <div class="relative z-10">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">event_upcoming</span> Evento Inminente #1
+          </span>
+          <span class="text-[10px] font-mono bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">
+            CONFIRMADO 2026
+          </span>
+        </div>
+
+        <h2 class="text-lg font-bold text-white tracking-tight leading-tight mb-1">
+          MINERALEXPO Barcelona-Sants
+        </h2>
+        <p class="text-xs text-zinc-400 mb-3 flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs text-emerald-400">location_on</span>
+          Cotxeres de Sants • Barcelona, España
+        </p>
+
+        <!-- Data Bar -->
+        <div class="grid grid-cols-3 gap-2 bg-[#101014] p-2.5 rounded-lg border border-surface-border/80 mb-3.5 text-center font-mono">
+          <div>
+            <span class="block text-[10px] text-zinc-500 uppercase">Fechas</span>
+            <span class="text-xs font-semibold text-zinc-200">6–8 Nov</span>
+          </div>
+          <div class="border-x border-surface-border">
+            <span class="block text-[10px] text-zinc-500 uppercase">Afluencia</span>
+            <span class="text-xs font-semibold text-emerald-400">Alta ★★★★</span>
+          </div>
+          <div>
+            <span class="block text-[10px] text-zinc-500 uppercase">Entrada</span>
+            <span class="text-xs font-semibold text-zinc-200">Libre</span>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="grid grid-cols-2 gap-2">
+          <a href="ferias.html" class="flex items-center justify-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold text-xs py-2.5 px-3 rounded-lg transition active:scale-95 shadow-lg shadow-emerald-500/10">
+            <span class="material-symbols-outlined text-base">travel_explore</span>
+            Ver en Radar
+          </a>
+          <a href="rutas.html" class="flex items-center justify-center gap-1.5 bg-surface-raised hover:bg-surface-borderHighlight text-zinc-200 font-semibold text-xs py-2.5 px-3 rounded-lg border border-surface-border transition active:scale-95">
+            <span class="material-symbols-outlined text-base text-cyan-400">directions_transit</span>
+            Cómo Llegar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accesos Rápidos Principales (Radar & Rutas) -->
+    <section class="space-y-2.5">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Módulos del Sistema
+        </h3>
+        <span class="text-[10px] font-mono text-zinc-500">4 ACTIVOS</span>
+      </div>
+
+      <div class="grid grid-cols-1 gap-2.5">
+        <!-- Tarjeta Radar de Ferias -->
+        <a href="ferias.html" class="group block p-3.5 bg-surface-card hover:bg-surface-raised border border-surface-border hover:border-emerald-500/50 rounded-xl transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-xl">event_available</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Radar Mundial de Ferias</h4>
+                  <span class="text-[9px] font-mono uppercase px-1.5 py-0.2 bg-emerald-500/20 text-emerald-300 rounded border border-emerald-500/30">CANÓNICO</span>
+                </div>
+                <p class="text-xs text-zinc-400 mt-0.5 leading-snug">
+                  Censo completo de España (MTI), Francia (Comptoir), Europa (EventsEye) y EE.UU. Con fechas y afluencia.
+                </p>
+                <div class="flex items-center gap-2 mt-2 font-mono text-[10px] text-zinc-500">
+                  <span class="text-emerald-400/90">+50 Salones</span>
+                  <span>•</span>
+                  <span>Filtro por Países</span>
+                  <span>•</span>
+                  <span>Calendario 2026/2027</span>
+                </div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-zinc-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all text-lg shrink-0">arrow_forward</span>
+          </div>
+        </a>
+
+        <!-- Tarjeta Rutas y Conexiones -->
+        <a href="rutas.html" class="group block p-3.5 bg-surface-card hover:bg-surface-raised border border-surface-border hover:border-cyan-500/50 rounded-xl transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-xl">route</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">Cómo Llegar & Transporte</h4>
+                  <span class="text-[9px] font-mono uppercase px-1.5 py-0.2 bg-cyan-500/20 text-cyan-300 rounded border border-cyan-500/30">GPS DIRECTO</span>
+                </div>
+                <p class="text-xs text-zinc-400 mt-0.5 leading-snug">
+                  Rutas en Metro, Renfe Cercanías, autobuses y enlace a Google Maps para cada recinto ferial.
+                </p>
+                <div class="flex items-center gap-2 mt-2 font-mono text-[10px] text-zinc-500">
+                  <span class="text-cyan-400/90">Estaciones Cercanas</span>
+                  <span>•</span>
+                  <span>Puntos GPS</span>
+                  <span>•</span>
+                  <span>Guías Locales</span>
+                </div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-zinc-500 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all text-lg shrink-0">arrow_forward</span>
+          </div>
+        </a>
+
+        <!-- Tarjeta Guía de Campo y Especies IMA -->
+        <a href="catalogo.html" class="group block p-3.5 bg-surface-card hover:bg-surface-raised border border-surface-border hover:border-amber-500/50 rounded-xl transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-xl">menu_book</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-white group-hover:text-amber-400 transition-colors">Guía de Campo IMA</h4>
+                  <span class="text-[9px] font-mono uppercase px-1.5 py-0.2 bg-amber-500/20 text-amber-300 rounded border border-amber-500/30">5.840 ESPECIES</span>
+                </div>
+                <p class="text-xs text-zinc-400 mt-0.5 leading-snug">
+                  Catálogo sistemático canónico con búsqueda por nombre, filtro de dureza Mohs, sistemas y familias.
+                </p>
+                <div class="flex items-center gap-2 mt-2 font-mono text-[10px] text-zinc-500">
+                  <span class="text-amber-400/90">Escala Mohs</span>
+                  <span>•</span>
+                  <span>Fórmulas Químicas</span>
+                  <span>•</span>
+                  <span>Cotejo Canónico</span>
+                </div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-zinc-500 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all text-lg shrink-0">arrow_forward</span>
+          </div>
+        </a>
+
+        <!-- Tarjeta Protocolo de Certeza de Campo -->
+        <a href="protocolo.html" class="group block p-3.5 bg-surface-card hover:bg-surface-raised border border-surface-border hover:border-emerald-500/50 rounded-xl transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-xl">science</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Protocolo de Identificación</h4>
+                  <span class="text-[9px] font-mono uppercase px-1.5 py-0.2 bg-zinc-800 text-zinc-300 rounded border border-zinc-700">CIENCIA DE CAMPO</span>
+                </div>
+                <p class="text-xs text-zinc-400 mt-0.5 leading-snug">
+                  Ensayos físicos objetivos de campo: test de raya en bizcocho de porcelana, dureza Mohs y reacción ácida.
+                </p>
+                <div class="flex items-center gap-2 mt-2 font-mono text-[10px] text-zinc-500">
+                  <span class="text-emerald-400/90">Sin Fallos</span>
+                  <span>•</span>
+                  <span>Criterio Dicotómico</span>
+                  <span>•</span>
+                  <span>Validación Pericial</span>
+                </div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-zinc-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all text-lg shrink-0">arrow_forward</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Próximas Citas Destacadas (Preview Carrusel / Lista) -->
+    <section class="space-y-2.5">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-sm text-emerald-400">calendar_month</span> Agenda Destacada 2026
+        </h3>
+        <a href="ferias.html" class="text-[11px] font-mono text-emerald-400 hover:underline flex items-center gap-0.5">
+          Ver todas <span class="material-symbols-outlined text-xs">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="space-y-2">
+        <!-- Item 1: Minerval Valencia -->
+        <div class="p-3 rounded-lg bg-[#151518] border border-surface-border flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="text-center font-mono px-2 py-1 rounded bg-surface-dim border border-surface-border">
+              <span class="block text-[9px] text-zinc-500 uppercase">NOV</span>
+              <span class="text-xs font-bold text-zinc-200">14-15</span>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">MINERVAL 2026 (39ª Edición)</h5>
+              <p class="text-[11px] text-zinc-400">Hotel Valencia Center • Valencia, ES</p>
+            </div>
+          </div>
+          <a href="rutas.html" class="p-2 rounded bg-surface-raised hover:bg-surface-borderHighlight text-cyan-400 transition" title="Cómo llegar a Minerval">
+            <span class="material-symbols-outlined text-base">directions</span>
+          </a>
+        </div>
+
+        <!-- Item 2: Intermineral Zaragoza -->
+        <div class="p-3 rounded-lg bg-[#151518] border border-surface-border flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="text-center font-mono px-2 py-1 rounded bg-surface-dim border border-surface-border">
+              <span class="block text-[9px] text-zinc-500 uppercase">NOV</span>
+              <span class="text-xs font-bold text-zinc-200">28-29</span>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">INTERMINERAL Zaragoza (30ª Ed.)</h5>
+              <p class="text-[11px] text-zinc-400">Auditorio de Zaragoza • Aragón, ES</p>
+            </div>
+          </div>
+          <a href="rutas.html" class="p-2 rounded bg-surface-raised hover:bg-surface-borderHighlight text-cyan-400 transition" title="Cómo llegar a Intermineral">
+            <span class="material-symbols-outlined text-base">directions</span>
+          </a>
+        </div>
+
+        <!-- Item 3: Mineral Expo París -->
+        <div class="p-3 rounded-lg bg-[#151518] border border-surface-border flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="text-center font-mono px-2 py-1 rounded bg-surface-dim border border-surface-border">
+              <span class="block text-[9px] text-zinc-500 uppercase">DIC</span>
+              <span class="text-xs font-bold text-zinc-200">04-06</span>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Salon Minéral Expo Paris (53ᵉ)</h5>
+              <p class="text-[11px] text-zinc-400">Espace Charenton • París, Francia</p>
+            </div>
+          </div>
+          <a href="rutas.html" class="p-2 rounded bg-surface-raised hover:bg-surface-borderHighlight text-cyan-400 transition" title="Cómo llegar a París">
+            <span class="material-symbols-outlined text-base">directions</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Respaldo de Fuentes Canónicas Oficiales -->
+    <section class="p-3 rounded-lg bg-surface-dim/80 border border-surface-border text-center">
+      <p class="text-[10px] font-mono text-zinc-400">
+        BASES DE DATOS VINCULADAS: <span class="text-zinc-300">MTI Ferias</span> • <span class="text-zinc-300">Mineraly</span> • <span class="text-zinc-300">Le Comptoir Géologique</span> • <span class="text-zinc-300">EventsEye</span> • <span class="text-zinc-300">IMA</span>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar (Docked Mobile Navigation) -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#131316] border-t border-surface-border px-3 py-1.5 flex justify-around items-center max-w-md mx-auto">
+    <a href="index.html" class="flex flex-col items-center justify-center text-emerald-400 py-1 px-2.5 rounded transition">
+      <span class="material-symbols-outlined text-xl">home</span>
+      <span class="text-[10px] font-mono font-bold tracking-wider mt-0.5">INICIO</span>
+    </a>
+
+    <a href="ferias.html" class="flex flex-col items-center justify-center text-zinc-400 hover:text-emerald-400 py-1 px-2.5 rounded transition">
+      <span class="material-symbols-outlined text-xl">radar</span>
+      <span class="text-[10px] font-mono tracking-wider mt-0.5">FERIAS</span>
+    </a>
+
+    <a href="rutas.html" class="flex flex-col items-center justify-center text-zinc-400 hover:text-cyan-400 py-1 px-2.5 rounded transition">
+      <span class="material-symbols-outlined text-xl">route</span>
+      <span class="text-[10px] font-mono tracking-wider mt-0.5">RUTAS</span>
+    </a>
+
+    <a href="catalogo.html" class="flex flex-col items-center justify-center text-zinc-400 hover:text-amber-400 py-1 px-2.5 rounded transition">
+      <span class="material-symbols-outlined text-xl">menu_book</span>
+      <span class="text-[10px] font-mono tracking-wider mt-0.5">CATÁLOGO</span>
+    </a>
+
+    <a href="protocolo.html" class="flex flex-col items-center justify-center text-zinc-400 hover:text-emerald-400 py-1 px-2.5 rounded transition">
+      <span class="material-symbols-outlined text-xl">science</span>
+      <span class="text-[10px] font-mono tracking-wider mt-0.5">TESTS</span>
+    </a>
+  </nav>
+
+</body>
+</html>
