@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoScan // Rutas & Transporte a Ferias</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            'surface-carbon': '#0e0e11',
+            'surface-bedrock': '#131316',
+            'surface-charcoal': '#1b1b1e',
+            'surface-plate': '#242428',
+            'laser-emerald': '#10b981',
+            'laser-amber': '#f59e0b',
+            'laser-cyan': '#06b6d4',
+            'outline-matte': '#2c2c30',
+            'text-muted': '#9ca3af',
+            'text-high': '#f3f4f6'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface-bedrock text-text-high font-sans antialiased min-h-screen pb-24 selection:bg-laser-emerald/30 selection:text-laser-emerald">
+
+  <!-- CABECERA SUPERIOR -->
+  <header class="sticky top-0 z-40 bg-surface-bedrock/95 backdrop-blur-md border-b border-outline-matte px-4 py-3">
+    <div class="flex items-center justify-between max-w-lg mx-auto">
+      <a href="ferias.html" class="flex items-center gap-2 text-text-muted hover:text-laser-emerald transition-colors">
+        <span class="material-symbols-outlined text-xl">arrow_back</span>
+        <span class="font-mono text-xs tracking-wider uppercase">Ferias</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-laser-emerald animate-pulse"></span>
+        <h1 class="font-mono text-sm font-bold tracking-widest uppercase text-text-high">CÓMO LLEGAR // RUTAS</h1>
+      </div>
+      <a href="index.html" class="text-text-muted hover:text-laser-emerald transition-colors">
+        <span class="material-symbols-outlined text-xl">home</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-lg mx-auto px-4 pt-4 space-y-4">
+
+    <!-- RESUMEN TÁCTICO -->
+    <section class="bg-surface-charcoal rounded-xl p-4 border border-outline-matte space-y-3">
+      <div class="flex items-center justify-between font-mono text-[11px] text-laser-emerald">
+        <span class="flex items-center gap-1.5 bg-laser-emerald/10 px-2 py-0.5 rounded border border-laser-emerald/20">
+          <span class="material-symbols-outlined text-sm">route</span>
+          LOGÍSTICA & MOVILIDAD GEOLÓGICA
+        </span>
+        <span class="text-text-muted">SYS: RT-749-GEO</span>
+      </div>
+      <h2 class="text-xl font-bold text-text-high leading-tight">
+        Conexiones & Rutas a Ferias de Minerales
+      </h2>
+      <p class="text-xs text-text-muted leading-relaxed">
+        Itinerarios multimodales (Metro, Cercanías/Tren, Bus, Aeropuerto y Coche) para asistir con total comodidad a los principales certámenes geológicos ibéricos y europeos.
+      </p>
+      
+      <!-- MÉTRICAS -->
+      <div class="grid grid-cols-3 gap-2 pt-2 border-t border-outline-matte/60 text-center">
+        <div class="bg-surface-bedrock p-2 rounded-lg border border-outline-matte">
+          <div class="font-mono text-[10px] text-text-muted uppercase">Sedes</div>
+          <div class="font-mono text-sm font-bold text-laser-emerald">6 ACTIVAS</div>
+        </div>
+        <div class="bg-surface-bedrock p-2 rounded-lg border border-outline-matte">
+          <div class="font-mono text-[10px] text-text-muted uppercase">Transbordo</div>
+          <div class="font-mono text-sm font-bold text-laser-cyan">INTEGRADO</div>
+        </div>
+        <div class="bg-surface-bedrock p-2 rounded-lg border border-outline-matte">
+          <div class="font-mono text-[10px] text-text-muted uppercase">Muestras</div>
+          <div class="font-mono text-sm font-bold text-laser-amber">CALIBRADO</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTOR DE DESTINOS / SEDES -->
+    <section class="space-y-2">
+      <div class="flex items-center justify-between font-mono text-xs text-text-muted">
+        <span class="flex items-center gap-1.5 text-laser-emerald">
+          <span class="w-1.5 h-1.5 rounded-full bg-laser-emerald"></span>
+          SELECCIONAR DESTINO // ITINERARIO
+        </span>
+        <span>INDEX [6 SEDES]</span>
+      </div>
+      
+      <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar text-xs font-mono">
+        <button id="tab-madrid" onclick="mostrarRuta('madrid')" class="tab-btn px-3 py-1.5 rounded-lg border bg-laser-emerald/10 border-laser-emerald text-laser-emerald whitespace-nowrap transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span>
+          Madrid (ETSIM Ríos Rosas)
+        </button>
+        <button id="tab-barcelona" onclick="mostrarRuta('barcelona')" class="tab-btn px-3 py-1.5 rounded-lg border bg-surface-charcoal border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span>
+          Barcelona (Sants / Montjuïc)
+        </button>
+        <button id="tab-valencia" onclick="mostrarRuta('valencia')" class="tab-btn px-3 py-1.5 rounded-lg border bg-surface-charcoal border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span>
+          Valencia (Rey Don Jaime)
+        </button>
+        <button id="tab-zaragoza" onclick="mostrarRuta('zaragoza')" class="tab-btn px-3 py-1.5 rounded-lg border bg-surface-charcoal border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span>
+          Zaragoza (Palacio Congresos)
+        </button>
+        <button id="tab-paris" onclick="mostrarRuta('paris')" class="tab-btn px-3 py-1.5 rounded-lg border bg-surface-charcoal border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">flight</span>
+          París (Charenton)
+        </button>
+        <button id="tab-alsacia" onclick="mostrarRuta('alsacia')" class="tab-btn px-3 py-1.5 rounded-lg border bg-surface-charcoal border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap transition-all flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">flight</span>
+          Sainte-Marie (Alsacia)
+        </button>
+      </div>
+    </section>
+
+    <!-- FICHA 1: MADRID ETSIM -->
+    <article id="ruta-madrid" class="ruta-card bg-surface-charcoal rounded-xl border border-laser-emerald/40 p-4 space-y-4">
+      <div class="space-y-1">
+        <div class="flex items-center justify-between font-mono text-[11px]">
+          <span class="text-laser-emerald flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-laser-emerald"></span>
+            SEDE HOMOLOGADA: C/ Ríos Rosas 21, 28003 Madrid
+          </span>
+        </div>
+        <h3 class="text-lg font-bold text-text-high">Madrid ETSIM — Expominerales & Mercadillo Ríos Rosas</h3>
+        <p class="font-mono text-xs text-text-muted flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm text-laser-cyan">near_me</span>
+          COORDENADAS UTM/GPS: 40.4428° N, 3.6985° W
+        </p>
+      </div>
+
+      <a href="https://maps.google.com/?q=Escuela+Tecnica+Superior+de+Ingenieros+de+Minas+y+Energia+Madrid" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-laser-emerald hover:bg-emerald-400 text-surface-carbon font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-laser-emerald/20 transition-all active:scale-98">
+        <span class="material-symbols-outlined text-lg">explore</span>
+        ABRIR EN GOOGLE MAPS (NAVEGACIÓN GPS EN VIVO)
+        <span class="material-symbols-outlined text-sm">open_in_new</span>
+      </a>
+
+      <!-- DESGLOSE DE TRANSPORTES -->
+      <div class="space-y-2.5 pt-2 border-t border-outline-matte text-xs">
+        <!-- Metro -->
+        <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-1">
+          <div class="flex items-center justify-between font-mono font-bold">
+            <span class="flex items-center gap-1.5 text-laser-emerald">
+              <span class="material-symbols-outlined text-base">subway</span> METRO DE MADRID
+            </span>
+            <div class="flex gap-1 text-[10px]">
+              <span class="bg-sky-500/20 text-sky-400 px-1.5 py-0.5 rounded border border-sky-500/30">L1</span>
+              <span class="bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded border border-orange-500/30">L7</span>
+              <span class="bg-pink-500/20 text-pink-400 px-1.5 py-0.5 rounded border border-pink-500/30">L8</span>
+            </div>
+          </div>
+          <p class="text-text-muted text-[11px] leading-relaxed">
+            <strong class="text-text-high">Línea 1</strong> (Estación Ríos Rosas - salida a 30m) y <strong class="text-text-high">Línea 7</strong> (Estación Alonso Cano a 200m). <strong class="text-text-high">Línea 8</strong> directa desde Aeropuerto Barajas T1-T4 hasta Nuevos Ministerios (a 1 parada o 8 min a pie).
+          </p>
+        </div>
+
+        <!-- Cercanías / Tren -->
+        <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-1">
+          <div class="flex items-center justify-between font-mono font-bold">
+            <span class="flex items-center gap-1.5 text-laser-cyan">
+              <span class="material-symbols-outlined text-base">directions_railway</span> CERCANÍAS / RENFE
+            </span>
+            <span class="text-[10px] text-text-muted">600m a pie</span>
+          </div>
+          <p class="text-text-muted text-[11px] leading-relaxed">
+            <strong class="text-text-high">Estación Nuevos Ministerios</strong> (C-1, C-2, C-3, C-4, C-7, C-8, C-10). Conexión directa de alta frecuencia desde las terminales de <strong class="text-text-high">Chamartín</strong> y <strong class="text-text-high">Atocha</strong> en menos de 10 minutos.
+          </p>
+        </div>
+
+        <!-- Autobús EMT -->
+        <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-1">
+          <div class="flex items-center justify-between font-mono font-bold">
+            <span class="flex items-center gap-1.5 text-laser-amber">
+              <span class="material-symbols-outlined text-base">directions_bus</span> AUTOBÚS EMT
+            </span>
+            <span class="text-[10px] text-text-muted">Paradas 30–80m</span>
+          </div>
+          <p class="text-text-muted text-[11px] leading-relaxed">
+            Líneas regulares <strong class="text-text-high">3, 12, 37, 45, 149</strong> con parada en Calle Ríos Rosas y Santa Engracia. Líneas circulares <strong class="text-text-high">C1 y C2</strong> con enlace a Cuatro Caminos y Moncloa.
+          </p>
+        </div>
+
+        <!-- Coche & Parking -->
+        <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-1">
+          <div class="flex items-center justify-between font-mono font-bold">
+            <span class="flex items-center gap-1.5 text-emerald-400">
+              <span class="material-symbols-outlined text-base">local_parking</span> COCHE & APARCAMIENTO
+            </span>
+            <span class="text-[10px] text-laser-amber">ZBE M-30</span>
+          </div>
+          <p class="text-text-muted text-[11px] leading-relaxed">
+            Zona SER (Azul/Verde regulada). Parking público subterráneo Ríos Rosas y Parking Bretón de los Herreros. <span class="text-laser-amber">Aviso:</span> Sujeto a restricciones de Zona de Bajas Emisiones (ZBE Madrid Distrito Centro/Interior M-30).
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- FICHA 2: BARCELONA -->
+    <article id="ruta-barcelona" class="ruta-card hidden bg-surface-charcoal rounded-xl border border-outline-matte p-4 space-y-4">
+      <div class="space-y-1">
+        <span class="font-mono text-[11px] text-laser-cyan flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span> CATALUÑA // COORD: 41.3750° N, 2.1332° E
+        </span>
+        <h3 class="text-lg font-bold text-text-high">Barcelona — Expominer & Mineralexpo Sants</h3>
+        <p class="text-xs text-text-muted">Sede: Cotxeres de Sants (C/ de Sants 79) & Fira Montjuïc</p>
+      </div>
+
+      <a href="https://maps.google.com/?q=Cotxeres+de+Sants+Barcelona" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-surface-plate hover:bg-surface-bedrock border border-outline-matte text-text-high font-mono text-xs flex items-center justify-center gap-2 transition-all">
+        <span class="material-symbols-outlined text-sm">map</span> ABRIR EN GOOGLE MAPS
+        <span class="material-symbols-outlined text-xs">open_in_new</span>
+      </a>
+
+      <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-2 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="bg-laser-emerald/20 text-laser-emerald font-mono text-[10px] px-2 py-0.5 rounded">METRO L1 / L5</span>
+          <span class="text-text-high font-semibold">Plaça de Sants</span>
+        </div>
+        <p class="text-text-muted text-[11px] leading-relaxed">
+          <strong class="text-text-high">Estació Barcelona-Sants (5 min a pie)</strong>: Conexión AVE/Rodalies de alta velocidad y cercanías. Conexión rápida desde Aeropuerto El Prat con el servicio directo <strong class="text-text-high">Aerobús A1/A2</strong> hasta Plaça Espanya (Fira Montjuïc).
+        </p>
+      </div>
+    </article>
+
+    <!-- FICHA 3: VALENCIA -->
+    <article id="ruta-valencia" class="ruta-card hidden bg-surface-charcoal rounded-xl border border-outline-matte p-4 space-y-4">
+      <div class="space-y-1">
+        <span class="font-mono text-[11px] text-laser-amber flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span> COMUNIDAD VALENCIANA // COORD: 39.4623° N, 0.3541° W
+        </span>
+        <h3 class="text-lg font-bold text-text-high">Valencia — Feria Minerval</h3>
+        <p class="text-xs text-text-muted">Sede: Hotel Rey Don Jaime, Av. de Balears 2 (junto al Jardín del Turia)</p>
+      </div>
+
+      <a href="https://maps.google.com/?q=Hotel+Rey+Don+Jaime+Valencia" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-surface-plate hover:bg-surface-bedrock border border-outline-matte text-text-high font-mono text-xs flex items-center justify-center gap-2 transition-all">
+        <span class="material-symbols-outlined text-sm">map</span> ABRIR EN GOOGLE MAPS
+        <span class="material-symbols-outlined text-xs">open_in_new</span>
+      </a>
+
+      <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-2 text-xs">
+        <span class="bg-laser-amber/20 text-laser-amber font-mono text-[10px] px-2 py-0.5 rounded">METROVALENCIA + EMT</span>
+        <p class="text-text-muted text-[11px] leading-relaxed">
+          <strong class="text-text-high">Metrovalencia:</strong> Línea 5 y Línea 7 en <strong class="text-text-high">Amistat o Aragó</strong> (12 min a pie). Red de autobuses <strong class="text-text-high">EMT Líneas 19, 35, 40, 95</strong> directos desde la Estación del Norte / Joaquín Sorolla (AVE).
+        </p>
+      </div>
+    </article>
+
+    <!-- FICHA 4: ZARAGOZA -->
+    <article id="ruta-zaragoza" class="ruta-card hidden bg-surface-charcoal rounded-xl border border-outline-matte p-4 space-y-4">
+      <div class="space-y-1">
+        <span class="font-mono text-[11px] text-laser-emerald flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">location_on</span> ARAGÓN // COORD: 41.6685° N, 0.9042° W
+        </span>
+        <h3 class="text-lg font-bold text-text-high">Zaragoza — Intermineral (Palacio de Congresos)</h3>
+        <p class="text-xs text-text-muted">Sede: Plaza Lucas Miret Rodríguez 1, Recinto Expo</p>
+      </div>
+
+      <a href="https://maps.google.com/?q=Palacio+de+Congresos+de+Zaragoza" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-surface-plate hover:bg-surface-bedrock border border-outline-matte text-text-high font-mono text-xs flex items-center justify-center gap-2 transition-all">
+        <span class="material-symbols-outlined text-sm">map</span> ABRIR EN GOOGLE MAPS
+        <span class="material-symbols-outlined text-xs">open_in_new</span>
+      </a>
+
+      <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-2 text-xs">
+        <span class="bg-laser-emerald/20 text-laser-emerald font-mono text-[10px] px-2 py-0.5 rounded">AVE DELICIAS + BUS DIRECTO</span>
+        <p class="text-text-muted text-[11px] leading-relaxed">
+          A solo 10 minutos de la <strong class="text-text-high">Estación Central de Delicias (AVE y Cercanías)</strong>. Líneas de autobús urbano <strong class="text-text-high">Ci1, Ci2</strong> y <strong class="text-text-high">Línea 23</strong> con parada en el Recinto Expo.
+        </p>
+      </div>
+    </article>
+
+    <!-- FICHA 5: PARÍS -->
+    <article id="ruta-paris" class="ruta-card hidden bg-surface-charcoal rounded-xl border border-outline-matte p-4 space-y-4">
+      <div class="space-y-1">
+        <span class="font-mono text-[11px] text-laser-cyan flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">flight</span> FRANCIA // COORD: 48.8286° N, 2.4042° E
+        </span>
+        <h3 class="text-lg font-bold text-text-high">París — Salon Minéral Expo París</h3>
+        <p class="text-xs text-text-muted">Sede: Espace Charenton (327 Rue de Charenton, París 12e)</p>
+      </div>
+
+      <a href="https://maps.google.com/?q=Espace+Charenton+Paris" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-surface-plate hover:bg-surface-bedrock border border-outline-matte text-text-high font-mono text-xs flex items-center justify-center gap-2 transition-all">
+        <span class="material-symbols-outlined text-sm">map</span> ABRIR EN GOOGLE MAPS
+        <span class="material-symbols-outlined text-xs">open_in_new</span>
+      </a>
+
+      <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-2 text-xs">
+        <span class="bg-laser-cyan/20 text-laser-cyan font-mono text-[10px] px-2 py-0.5 rounded">MÉTRO LÍNEA 8 & TRAM 3A</span>
+        <p class="text-text-muted text-[11px] leading-relaxed">
+          Estación de Metro <strong class="text-text-high">Porte de Charenton</strong> (Línea 8 directa desde Opéra, Bastille y République) o estación <strong class="text-text-high">Liberté</strong>. Tranvía T3a. Conexión rápida desde Gare de Lyon.
+        </p>
+      </div>
+    </article>
+
+    <!-- FICHA 6: SAINTE-MARIE-AUX-MINES -->
+    <article id="ruta-alsacia" class="ruta-card hidden bg-surface-charcoal rounded-xl border border-outline-matte p-4 space-y-4">
+      <div class="space-y-1">
+        <span class="font-mono text-[11px] text-laser-emerald flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">flight</span> FRANCIA // COORD: 48.2464° N, 7.1842° E
+        </span>
+        <h3 class="text-lg font-bold text-text-high">Sainte-Marie-aux-Mines — Mineral & Gem (Alsacia)</h3>
+        <p class="text-xs text-text-muted">Sede: Val d'Argent Expo (Haut-Rhin, Francia)</p>
+      </div>
+
+      <a href="https://maps.google.com/?q=Val+d'Argent+Expo+Sainte-Marie-aux-Mines" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-surface-plate hover:bg-surface-bedrock border border-outline-matte text-text-high font-mono text-xs flex items-center justify-center gap-2 transition-all">
+        <span class="material-symbols-outlined text-sm">map</span> ABRIR EN GOOGLE MAPS
+        <span class="material-symbols-outlined text-xs">open_in_new</span>
+      </a>
+
+      <div class="bg-surface-bedrock p-3 rounded-lg border border-outline-matte space-y-2 text-xs">
+        <span class="bg-laser-emerald/20 text-laser-emerald font-mono text-[10px] px-2 py-0.5 rounded">SHUTTLES TGV + AEROPUERTOS</span>
+        <p class="text-text-muted text-[11px] leading-relaxed">
+          <strong class="text-text-high">Shuttles Oficiales Gratuitos</strong> continuos desde las estaciones TGV de <strong class="text-text-high">Sélestat</strong> y <strong class="text-text-high">Colmar</strong>. Terminales aéreas recomendadas: Aeropuerto de Basilea-Mulhouse (EuroAirport MLH/BSL) a 50 min o Estrasburgo (SXB).
+        </p>
+      </div>
+    </article>
+
+    <!-- PROTOCOLO DE TRANSPORTE DE MUESTRAS -->
+    <section class="bg-surface-charcoal rounded-xl border border-laser-amber/40 p-4 space-y-3">
+      <div class="flex items-center justify-between font-mono text-xs text-laser-amber">
+        <span class="flex items-center gap-1.5 font-bold">
+          <span class="material-symbols-outlined text-base">luggage</span>
+          Protocolo de Transporte de Muestras & Minerales
+        </span>
+        <span class="text-[10px] bg-laser-amber/10 px-2 py-0.5 rounded border border-laser-amber/20">AVISO TÉCNICO</span>
+      </div>
+      <div class="space-y-2.5 text-xs text-text-muted">
+        <div class="flex gap-2.5 items-start">
+          <span class="font-mono font-bold text-laser-amber text-xs">01</span>
+          <p class="leading-relaxed">
+            <strong class="text-text-high">Chasis Rodado Reforzado:</strong> Para piezas de gran densidad o geodas de cuarzo y calcita, usa maleta rígida con espuma de poliuretano troquelada para amortiguar vibraciones en pavimentos urbanos.
+          </p>
+        </div>
+        <div class="flex gap-2.5 items-start">
+          <span class="font-mono font-bold text-laser-amber text-xs">02</span>
+          <p class="leading-relaxed">
+            <strong class="text-text-high">Inspección de Seguridad Aérea (AENA/TSA):</strong> Lleva minerales metálicos densos (galena, pirita, casiterita) siempre con la etiqueta identificativa de feria y recibo para agilizar la lectura de densidad radioscópica en los arcos de control.
+          </p>
+        </div>
+        <div class="flex gap-2.5 items-start">
+          <span class="font-mono font-bold text-laser-amber text-xs">03</span>
+          <p class="leading-relaxed">
+            <strong class="text-text-high">Embalaje de Cristales Aciculares:</strong> Jamás uses algodón suelto ni papel húmedo sobre zeolitas o vanadinitas; utiliza cajas de micromontura con masilla no residual neutra.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BARRA DE NAVEGACIÓN INFERIOR MÓVIL -->
+  <nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-bedrock/95 backdrop-blur-md border-t border-outline-matte flex justify-around items-center px-4 py-2">
+    <a href="index.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
+      <span class="material-symbols-outlined text-xl">dashboard</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider">Inicio</span>
+    </a>
+    <a href="ferias.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
+      <span class="material-symbols-outlined text-xl">calendar_month</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider">Ferias</span>
+    </a>
+    <a href="rutas.html" class="flex flex-col items-center gap-1 text-laser-emerald border-t-2 border-laser-emerald pt-0.5 pb-1">
+      <span class="material-symbols-outlined text-xl">route</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider font-bold">Rutas</span>
+    </a>
+    <a href="scanner.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
+      <span class="material-symbols-outlined text-xl">view_in_ar</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider">Scanner</span>
+    </a>
+    <a href="catalogo.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
+      <span class="material-symbols-outlined text-xl">menu_book</span>
+      <span class="font-mono text-[10px] uppercase tracking-wider">Catálogo</span>
+    </a>
+  </nav>
+
+  <!-- SCRIPT DE CONTROL DE INTERACCIÓN -->
+  <script>
+    function mostrarRuta(ciudad) {
+      // Ocultar todas las fichas
+      const cards = document.querySelectorAll('.ruta-card');
+      cards.forEach(card => card.classList.add('hidden'));
+
+      // Desactivar todos los botones de pestaña
+      const btns = document.querySelectorAll('.tab-btn');
+      btns.forEach(btn => {
+        btn.classList.remove('bg-laser-emerald/10', 'border-laser-emerald', 'text-laser-emerald');
+        btn.classList.add('bg-surface-charcoal', 'border-outline-matte', 'text-text-muted');
+      });
+
+      // Mostrar la ficha seleccionada
+      const targetCard = document.getElementById('ruta-' + ciudad);
+      if (targetCard) {
+        targetCard.classList.remove('hidden');
+      }
+
+      // Activar el botón de la pestaña seleccionada
+      const targetBtn = document.getElementById('tab-' + ciudad);
+      if (targetBtn) {
+        targetBtn.classList.add('bg-laser-emerald/10', 'border-laser-emerald', 'text-laser-emerald');
+        targetBtn.classList.remove('bg-surface-charcoal', 'border-outline-matte', 'text-text-muted');
+      }
+    }
+  </script>
+</body>
+</html>
