@@ -133,15 +133,19 @@
 </div>
 </div>
 </div>
-<!-- BOTONERA DE DISPARO Y ADQUISICIÓN -->
+<!-- BOTONERA DE DISPARO Y ADQUISICIÓN RECTIFICADA (CÁMARA VS GALERÍA) -->
 <div class="grid grid-cols-3 gap-2">
+<!-- Botón Cámara -->
 <button class="col-span-2 bg-laser-emerald hover:bg-emerald-400 text-surface-carbon font-mono font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-laser-emerald/20" onclick="capturarFoto()">
 <span class="material-symbols-outlined text-lg">photo_camera</span>
 <span>HACER FOTO AL MINERAL</span>
 </button>
-<!-- Input invisible para invocar la cámara del smartphone -->
+<!-- Input específico para CÁMARA (con capture) -->
 <input accept="image/*" capture="environment" class="hidden" id="camera-input" onchange="cargarFotoUsuario(event)" type="file"/>
-<button class="bg-surface-charcoal hover:bg-surface-plate border border-outline-matte text-text-high font-mono text-xs py-3 px-2 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-colors" onclick="document.getElementById('camera-input').click()">
+<!-- Input específico para GALERÍA (sin capture) -->
+<input accept="image/*" class="hidden" id="gallery-input" onchange="cargarFotoUsuario(event)" type="file"/>
+<!-- Botón Subir Img abre exclusivamente la galería / carrete -->
+<button class="bg-surface-charcoal hover:bg-surface-plate border border-outline-matte text-text-high font-mono text-xs py-3 px-2 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-colors" onclick="document.getElementById('gallery-input').click()">
 <span class="material-symbols-outlined text-base text-laser-cyan">upload_file</span>
 <span class="text-[10px]">SUBIR IMG</span>
 </button>
@@ -298,7 +302,7 @@
 <span class="font-mono text-[10px] uppercase tracking-wider">Catálogo</span>
 </a>
 </nav>
-<!-- LÓGICA DE VISIÓN ÓPTICA, CÁMARA Y MOTOR DE COTEJO WEB -->
+<!-- LÓGICA DE VISIÓN ÓPTICA, CÁMARA Y MOTOR DE COTEJE WEB -->
 <script>
     const baseDatos = {
       rodocrosita: {
@@ -352,7 +356,7 @@
     };
 
     function capturarFoto() {
-      // Intentar abrir el selector de cámara nativo
+      // Dispara el selector nativo con capture="environment" (cámara directa)
       document.getElementById('camera-input').click();
     }
 
