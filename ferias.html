@@ -3,601 +3,585 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GeoScan - Ferias & Mercados Geológicos</title>
+  <title>ferias.html - Código Fuente Oficial por Bloques de Países</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Space Grotesk', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
           colors: {
-            'surface-carbon': '#0e0e11',
-            'surface-bedrock': '#131316',
-            'surface-charcoal': '#1b1b1e',
-            'surface-plate': '#242428',
-            'laser-emerald': '#10b981',
-            'laser-amber': '#f59e0b',
-            'laser-cyan': '#06b6d4',
-            'outline-matte': '#2c2c30',
-            'text-muted': '#9ca3af',
-            'text-high': '#f3f4f6'
+            surface: {
+              bedrock: '#0e0e11',
+              charcoal: '#131316',
+              matte: '#1b1b1f',
+              plate: '#242429',
+              border: '#2e2e36'
+            },
+            emerald: {
+              laser: '#10b981',
+              glow: '#059669'
+            }
+          },
+          fontFamily: {
+            grotesk: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-surface-bedrock text-text-high font-sans antialiased min-h-screen pb-28 selection:bg-laser-emerald/30 selection:text-laser-emerald">
-
-  <!-- CABECERA TÁCTICA -->
-  <header class="sticky top-0 z-40 bg-surface-bedrock/95 backdrop-blur-md border-b border-outline-matte px-4 py-3">
-    <div class="flex items-center justify-between max-w-md mx-auto">
-      <a href="index.html" class="flex items-center gap-1.5 text-text-muted hover:text-laser-emerald transition-colors">
-        <span class="material-symbols-outlined text-xl">arrow_back</span>
-        <span class="font-mono text-xs tracking-wider uppercase">Inicio</span>
-      </a>
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-laser-emerald animate-pulse"></span>
-        <h1 class="font-mono text-sm font-bold tracking-wider text-text-high uppercase">RADAR DE FERIAS</h1>
+<body class="bg-[#0e0e11] text-zinc-200 font-grotesk min-h-screen p-4 md:p-8">
+  <div class="max-w-6xl mx-auto space-y-6">
+    <!-- Header -->
+    <header class="bg-[#131316] border border-[#2e2e36] rounded-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono tracking-widest uppercase mb-1">
+          <span class="material-symbols-outlined text-sm">terminal</span>
+          <span>GeoScan • Repositorio GitHub</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight">ferias.html • Bloques Geográficos</h1>
+        <p class="text-sm text-zinc-400 mt-1">Copia este código y pégalo íntegramente en tu archivo <code class="text-emerald-400 bg-zinc-900 px-1.5 py-0.5 rounded font-mono">ferias.html</code> de GitHub.</p>
       </div>
-      <a href="rutas.html" class="text-laser-emerald hover:text-emerald-400 transition-colors flex items-center gap-1 font-mono text-xs">
-        <span class="material-symbols-outlined text-lg">route</span>
-        <span>RUTAS</span>
-      </a>
-    </div>
-  </header>
+      <button onclick="copiarCodigo()" class="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-5 py-3 rounded-xl transition-all shadow-lg shadow-emerald-950/40 active:scale-95">
+        <span class="material-symbols-outlined text-xl">content_copy</span>
+        <span id="btnText">Copiar Código Completo</span>
+      </button>
+    </header>
 
-  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
-
-    <!-- PANEL DE CONTROL & BUSCADOR INTERACTIVO -->
-    <section class="bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-3">
-      <div class="flex items-center justify-between text-xs font-mono">
-        <span class="text-laser-emerald flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-sm">radar</span>
-          CENSO GEOLÓGICO 2026 / 2027
-        </span>
-        <span id="contador-eventos" class="text-text-muted bg-surface-bedrock px-2 py-0.5 rounded border border-outline-matte">
-          14 FERIAS ACTIVAS
-        </span>
+    <!-- Source Code View -->
+    <div class="bg-[#131316] border border-[#2e2e36] rounded-2xl overflow-hidden shadow-2xl">
+      <div class="bg-[#1b1b1f] px-6 py-3 border-b border-[#2e2e36] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+          <span class="ml-2 font-mono text-xs text-zinc-400">ferias.html (100% autónomo para GitHub Pages)</span>
+        </div>
+        <span class="text-xs text-emerald-400 font-mono">UTF-8 • HTML5 • Tailwind CDN</span>
       </div>
 
-      <!-- Buscador en tiempo real -->
-      <div class="relative">
-        <span class="material-symbols-outlined absolute left-3 top-2.5 text-text-muted text-lg">search</span>
-        <input 
-          type="text" 
-          id="input-buscador" 
-          placeholder="Buscar por ciudad, recinto o mineral..." 
-          oninput="filtrarFerias()"
-          class="w-full bg-surface-bedrock border border-outline-matte rounded-lg pl-9 pr-8 py-2 text-xs font-mono text-text-high placeholder-text-muted/60 focus:outline-none focus:border-laser-emerald transition-colors"
-        />
-        <button id="btn-limpiar" onclick="limpiarBuscador()" class="hidden absolute right-2.5 top-2.5 text-text-muted hover:text-text-high">
-          <span class="material-symbols-outlined text-sm">close</span>
-        </button>
-      </div>
+      <textarea id="rawCode" readonly class="w-full h-[650px] p-6 bg-[#0e0e11] text-emerald-400/90 font-mono text-xs md:text-sm leading-relaxed outline-none resize-none selection:bg-emerald-500 selection:text-black">&lt;!DOCTYPE html&gt;
+&lt;html lang="es" class="dark"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;GeoScan - Radar Geomineral de Ferias&lt;/title&gt;
+  &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" /&gt;
+  &lt;script&gt;
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: {
+              bedrock: '#0e0e11',
+              charcoal: '#131316',
+              matte: '#1b1b1f',
+              plate: '#242429',
+              border: '#2e2e36'
+            },
+            emerald: {
+              laser: '#10b981',
+              glow: '#059669'
+            }
+          },
+          fontFamily: {
+            grotesk: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  &lt;/script&gt;
+  &lt;style&gt;
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class="bg-[#0e0e11] text-zinc-200 font-grotesk min-h-screen pb-24"&gt;
 
-      <!-- Filtros por Territorio / Región -->
-      <div class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[11px] font-mono">
-        <button onclick="filtrarRegion('todos', this)" class="filtro-btn px-2.5 py-1 rounded border bg-laser-emerald/10 border-laser-emerald text-laser-emerald whitespace-nowrap font-bold">
-          Todas
-        </button>
-        <button onclick="filtrarRegion('espana', this)" class="filtro-btn px-2.5 py-1 rounded border bg-surface-bedrock border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap">
-          España (MTI)
-        </button>
-        <button onclick="filtrarRegion('francia', this)" class="filtro-btn px-2.5 py-1 rounded border bg-surface-bedrock border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap">
-          Francia
-        </button>
-        <button onclick="filtrarRegion('mundial', this)" class="filtro-btn px-2.5 py-1 rounded border bg-surface-bedrock border-outline-matte text-text-muted hover:text-text-high whitespace-nowrap">
-          Grandes Mundiales
-        </button>
-      </div>
-    </section>
+  &lt;!-- Barra Superior --&gt;
+  &lt;header class="sticky top-0 z-40 bg-[#131316]/95 backdrop-blur-md border-b border-[#2e2e36] px-4 py-3"&gt;
+    &lt;div class="max-w-4xl mx-auto flex items-center justify-between"&gt;
+      &lt;div class="flex items-center gap-3"&gt;
+        &lt;a href="index.html" class="p-2 -ml-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800/60 active:scale-95 transition-all"&gt;
+          &lt;span class="material-symbols-outlined text-2xl"&gt;arrow_back&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;div&gt;
+          &lt;div class="flex items-center gap-1.5"&gt;
+            &lt;span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"&gt;&lt;/span&gt;
+            &lt;span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase"&gt;Radar Activo • 2026/2027&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;h1 class="text-base font-bold text-white tracking-tight leading-tight"&gt;Ferias y Salones Geológicos&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;a href="rutas.html" class="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/20 active:scale-95 transition-all"&gt;
+        &lt;span class="material-symbols-outlined text-sm"&gt;route&lt;/span&gt;
+        &lt;span&gt;Rutas&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
 
-    <!-- ACCESO RÁPIDO A CÓMO LLEGAR -->
-    <a href="rutas.html" class="flex items-center justify-between p-3 rounded-xl bg-laser-emerald/10 border border-laser-emerald/30 hover:border-laser-emerald transition-all group">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-laser-emerald text-surface-carbon flex items-center justify-center font-bold">
-          <span class="material-symbols-outlined text-lg">navigation</span>
-        </div>
-        <div>
-          <div class="text-xs font-bold text-laser-emerald flex items-center gap-1">
-            CÓMO LLEGAR // RUTAS & TRANSPORTE
-            <span class="material-symbols-outlined text-xs">open_in_new</span>
-          </div>
-          <div class="text-[11px] text-text-muted">Metro, Cercanías, Bus y GPS a los recintos feriales</div>
-        </div>
-      </div>
-      <span class="material-symbols-outlined text-laser-emerald group-hover:translate-x-0.5 transition-transform text-lg">arrow_forward</span>
-    </a>
+  &lt;main class="max-w-4xl mx-auto px-4 py-4 space-y-4"&gt;
 
-    <!-- LISTADO DE FERIAS & CONVOCATORIAS -->
-    <section id="contenedor-ferias" class="space-y-3">
+    &lt;!-- Buscador en Vivo --&gt;
+    &lt;div class="relative"&gt;
+      &lt;span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 text-lg"&gt;search&lt;/span&gt;
+      &lt;input id="searchInput" type="text" oninput="filtrarFerias()" placeholder="Buscar por feria, ciudad, país o mineral..." class="w-full bg-[#131316] border border-[#2e2e36] rounded-xl pl-10 pr-10 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/60 font-grotesk transition-all"&gt;
+      &lt;button id="clearBtn" onclick="limpiarBusqueda()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"&gt;
+        &lt;span class="material-symbols-outlined text-base"&gt;cancel&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
 
-      <!-- FERIA 1: EXPOMINER & SANTS BARCELONA -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="espana" data-keywords="barcelona expominer sants fira montjuic pirita navajun cataluña noviembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-emerald/10 text-laser-emerald px-2 py-0.5 rounded border border-laser-emerald/30 font-bold">
-            ESPAÑA // CATALUÑA
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            6, 7 y 8 NOV 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Expominer Barcelona & Mineralexpo Sants (45ª Ed.)</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Cotxeres de Sants & Fira Montjuïc (Barcelona)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Esp: Pirita Navajún, Celestina</span>
-          <a href="rutas.html" class="text-laser-emerald hover:underline text-[11px] flex items-center gap-1">
-            <span>Ruta GPS</span>
-            <span class="material-symbols-outlined text-xs">arrow_forward</span>
-          </a>
-        </div>
-      </article>
+    &lt;!-- Selector de Bloques de Países --&gt;
+    &lt;div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs font-medium"&gt;
+      &lt;button onclick="seleccionarBloque('todos')" class="bloque-btn active bg-emerald-500 text-black font-semibold px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-all" data-bloque="todos"&gt;Todos&lt;/button&gt;
+      &lt;button onclick="seleccionarBloque('espana')" class="bloque-btn bg-[#131316] text-zinc-400 border border-[#2e2e36] px-3.5 py-1.5 rounded-lg whitespace-nowrap hover:text-white hover:border-zinc-500 transition-all" data-bloque="espana"&gt;🇪🇸 España&lt;/button&gt;
+      &lt;button onclick="seleccionarBloque('francia')" class="bloque-btn bg-[#131316] text-zinc-400 border border-[#2e2e36] px-3.5 py-1.5 rounded-lg whitespace-nowrap hover:text-white hover:border-zinc-500 transition-all" data-bloque="francia"&gt;🇫🇷 Francia&lt;/button&gt;
+      &lt;button onclick="seleccionarBloque('belgica')" class="bloque-btn bg-[#131316] text-zinc-400 border border-[#2e2e36] px-3.5 py-1.5 rounded-lg whitespace-nowrap hover:text-white hover:border-zinc-500 transition-all" data-bloque="belgica"&gt;🇧🇪 Bélgica&lt;/button&gt;
+      &lt;button onclick="seleccionarBloque('europa')" class="bloque-btn bg-[#131316] text-zinc-400 border border-[#2e2e36] px-3.5 py-1.5 rounded-lg whitespace-nowrap hover:text-white hover:border-zinc-500 transition-all" data-bloque="europa"&gt;🇪🇺 Europa&lt;/button&gt;
+      &lt;button onclick="seleccionarBloque('mundial')" class="bloque-btn bg-[#131316] text-zinc-400 border border-[#2e2e36] px-3.5 py-1.5 rounded-lg whitespace-nowrap hover:text-white hover:border-zinc-500 transition-all" data-bloque="mundial"&gt;🌎 Mundial&lt;/button&gt;
+    &lt;/div&gt;
 
-      <!-- FERIA 2: EXPOMINERALES MADRID ETSIM -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="espana" data-keywords="madrid expominerales etsim rios rosas minas esfalerita aliva marzo domingo mensual">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-emerald/10 text-laser-emerald px-2 py-0.5 rounded border border-laser-emerald/30 font-bold">
-            ESPAÑA // MADRID
-          </span>
-          <span class="text-laser-cyan flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">event_repeat</span>
-            1º DOMINGO / MES + MARZO 2027
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Expominerales Madrid (ETSIM Minas) & Mercadillo</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            C/ Ríos Rosas 21 (Escuela de Minas, Madrid)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-laser-emerald font-bold">ENTRADA GRATUITA</span>
-          <a href="rutas.html" class="text-laser-emerald hover:underline text-[11px] flex items-center gap-1">
-            <span>Ruta GPS</span>
-            <span class="material-symbols-outlined text-xs">arrow_forward</span>
-          </a>
-        </div>
-      </article>
+    &lt;!-- Contador de eventos --&gt;
+    &lt;div class="flex items-center justify-between text-xs text-zinc-400 font-mono px-1"&gt;
+      &lt;span&gt;MOSTRANDO: &lt;strong id="contadorEventos" class="text-emerald-400 font-bold"&gt;0&lt;/strong&gt; CONVOCATORIAS&lt;/span&gt;
+      &lt;span class="text-zinc-500"&gt;Bases: MTI • Elithos • Mineraly • EventsEye&lt;/span&gt;
+    &lt;/div&gt;
 
-      <!-- FERIA 3: INTERMINERAL ZARAGOZA & MINERVAL VALENCIA -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="espana" data-keywords="zaragoza valencia intermineral minerval aragon rey don jaime aragonito trilobites noviembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-emerald/10 text-laser-emerald px-2 py-0.5 rounded border border-laser-emerald/30 font-bold">
-            ESPAÑA // ARAGÓN & LEVANTE
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            14-15 & 28-29 NOV 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Intermineral Zaragoza (30ª) & Minerval Valencia (39ª)</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Palacio Congresos (ZGZ) / Hotel Rey Don Jaime (VLC)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Esp: Aragonito Molina, Fósiles</span>
-          <a href="rutas.html" class="text-laser-emerald hover:underline text-[11px] flex items-center gap-1">
-            <span>Ruta GPS</span>
-            <span class="material-symbols-outlined text-xs">arrow_forward</span>
-          </a>
-        </div>
-      </article>
+    &lt;!-- Lista de Eventos --&gt;
+    &lt;div id="listaFerias" class="space-y-3"&gt;
+      &lt;!-- Se generan dinámicamente con JavaScript --&gt;
+    &lt;/div&gt;
 
-      <!-- FERIA 4: URRETXU URRELUR -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="espana" data-keywords="urretxu urrelur guipuzcoa euskadi pais vasco ederrena plomo zinc octubre noviembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-emerald/10 text-laser-emerald px-2 py-0.5 rounded border border-laser-emerald/30 font-bold">
-            ESPAÑA // PAÍS VASCO
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            30 OCT - 1 NOV 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">38ª Feria de Minerales de Urretxu - Urrelur</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Frontón Ederrena (Urretxu, Guipúzcoa)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Yacimientos vascos y pirineos</span>
-          <span class="text-text-muted">Censo MTI</span>
-        </div>
-      </article>
+  &lt;/main&gt;
 
-      <!-- FERIA 5: ALICANTE MIMINAL -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="espana" data-keywords="alicante moralet miminal intercambio fosiles levante octubre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-emerald/10 text-laser-emerald px-2 py-0.5 rounded border border-laser-emerald/30 font-bold">
-            ESPAÑA // C. VALENCIANA
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            25 OCT 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">XIV Mesa de Intercambio de Minerales (MIMINAL)</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Sede Moralet (Alicante)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Intercambio & Venta directa</span>
-          <span class="text-text-muted">Censo MTI</span>
-        </div>
-      </article>
+  &lt;!-- Barra de Navegación Inferior Móvil Unificada --&gt;
+  &lt;nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#131316]/95 backdrop-blur-lg border-t border-[#2e2e36] py-2 px-4"&gt;
+    &lt;div class="max-w-md mx-auto grid grid-cols-4 gap-1 text-center"&gt;
+      &lt;a href="index.html" class="flex flex-col items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors py-1"&gt;
+        &lt;span class="material-symbols-outlined text-xl"&gt;home&lt;/span&gt;
+        &lt;span class="text-[10px] tracking-wider uppercase font-medium"&gt;Inicio&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;a href="ferias.html" class="flex flex-col items-center gap-1 text-emerald-400 bg-emerald-500/10 rounded-lg py-1 border border-emerald-500/20"&gt;
+        &lt;span class="material-symbols-outlined text-xl"&gt;event&lt;/span&gt;
+        &lt;span class="text-[10px] tracking-wider uppercase font-bold"&gt;Ferias&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;a href="rutas.html" class="flex flex-col items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors py-1"&gt;
+        &lt;span class="material-symbols-outlined text-xl"&gt;route&lt;/span&gt;
+        &lt;span class="text-[10px] tracking-wider uppercase font-medium"&gt;Rutas&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;a href="catalogo.html" class="flex flex-col items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors py-1"&gt;
+        &lt;span class="material-symbols-outlined text-xl"&gt;menu_book&lt;/span&gt;
+        &lt;span class="text-[10px] tracking-wider uppercase font-medium"&gt;Guía&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
 
-      <!-- FERIA 6: VIGO -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="espana" data-keywords="vigo galicia estacion maritima pontevedra wolframio cuarzo octubre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-emerald/10 text-laser-emerald px-2 py-0.5 rounded border border-laser-emerald/30 font-bold">
-            ESPAÑA // GALICIA
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            9 - 12 OCT 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">III Feira de Minerais de Vigo</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Estación Marítima de Vigo (Pontevedra)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Colectores ibéricos y atlánticos</span>
-          <span class="text-text-muted">4 Días</span>
-        </div>
-      </article>
+  &lt;script&gt;
+    // Base de datos canónica estructurada por bloques de países
+    const feriasData = [
+      // ESPAÑA (MTI, AnnaPiedra, Mineraly.es)
+      {
+        id: "esp-1",
+        bloque: "espana",
+        pais: "España",
+        flag: "🇪🇸",
+        titulo: "Intermineral Zaragoza 2026",
+        edicion: "30ª Edición",
+        fecha: "28 y 29 de noviembre de 2026",
+        ciudad: "Zaragoza, Aragón",
+        lugar: "Auditorio de Zaragoza",
+        afluencia: "Alta • 4.5/5",
+        especialidad: "Aragonitos, Cuarzos y Fósiles Ibéricos",
+        origen: "MTI Ferias",
+        lat: 41.6408, lon: -0.9015
+      },
+      {
+        id: "esp-2",
+        bloque: "espana",
+        pais: "España",
+        flag: "🇪🇸",
+        titulo: "Minerval Valencia 2026",
+        edicion: "39ª Edición",
+        fecha: "14 y 15 de noviembre de 2026",
+        ciudad: "Valencia, Comunidad Valenciana",
+        lugar: "Hotel Conqueridor / Salas Centrales",
+        afluencia: "Referencia Levante • 4.7/5",
+        especialidad: "Minerales del Arco Mediterráneo",
+        origen: "MTI Ferias / AnnaPiedra",
+        lat: 39.4702, lon: -0.3768
+      },
+      {
+        id: "esp-3",
+        bloque: "espana",
+        pais: "España",
+        flag: "🇪🇸",
+        titulo: "Mineralexpo Barcelona-Sants (Otoño)",
+        edicion: "Edición Otoño 2026",
+        fecha: "6, 7 y 8 de noviembre de 2026",
+        ciudad: "Barcelona, Cataluña",
+        lugar: "Cocheras de Sants",
+        afluencia: "Muy Alta • 4.8/5",
+        especialidad: "Sistemática Ibérica, Piritas y Gemas",
+        origen: "MTI Ferias / GMC",
+        lat: 41.3751, lon: 2.1332
+      },
+      {
+        id: "esp-4",
+        bloque: "espana",
+        pais: "España",
+        flag: "🇪🇸",
+        titulo: "Urretxu Mineralexpo 2026",
+        edicion: "38ª Edición",
+        fecha: "30, 31 oct. y 1 nov. 2026",
+        ciudad: "Urretxu, Guipúzcoa",
+        lugar: "Polideportivo Ederrena / Urrelur",
+        afluencia: "Referencia Norte • 4.6/5",
+        especialidad: "Mineralogía del Cantábrico y Pirineos",
+        origen: "MTI Ferias",
+        lat: 43.0906, lon: -2.3168
+      },
+      {
+        id: "esp-5",
+        bloque: "espana",
+        pais: "España",
+        flag: "🇪🇸",
+        titulo: "Expominerales Madrid ETSIM",
+        edicion: "45ª Edición",
+        fecha: "Primavera 2027 (Marzo)",
+        ciudad: "Madrid",
+        lugar: "Escuela Técnica Superior de Ingenieros de Minas",
+        afluencia: "Máxima • 5.0/5",
+        especialidad: "Patrimonio Histórico y Divulgación",
+        origen: "ETSIM / AnnaPiedra",
+        lat: 40.4398, lon: -3.6994
+      },
 
-      <!-- FERIA 7: PARIS MINERAL EXPO -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="francia" data-keywords="paris charenton francia mineral expo gemas meteoritos diciembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-cyan/10 text-laser-cyan px-2 py-0.5 rounded border border-laser-cyan/30 font-bold">
-            FRANCIA // PARÍS
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            4 - 6 DIC 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Mineral Expo París — 53ª Edición</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Espace Charenton (327 Rue de Charenton, París 12e)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Métro Porte de Charenton (L8)</span>
-          <a href="rutas.html" class="text-laser-emerald hover:underline text-[11px] flex items-center gap-1">
-            <span>Ruta GPS</span>
-            <span class="material-symbols-outlined text-xs">arrow_forward</span>
-          </a>
-        </div>
-      </article>
+      // FRANCIA (Le Comptoir Géologique, Mineraly.fr, Elithos)
+      {
+        id: "fra-1",
+        bloque: "francia",
+        pais: "Francia",
+        flag: "🇫🇷",
+        titulo: "Mineral & Gem Sainte-Marie-aux-Mines",
+        edicion: "61ª Edición Mundial",
+        fecha: "24 al 28 de junio de 2026",
+        ciudad: "Sainte-Marie-aux-Mines, Alsacia",
+        lugar: "Val d'Argent Expo",
+        afluencia: "+35.000 Visitantes • Top 2 Mundial",
+        especialidad: "Pegmatitas, Piezas de Museo y Gemas",
+        origen: "Elithos / EventsEye",
+        lat: 48.2464, lon: 7.1843
+      },
+      {
+        id: "fra-2",
+        bloque: "francia",
+        pais: "Francia",
+        flag: "🇫🇷",
+        titulo: "Salon Minéral Expo Paris",
+        edicion: "53ª Edición Oficial",
+        fecha: "4 al 6 de diciembre de 2026",
+        ciudad: "París",
+        lugar: "Espace Charenton (75012)",
+        afluencia: "Top Capital • 4.8/5",
+        especialidad: "Gemas Finas, Joyería y Meteoritos",
+        origen: "Mineraly.fr / Le Comptoir",
+        lat: 48.8322, lon: 2.4042
+      },
+      {
+        id: "fra-3",
+        bloque: "francia",
+        pais: "Francia",
+        flag: "🇫🇷",
+        titulo: "Salon de Toulouse Minéraux & Gemmes",
+        edicion: "Convocatoria Otoño",
+        fecha: "7 y 8 de noviembre de 2026",
+        ciudad: "Toulouse, Occitania",
+        lugar: "Hall 8 - Allée Fernand Jourdant",
+        afluencia: "Referencia Sudoeste • 4.5/5",
+        especialidad: "Fluoritas Francesas y Pirineos",
+        origen: "Le Comptoir Géologique",
+        lat: 43.5857, lon: 1.4363
+      },
+      {
+        id: "fra-4",
+        bloque: "francia",
+        pais: "Francia",
+        flag: "🇫🇷",
+        titulo: "Salon de Rouen - Fossiles & Bijoux",
+        edicion: "Edición 2026",
+        fecha: "3 y 4 de octubre de 2026",
+        ciudad: "Rouen, Normandía",
+        lugar: "Halle aux Toiles",
+        afluencia: "Alta • 4.4/5",
+        especialidad: "Fósiles Jurásicos y Calcitas",
+        origen: "Le Comptoir Géologique",
+        lat: 49.4398, lon: 1.0927
+      },
+      {
+        id: "fra-5",
+        bloque: "francia",
+        pais: "Francia",
+        flag: "🇫🇷",
+        titulo: "Salon des Minéraux de Chambéry & Dinomania",
+        edicion: "7ª Edición",
+        fecha: "17 y 18 de octubre de 2026",
+        ciudad: "Chambéry, Saboya",
+        lugar: "SAVOIEXPO",
+        afluencia: "Alpina • 4.6/5",
+        especialidad: "Cristales Alpinos y Dinosaurios",
+        origen: "Mineraly.fr / Le Comptoir",
+        lat: 45.5861, lon: 5.9083
+      },
 
-      <!-- FERIA 8: SAINTE-MARIE-AUX-MINES -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="francia" data-keywords="sainte marie aux mines alsacia francia mineral gem val argent junio 2027">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-cyan/10 text-laser-cyan px-2 py-0.5 rounded border border-laser-cyan/30 font-bold">
-            FRANCIA // ALSACIA
-          </span>
-          <span class="text-laser-emerald flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">event_available</span>
-            JUNIO 2027 (TIER-1)
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Mineral & Gem Sainte-Marie-aux-Mines</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Val d'Argent Expo (Haut-Rhin, Francia)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Shuttles TGV desde Sélestat</span>
-          <a href="rutas.html" class="text-laser-emerald hover:underline text-[11px] flex items-center gap-1">
-            <span>Ruta GPS</span>
-            <span class="material-symbols-outlined text-xs">arrow_forward</span>
-          </a>
-        </div>
-      </article>
+      // BÉLGICA (Elithos, EventsEye, Brussels Expo)
+      {
+        id: "bel-1",
+        bloque: "belgica",
+        pais: "Bélgica",
+        flag: "🇧🇪",
+        titulo: "Brussels Mineral & Fossil Show",
+        edicion: "Edición Otoño 2026",
+        fecha: "Septiembre 2026",
+        ciudad: "Bruselas",
+        lugar: "Autoworld, Parc du Cinquantenaire",
+        afluencia: "+100 Expositores • 4.7/5",
+        especialidad: "Minerales de las Ardenas y Bélgica",
+        origen: "Elithos / EventsEye",
+        lat: 50.8402, lon: 4.3934
+      },
+      {
+        id: "bel-2",
+        bloque: "belgica",
+        pais: "Bélgica",
+        flag: "🇧🇪",
+        titulo: "MINERANT - Salón de Amberes",
+        edicion: "Convocatoria 2027",
+        fecha: "1 y 2 de mayo de 2027",
+        ciudad: "Amberes",
+        lugar: "Antwerp Expo (Bouwcentrum)",
+        afluencia: "Referencia Flamenca • 4.8/5",
+        especialidad: "Gemas, Fósiles y Coleccionismo Pro",
+        origen: "EventsEye / Elithos",
+        lat: 51.1894, lon: 4.3986
+      },
+      {
+        id: "bel-3",
+        bloque: "belgica",
+        pais: "Bélgica",
+        flag: "🇧🇪",
+        titulo: "Bourse de Bernissart",
+        edicion: "Cita Anual Estival",
+        fecha: "Agosto 2026",
+        ciudad: "Bernissart, Valonia",
+        lugar: "Centro Cívico de Bernissart",
+        afluencia: "Especializada Paleontología",
+        especialidad: "Fósiles de Iguanodontes y Carbón",
+        origen: "Elithos",
+        lat: 50.4772, lon: 3.6506
+      },
 
-      <!-- FERIA 9: TOULOUSE MINERAUX EXPO -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="francia" data-keywords="toulouse occitania francia hall 8 cuarzo amonites noviembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-cyan/10 text-laser-cyan px-2 py-0.5 rounded border border-laser-cyan/30 font-bold">
-            FRANCIA // OCCITANIA
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            7 - 8 NOV 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Salon des Minéraux de Toulouse</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Hall 8, 8 Allée Fernand Jourdant (Toulouse)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Censo Le Comptoir Géologique</span>
-          <span class="text-laser-cyan">Tarifa: 6€</span>
-        </div>
-      </article>
+      // EUROPA (EventsEye, Elithos)
+      {
+        id: "eur-1",
+        bloque: "europa",
+        pais: "Alemania",
+        flag: "🇩🇪",
+        titulo: "The Munich Show (Mineralientage)",
+        edicion: "62ª Edición Europea",
+        fecha: "22 al 25 de octubre de 2026",
+        ciudad: "Múnich, Baviera",
+        lugar: "Messe München Riem",
+        afluencia: "+45.000 Visitantes • Top 1 Europa",
+        especialidad: "Gemas Internacionales, Fósiles y Sistemática",
+        origen: "Elithos / EventsEye",
+        lat: 48.1351, lon: 11.6986
+      },
+      {
+        id: "eur-2",
+        bloque: "europa",
+        pais: "Italia",
+        flag: "🇮🇹",
+        titulo: "Bologna Mineral Show",
+        edicion: "56ª Edición",
+        fecha: "13 al 15 de marzo de 2026",
+        ciudad: "Bolonia",
+        lugar: "Unipol Arena (Casalecchio di Reno)",
+        afluencia: "+200 Expositores • 4.7/5",
+        especialidad: "Pegmatitas Alpinas y Gemas del Mediterráneo",
+        origen: "Elithos / EventsEye",
+        lat: 44.4842, lon: 11.2721
+      },
+      {
+        id: "eur-3",
+        bloque: "europa",
+        pais: "Suiza",
+        flag: "🇨🇭",
+        titulo: "Bourse aux Minéraux de Genève",
+        edicion: "56ª Edición",
+        fecha: "Noviembre 2026",
+        ciudad: "Ginebra",
+        lugar: "Event Center Ginebra",
+        afluencia: "Alta • 4.6/5",
+        especialidad: "Cuarzos Faden y Especies Alpinas",
+        origen: "Elithos",
+        lat: 46.2044, lon: 6.1432
+      },
 
-      <!-- FERIA 10: ROUEN -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="francia" data-keywords="rouen normandia halle aux toiles calcita pirita octubre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-cyan/10 text-laser-cyan px-2 py-0.5 rounded border border-laser-cyan/30 font-bold">
-            FRANCIA // NORMANDÍA
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            3 - 4 OCT 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Salon des Minéraux & Fossiles de Rouen</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Halle aux Toiles (Pl. de la Basse Vieille Tour, Rouen)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">+40 expositores internacionales</span>
-          <span class="text-laser-cyan">Tarifa: 4€</span>
-        </div>
-      </article>
+      // MUNDIAL (Tucson, Denver, Tokio)
+      {
+        id: "mun-1",
+        bloque: "mundial",
+        pais: "EE.UU.",
+        flag: "🇺🇸",
+        titulo: "Tucson Gem & Mineral Show",
+        edicion: "Referencia Absoluta",
+        fecha: "Enero / Febrero 2027",
+        ciudad: "Tucson, Arizona",
+        lugar: "Tucson Convention Center (+50 sedes)",
+        afluencia: "+65.000 Visitantes • Top 1 Mundial",
+        especialidad: "Wulfenitas, Novedades Globales y Gemas",
+        origen: "EventsEye / MTI",
+        lat: 32.2217, lon: -110.9747
+      },
+      {
+        id: "mun-2",
+        bloque: "mundial",
+        pais: "EE.UU.",
+        flag: "🇺🇸",
+        titulo: "Colorado Minerals & Fossils Denver",
+        edicion: "Edición 2026",
+        fecha: "11 al 20 de septiembre de 2026",
+        ciudad: "Denver, Colorado",
+        lugar: "National Western Complex",
+        afluencia: "Muy Alta • 4.8/5",
+        especialidad: "Rodocrositas de Sweet Home y Cuarzo Ahumado",
+        origen: "Mineraly / EventsEye",
+        lat: 39.7817, lon: -104.9719
+      }
+    ];
 
-      <!-- FERIA 11: LORIENT -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="francia" data-keywords="lorient bretaña francia estaurolitas croisettes septiembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-cyan/10 text-laser-cyan px-2 py-0.5 rounded border border-laser-cyan/30 font-bold">
-            FRANCIA // BRETAÑA
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            26 - 27 SEPT 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">32ème Salon de Lorient (Légende des Croisettes)</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Palais des Congrès (Quai Gustave Mansion, Lorient)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Especial Estaurolitas macladas</span>
-          <span class="text-laser-cyan">Tarifa: 2€</span>
-        </div>
-      </article>
+    let bloqueActivo = 'todos';
 
-      <!-- FERIA 12: TUCSON (USA) -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="mundial" data-keywords="tucson arizona estados unidos usa febrero gem show mundial tier-1">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-amber/10 text-laser-amber px-2 py-0.5 rounded border border-laser-amber/30 font-bold">
-            TOP #1 MUNDIAL // USA
-          </span>
-          <span class="text-laser-emerald flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            FEB 2027
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Tucson Gem & Mineral Show</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Tucson Convention Center (Arizona, USA)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">+65.000 visitantes // Sistemática</span>
-          <span class="text-laser-amber font-bold">12 DÍAS</span>
-        </div>
-      </article>
+    function renderizarFerias(lista) {
+      const container = document.getElementById('listaFerias');
+      document.getElementById('contadorEventos').textContent = lista.length;
 
-      <!-- FERIA 13: THE MUNICH SHOW -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="mundial" data-keywords="munich alemania mineralientage messe riem baviera octubre europa">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-amber/10 text-laser-amber px-2 py-0.5 rounded border border-laser-amber/30 font-bold">
-            ALEMANIA // OTOÑO INTERNACIONAL
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            22 - 25 OCT 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">The Munich Show (Mineralientage München)</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Messe München Riem (Munich, Alemania)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">+40.000 visitantes // Piezas Museo</span>
-          <span class="text-laser-cyan font-bold">EventsEye</span>
-        </div>
-      </article>
-
-      <!-- FERIA 14: TOKYO MINERAL SHOW -->
-      <article class="feria-card bg-surface-charcoal rounded-xl border border-outline-matte p-3.5 space-y-2.5" data-region="mundial" data-keywords="tokyo japon ikebukuro sunshine city meteoritos asia diciembre">
-        <div class="flex items-center justify-between font-mono text-[10px]">
-          <span class="bg-laser-amber/10 text-laser-amber px-2 py-0.5 rounded border border-laser-amber/30 font-bold">
-            ASIA // JAPÓN
-          </span>
-          <span class="text-laser-amber flex items-center gap-1 font-bold">
-            <span class="material-symbols-outlined text-xs">calendar_month</span>
-            DIC 2026
-          </span>
-        </div>
-        <div class="space-y-1">
-          <h2 class="text-base font-bold text-text-high leading-snug">Tokyo Mineral Show (Ikebukuro)</h2>
-          <p class="text-xs text-text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-laser-cyan">location_on</span>
-            Sunshine City Cultural Center (Tokio, Japón)
-          </p>
-        </div>
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-outline-matte/60 font-mono">
-          <span class="text-text-muted">Meteoritos & Sistemática asiática</span>
-          <span class="text-text-muted">4 Días</span>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- MENSAJE DE NO RESULTADOS -->
-    <div id="no-resultados" class="hidden text-center py-8 space-y-2 bg-surface-charcoal rounded-xl border border-outline-matte">
-      <span class="material-symbols-outlined text-3xl text-text-muted">travel_explore</span>
-      <p class="text-xs font-mono text-text-muted">No se encontraron ferias con ese criterio.</p>
-      <button onclick="limpiarBuscador()" class="text-xs font-mono text-laser-emerald hover:underline">Restablecer filtros</button>
-    </div>
-
-    <!-- PROTOCOLO & CONSEJOS ANNA PIEDRA -->
-    <section class="bg-surface-charcoal rounded-xl border border-laser-amber/30 p-4 space-y-2.5 text-xs">
-      <div class="flex items-center justify-between font-mono text-laser-amber text-[11px] font-bold">
-        <span class="flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-sm">verified_user</span>
-          CONSEJOS DE CAMPO // ANNA PIEDRA
-        </span>
-        <span class="bg-laser-amber/10 px-2 py-0.5 rounded border border-laser-amber/20">NORMAS</span>
-      </div>
-      <p class="text-text-muted leading-relaxed text-[11px]">
-        Lleva siempre <strong class="text-text-high">efectivo (50–100€)</strong> para mejores tratos con pequeños colectores. Sopesa la densidad física de la pieza en mano y exige siempre factura con localidad y mina de origen para cumplir con la <strong class="text-text-high">Ley de Patrimonio y CITES</strong>.
-      </p>
-    </section>
-
-  </main>
-
-  <!-- BARRA DE NAVEGACIÓN INFERIOR TÁCTICA -->
-  <nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-bedrock/95 backdrop-blur-md border-t border-outline-matte flex justify-around items-center px-4 py-2">
-    <a href="index.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
-      <span class="material-symbols-outlined text-xl">dashboard</span>
-      <span class="font-mono text-[10px] uppercase tracking-wider">Inicio</span>
-    </a>
-    <a href="ferias.html" class="flex flex-col items-center gap-1 text-laser-emerald border-t-2 border-laser-emerald pt-0.5 pb-1">
-      <span class="material-symbols-outlined text-xl">calendar_month</span>
-      <span class="font-mono text-[10px] uppercase tracking-wider font-bold">Ferias</span>
-    </a>
-    <a href="rutas.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
-      <span class="material-symbols-outlined text-xl">route</span>
-      <span class="font-mono text-[10px] uppercase tracking-wider">Rutas</span>
-    </a>
-    <a href="scanner.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
-      <span class="material-symbols-outlined text-xl">view_in_ar</span>
-      <span class="font-mono text-[10px] uppercase tracking-wider">Scanner</span>
-    </a>
-    <a href="catalogo.html" class="flex flex-col items-center gap-1 text-text-muted hover:text-laser-emerald transition-colors py-1">
-      <span class="material-symbols-outlined text-xl">menu_book</span>
-      <span class="font-mono text-[10px] uppercase tracking-wider">Catálogo</span>
-    </a>
-  </nav>
-
-  <!-- SCRIPT DE FILTRADO Y BÚSQUEDA INTERACTIVA -->
-  <script>
-    let regionActiva = 'todos';
-
-    function filtrarRegion(region, btnElement) {
-      regionActiva = region;
-
-      // Actualizar estilos de botones
-      const botones = document.querySelectorAll('.filtro-btn');
-      botones.forEach(b => {
-        b.classList.remove('bg-laser-emerald/10', 'border-laser-emerald', 'text-laser-emerald', 'font-bold');
-        b.classList.add('bg-surface-bedrock', 'border-outline-matte', 'text-text-muted');
-      });
-
-      if (btnElement) {
-        btnElement.classList.add('bg-laser-emerald/10', 'border-laser-emerald', 'text-laser-emerald', 'font-bold');
-        btnElement.classList.remove('bg-surface-bedrock', 'border-outline-matte', 'text-text-muted');
+      if (lista.length === 0) {
+        container.innerHTML = `
+          &lt;div class="bg-[#131316] border border-[#2e2e36] rounded-2xl p-8 text-center"&gt;
+            &lt;span class="material-symbols-outlined text-4xl text-zinc-600 mb-2"&gt;travel_explore&lt;/span&gt;
+            &lt;h3 class="text-white font-semibold text-base"&gt;No se encontraron ferias&lt;/h3&gt;
+            &lt;p class="text-zinc-400 text-xs mt-1"&gt;Prueba buscando otro país, ciudad o restablece los filtros.&lt;/p&gt;
+            &lt;button onclick="seleccionarBloque('todos')" class="mt-3 text-xs text-emerald-400 font-semibold underline"&gt;Ver todas las ferias&lt;/button&gt;
+          &lt;/div&gt;
+        `;
+        return;
       }
 
-      ejecutarFiltro();
+      container.innerHTML = lista.map(f =&gt; `
+        &lt;article class="bg-[#131316] border border-[#2e2e36] hover:border-emerald-500/40 rounded-2xl p-4 transition-all duration-200 hover:shadow-lg hover:shadow-black/60"&gt;
+          &lt;div class="flex items-start justify-between gap-3"&gt;
+            &lt;div class="space-y-1 flex-1"&gt;
+              &lt;div class="flex items-center gap-2"&gt;
+                &lt;span class="text-lg"&gt;${f.flag}&lt;/span&gt;
+                &lt;span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20"&gt;${f.pais}&lt;/span&gt;
+                &lt;span class="text-[10px] text-zinc-400 font-mono"&gt;${f.edicion}&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;h3 class="text-base font-bold text-white tracking-tight leading-snug"&gt;${f.titulo}&lt;/h3&gt;
+              &lt;p class="text-xs text-zinc-400 flex items-center gap-1"&gt;
+                &lt;span class="material-symbols-outlined text-xs text-zinc-500"&gt;location_on&lt;/span&gt;
+                &lt;span&gt;${f.lugar}, ${f.ciudad}&lt;/span&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="text-right whitespace-nowrap"&gt;
+              &lt;span class="text-[11px] font-mono font-semibold text-emerald-400 block"&gt;${f.fecha.split(' ')[0]} ${f.fecha.split(' ')[1] || ''}&lt;/span&gt;
+              &lt;span class="text-[9px] text-zinc-500 font-mono block"&gt;${f.fecha}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class="mt-3 pt-3 border-t border-[#242429] flex flex-wrap items-center justify-between gap-2 text-xs"&gt;
+            &lt;div class="flex items-center gap-2 text-[11px] text-zinc-400"&gt;
+              &lt;span class="text-zinc-500"&gt;Enfoque:&lt;/span&gt;
+              &lt;span class="text-zinc-300 font-medium"&gt;${f.especialidad}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="flex items-center gap-2"&gt;
+              &lt;a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(f.titulo + ' ' + f.ciudad)}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 bg-[#1b1b1f] hover:bg-zinc-800 text-zinc-300 px-2.5 py-1 rounded-lg border border-[#2e2e36] text-[11px] transition-colors"&gt;
+                &lt;span class="material-symbols-outlined text-xs text-emerald-400"&gt;near_me&lt;/span&gt;
+                &lt;span&gt;GPS&lt;/span&gt;
+              &lt;/a&gt;
+              &lt;a href="rutas.html?destino=${encodeURIComponent(f.ciudad)}" class="flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-lg border border-emerald-500/30 text-[11px] font-semibold transition-colors"&gt;
+                &lt;span class="material-symbols-outlined text-xs"&gt;directions_subway&lt;/span&gt;
+                &lt;span&gt;Cómo Llegar&lt;/span&gt;
+              &lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+      `).join('');
+    }
+
+    function seleccionarBloque(bloque) {
+      bloqueActivo = bloque;
+      document.querySelectorAll('.bloque-btn').forEach(btn =&gt; {
+        if (btn.dataset.bloque === bloque) {
+          btn.className = 'bloque-btn active bg-emerald-500 text-black font-semibold px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-all';
+        } else {
+          btn.className = 'bloque-btn bg-[#131316] text-zinc-400 border border-[#2e2e36] px-3.5 py-1.5 rounded-lg whitespace-nowrap hover:text-white hover:border-zinc-500 transition-all';
+        }
+      });
+      filtrarFerias();
     }
 
     function filtrarFerias() {
-      const input = document.getElementById('input-buscador');
-      const btnLimpiar = document.getElementById('btn-limpiar');
-      
-      if (input.value.trim().length > 0) {
-        btnLimpiar.classList.remove('hidden');
-      } else {
-        btnLimpiar.classList.add('hidden');
-      }
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      document.getElementById('clearBtn').classList.toggle('hidden', q.length === 0);
 
-      ejecutarFiltro();
-    }
-
-    function limpiarBuscador() {
-      const input = document.getElementById('input-buscador');
-      input.value = '';
-      document.getElementById('btn-limpiar').classList.add('hidden');
-      ejecutarFiltro();
-    }
-
-    function ejecutarFiltro() {
-      const query = document.getElementById('input-buscador').value.toLowerCase().trim();
-      const tarjetas = document.querySelectorAll('.feria-card');
-      let visibles = 0;
-
-      tarjetas.forEach(tarjeta => {
-        const tarjetaRegion = tarjeta.getAttribute('data-region') || '';
-        const tarjetaKeywords = (tarjeta.getAttribute('data-keywords') || '') + ' ' + tarjeta.innerText.toLowerCase();
-
-        const coincideRegion = (regionActiva === 'todos') || (tarjetaRegion === regionActiva);
-        const coincideQuery = (query === '') || tarjetaKeywords.includes(query);
-
-        if (coincideRegion && coincideQuery) {
-          tarjeta.classList.remove('hidden');
-          visibles++;
-        } else {
-          tarjeta.classList.add('hidden');
-        }
+      const filtradas = feriasData.filter(f =&gt; {
+        const coincideBloque = (bloqueActivo === 'todos') || (f.bloque === bloqueActivo);
+        const coincideBusqueda = !q || 
+          f.titulo.toLowerCase().includes(q) ||
+          f.ciudad.toLowerCase().includes(q) ||
+          f.pais.toLowerCase().includes(q) ||
+          f.especialidad.toLowerCase().includes(q) ||
+          f.lugar.toLowerCase().includes(q);
+        return coincideBloque && coincideBusqueda;
       });
 
-      // Actualizar contador
-      const contador = document.getElementById('contador-eventos');
-      if (contador) {
-        contador.textContent = visibles + (visibles === 1 ? ' FERIA ACTIVA' : ' FERIAS ACTIVAS');
-      }
+      renderizarFerias(filtradas);
+    }
 
-      // Mostrar/ocultar mensaje de no resultados
-      const noRes = document.getElementById('no-resultados');
-      if (noRes) {
-        if (visibles === 0) {
-          noRes.classList.remove('hidden');
-        } else {
-          noRes.classList.add('hidden');
-        }
-      }
+    function limpiarBusqueda() {
+      document.getElementById('searchInput').value = '';
+      filtrarFerias();
+    }
+
+    // Inicializar
+    renderizarFerias(feriasData);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+    </div>
+  </div>
+
+  <script>
+    function copiarCodigo() {
+      const copyText = document.getElementById("rawCode");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(copyText.value).then(() => {
+        const btn = document.getElementById("btnText");
+        btn.textContent = "¡Copiado con Éxito!";
+        setTimeout(() => {
+          btn.textContent = "Copiar Código Completo";
+        }, 2500);
+      });
     }
   </script>
 </body>
